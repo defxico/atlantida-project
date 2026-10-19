@@ -28,15 +28,15 @@ export function initScene(scene) {
 
   // Robô bartender
   const rArm = q('.actor--robo .actor__arm');
-  tl.to(rArm, { rotation: -8, duration: .75, yoyo: true, repeat: 3 }, 0);          // 0–3 limpa o balcão
-  tl.to(rArm, { rotation: -30, duration: 1.5 }, 3);                                // 3–4.5 vai à torneira
+  tl.to(rArm, { rotation: -5, duration: .75, yoyo: true, repeat: 3 }, 0);          // 0–3 limpa o balcão
+  tl.to(rArm, { rotation: -10, duration: 1.5 }, 3);                                // 3–4.5 vai à torneira
   tl.fromTo(q('.robo__pour'), { scaleY: 0 }, { scaleY: 1, duration: .4 }, 4.5);    // enche
   tl.to(q('.robo__pour'), { scaleY: 0, duration: .4 }, 6.6);
-  tl.to(rArm, { rotation: -55, y: -12, duration: 1.5 }, 7);                        // 7–8.5 ergue a caneca
+  tl.to(rArm, { rotation: -26, y: -6, duration: 1.5 }, 7);                        // 7–8.5 ergue a caneca
   tl.to(q('.robo__eye'), { opacity: .15, duration: .15, yoyo: true, repeat: 5 }, 8); // pisca
-  tl.to(rArm, { rotation: -30, y: 0, duration: 1.5 }, 10);                         // 10–11.5 pousa
+  tl.to(rArm, { rotation: -10, y: 0, duration: 1.5 }, 10);                         // 10–11.5 pousa
   tl.to(rArm, { rotation: 0, duration: 1.5 }, 14);                                 // 14–15.5 volta
-  tl.to(rArm, { rotation: -8, duration: .625, yoyo: true, repeat: 3 }, 15.5);      // 15.5–18 limpa → pose inicial
+  tl.to(rArm, { rotation: -5, duration: .625, yoyo: true, repeat: 3 }, 15.5);      // 15.5–18 limpa → pose inicial
 
   // Cliente (Torak)
   const cArm = q('.actor--cliente .actor__arm');
