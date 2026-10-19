@@ -8,8 +8,8 @@ export function renderHotspots(container, hotspots) {
 }
 
 export function renderNav(nav, hotspots) {
-  nav.innerHTML = '<a href="#" data-area="">Início</a>'
-    + hotspots.map(h => `<a href="#${h.id}" data-area="${h.id}">${h.nav}</a>`).join('');
+  nav.innerHTML = '<a href="#" data-area=""><i>01</i>Início</a>'
+    + hotspots.map((h, i) => `<a href="#${h.id}" data-area="${h.id}"><i>${String(i + 2).padStart(2, '0')}</i>${h.nav}</a>`).join('');
 }
 
 export function setArea(id, label) {
@@ -28,6 +28,7 @@ export function revealHud() {
     .from('.hud__corner', { scale: 1.8, opacity: 0, duration: .5, stagger: .07, ease: 'back.out(2)', clearProps }, '-=.6')
     .from('.hud__status, .hud__brand, .hud__compass, .hud__nav', { opacity: 0, y: -10, duration: .45, stagger: .08, clearProps }, '-=.3')
     .from('.hud__gauges li, .hud__link', { opacity: 0, x: -16, duration: .4, stagger: .1, clearProps }, '-=.3')
-    .from('.hud__intro', { opacity: 0, x: -24, duration: .55, clearProps }, '-=.2')
+    .from('.hud__msg', { opacity: 0, x: 60, duration: .5, ease: 'power3.out', clearProps }, '-=.1')
+    .from('.hud__msg-body > *', { opacity: 0, y: 8, duration: .35, stagger: .12, clearProps }, '-=.2')
     .from('.hotspot', { opacity: 0, scale: .6, duration: .45, stagger: .16, ease: 'back.out(2)', clearProps }, '-=.1');
 }
