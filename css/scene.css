@@ -14,7 +14,7 @@
 .scene {
   position: absolute; inset: 0;
   /* ponytail: posições calibradas sobre a arte; ajustar quando taverna-fundo.webp final chegar */
-  --porthole-x: 55.5%; --porthole-y: 24%; --porthole-size: 17%;
+  --porthole-x: 41.8%; --porthole-y: 31.9%; --porthole-size: 14.8%;
   --robo-x: 78%; --robo-y: 43%; --robo-h: 50%; --robo-ratio: 2 / 5;
   --robo-shoulder: 45% 30%; --robo-eye-x: 55%; --robo-eye-y: 12%; --robo-tap-x: 8%; --robo-tap-y: 48%;
   --cliente-x: 21%; --cliente-y: 58%; --cliente-h: 30%; --cliente-ratio: 3 / 4;
