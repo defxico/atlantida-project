@@ -28,13 +28,16 @@ export async function render(container) {
     <div class="filters" role="group" aria-label="Filtrar por categoria">
       ${CATEGORIAS.map(c => `<button type="button" class="chip" data-cat="${c}" aria-pressed="${c === 'todos'}">${c === 'todos' ? 'Todos' : c}</button>`).join('')}
     </div>
-    <ol class="feed" aria-live="polite"></ol>`;
+    <p class="sr-only" role="status"></p>
+    <ol class="feed"></ol>`;
 
   const feed = container.querySelector('.feed');
+  const status = container.querySelector('[role="status"]');
   const draw = cat => {
     const items = filterByCategoria(sortByDateDesc(posts), cat);
     feed.innerHTML = items.map(p => post(p, autores[p.autorId])).join('')
       || '<li class="feed__empty">Nenhuma publicação nessa categoria.</li>';
+    status.textContent = (items.length === 1 ? '1 publicação' : `${items.length} publicações`) + (cat !== 'todos' ? ` em ${cat}` : '');
   };
 
   container.querySelector('.filters').addEventListener('click', e => {

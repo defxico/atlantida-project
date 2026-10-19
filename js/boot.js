@@ -11,13 +11,14 @@ export function runBoot() {
 
   return new Promise(resolve => {
     const finish = () => {
-      gsap.set(viewport, { clearProps: 'filter' });
+      gsap.set(viewport, { clearProps: 'filter,transition' });
+      if (boot.contains(document.activeElement)) document.querySelector('.skip-link')?.focus();
       root.classList.remove('will-boot');
       try { localStorage.setItem(KEY, '1'); } catch {}
       resolve();
     };
     const tl = gsap.timeline({ onComplete: finish });
-    tl.set(viewport, { filter: 'blur(14px) brightness(.6)' });
+    tl.set(viewport, { transition: 'none', filter: 'blur(14px) brightness(.6)' });
     tl.from(boot.querySelector('.boot__line'), { scaleX: 0, duration: .4, ease: 'power2.out' });
 
     let done = '';

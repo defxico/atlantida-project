@@ -9,7 +9,7 @@ const field = (name, label, control, required = true) => `
   <div class="field">
     <label for="f-${name}">${label}${required ? ' <span class="req" aria-hidden="true">*</span>' : ''}</label>
     ${control}
-    <p class="field__error" id="err-${name}"></p>
+    <p class="field__error" aria-live="polite" id="err-${name}"></p>
   </div>`;
 
 export function render(container) {

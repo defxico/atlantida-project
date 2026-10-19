@@ -23,8 +23,8 @@ export function setArea(id, label) {
 export function revealHud() {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   gsap.timeline()
-    .from('.hud__corner', { scale: 1.6, opacity: 0, duration: .5, stagger: .06, ease: 'back.out(2)' })
-    .from('.hud__status, .hud__brand, .hud__nav', { opacity: 0, y: -8, duration: .4, stagger: .08 }, '-=.2')
-    .from('.hud__intro', { opacity: 0, x: -20, duration: .5 }, '-=.2')
-    .from('.hotspot', { opacity: 0, scale: .6, duration: .4, stagger: .15, ease: 'back.out(2)' }, '-=.1');
+    .from('.hud__corner', { scale: 1.6, opacity: 0, duration: .5, stagger: .06, ease: 'back.out(2)', clearProps: 'opacity,scale,x,y' })
+    .from('.hud__status, .hud__brand, .hud__nav', { opacity: 0, y: -8, duration: .4, stagger: .08, clearProps: 'opacity,scale,x,y' }, '-=.2')
+    .from('.hud__intro', { opacity: 0, x: -20, duration: .5, clearProps: 'opacity,scale,x,y' }, '-=.2')
+    .from('.hotspot', { opacity: 0, scale: .6, duration: .4, stagger: .15, ease: 'back.out(2)', clearProps: 'opacity,scale,x,y' }, '-=.1');
 }

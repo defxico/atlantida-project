@@ -9,7 +9,7 @@ test('index.html tem todos os containers', () => {
   for (const id of ['viewport', 'camera', 'scene', 'hotspots', 'hud-nav', 'hud-depth', 'hud-area', 'panel', 'panel-body', 'boot']) {
     assert.match(html, new RegExp(`id="${id}"`), `falta #${id}`);
   }
-  assert.match(html, /gsap\/3\.12\.5\/gsap\.min\.js/);
+  assert.match(html, /js\/vendor\/gsap\.min\.js/);
   assert.match(html, /<html lang="pt-BR"/);
 });
 

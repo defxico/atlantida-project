@@ -4,7 +4,10 @@ import { initLook } from './look.js';
 import { runBoot } from './boot.js';
 import { initRouter } from './router.js';
 
-const hotspots = await fetch('data/hotspots.json').then(r => r.json());
+let started = false;
+let hotspots = [];
+try {
+hotspots = await fetch('data/hotspots.json').then(r => r.json());
 const viewport = document.getElementById('viewport');
 const sceneEl = document.getElementById('scene');
 
@@ -15,4 +18,10 @@ initLook(viewport, sceneEl);
 
 await runBoot();
 revealHud();
+started = true;
 initRouter({ hotspots, scene });
+} catch (err) {
+  console.error(err);
+  document.documentElement.classList.remove('will-boot');
+  if (!started) initRouter({ hotspots, scene: { setSpeed() {} } });
+}
