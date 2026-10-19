@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rede Náutilus — A comunidade de Atlântida</title>
+  <meta name="description" content="Portal da comunidade de Atlântida, visto pelos seus óculos.">
+  <script>
+    try {
+      if (!localStorage.getItem('nautilus.booted') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('will-boot');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/scene.css">
+  <link rel="stylesheet" href="css/hud.css">
+  <link rel="stylesheet" href="css/panel.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#hud-nav">Pular para o menu</a>
+
+  <main id="viewport" class="viewport" aria-label="Taverna do Náutilus">
+    <div id="camera" class="camera">
+      <div id="scene" class="scene">
+        <img class="layer layer--bg" data-depth="0.15" src="assets/img/taverna-fundo.webp"
+             alt="Interior da Taverna do Náutilus: mesas de madeira, lanternas, um robô no balcão e uma grande vigia para o oceano.">
+        <div class="layer porthole" data-depth="0.25" aria-hidden="true">
+          <div class="porthole__fish"></div>
+          <img class="porthole__shark" src="assets/img/tubarao.webp" alt="">
+          <div class="bubbles"></div>
+        </div>
+        <div class="layer fog fog--back" data-depth="0.35" aria-hidden="true"></div>
+        <div class="layer actor actor--cliente" data-depth="0.5" aria-hidden="true">
+          <img class="actor__body" src="assets/img/cliente-corpo.webp" alt="">
+          <img class="actor__arm" src="assets/img/cliente-braco.webp" alt="">
+        </div>
+        <div class="layer actor actor--robo" data-depth="0.55" aria-hidden="true">
+          <img class="actor__body" src="assets/img/robo-corpo.webp" alt="">
+          <span class="robo__eye"></span>
+          <span class="robo__pour"></span>
+          <img class="actor__arm" src="assets/img/robo-braco.webp" alt="">
+        </div>
+        <div class="layer glows" data-depth="0.55" aria-hidden="true">
+          <span class="glow" style="--x:7.5;--y:29"></span>
+          <span class="glow" style="--x:30;--y:37"></span>
+          <span class="glow" style="--x:65;--y:66"></span>
+          <span class="glow" style="--x:91.5;--y:29"></span>
+        </div>
+        <div class="layer dust" data-depth="0.7" aria-hidden="true"></div>
+        <div class="layer fog fog--front" data-depth="0.85" aria-hidden="true"></div>
+        <div id="hotspots" class="layer hotspots"></div>
+      </div>
+    </div>
+  </main>
+
+  <div class="hud">
+    <span class="hud__corner hud__corner--tl" aria-hidden="true"></span>
+    <span class="hud__corner hud__corner--tr" aria-hidden="true"></span>
+    <span class="hud__corner hud__corner--bl" aria-hidden="true"></span>
+    <span class="hud__corner hud__corner--br" aria-hidden="true"></span>
+    <div class="hud__scan" aria-hidden="true"></div>
+    <p class="hud__status">
+      <span class="hud__depth">↓ <span id="hud-depth">3.000</span> m</span>
+      <span id="hud-area" class="hud__area">Início</span>
+    </p>
+    <p class="hud__brand">Rede Náutilus <small>A comunidade de Atlântida</small></p>
+    <section class="hud__intro" aria-labelledby="intro-title">
+      <h1 id="intro-title">A cidade é grande. Nossa comunidade é maior.</h1>
+      <p>Conectando habitantes, compartilhando histórias e mantendo Atlântida unida, uma mensagem de cada vez. Olhe em volta: seus óculos marcam cada canto da taverna.</p>
+      <a class="btn" href="#mural">Entrar na comunidade →</a>
+    </section>
+    <nav id="hud-nav" class="hud__nav" aria-label="Áreas do portal"></nav>
+  </div>
+
+  <div id="panel" class="panel" hidden>
+    <section class="panel__frame" role="dialog" aria-modal="true" aria-labelledby="panel-title">
+      <button type="button" class="panel__close" aria-label="Fechar e voltar à taverna">✕</button>
+      <div id="panel-body" class="panel__body"></div>
+    </section>
+  </div>
+
+  <div id="boot" class="boot" aria-hidden="true">
+    <div class="boot__lid boot__lid--top"></div>
+    <div class="boot__lid boot__lid--bottom"></div>
+    <div class="boot__screen">
+      <span class="boot__line"></span>
+      <pre class="boot__log"></pre>
+    </div>
+    <button type="button" class="boot__skip">Pular</button>
+  </div>
+</body>
+</html>
