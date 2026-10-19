@@ -8,8 +8,8 @@ export function renderHotspots(container, hotspots) {
 }
 
 export function renderNav(nav, hotspots) {
-  nav.innerHTML = '<a href="#" data-area=""><i>01</i>Início</a>'
-    + hotspots.map((h, i) => `<a href="#${h.id}" data-area="${h.id}"><i>${String(i + 2).padStart(2, '0')}</i>${h.nav}</a>`).join('');
+  nav.innerHTML = '<a href="#" data-area=""><span><i>01</i>Início</span></a>'
+    + hotspots.map((h, i) => `<a href="#${h.id}" data-area="${h.id}"><span><i>${String(i + 2).padStart(2, '0')}</i>${h.nav}</span></a>`).join('');
 }
 
 export function setArea(id, label) {
