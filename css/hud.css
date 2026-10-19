@@ -53,3 +53,12 @@
   .hotspot__label { left: 36px; top: -40px; }
   .hotspot--left .hotspot__label { right: 36px; }
 }
+/* Boot */
+.boot { position: fixed; inset: 0; z-index: 50; }
+.boot__lid { position: absolute; left: 0; right: 0; height: 50%; background: #000; }
+.boot__lid--top { top: 0; }
+.boot__lid--bottom { bottom: 0; }
+.boot__screen { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: var(--space-3); }
+.boot__line { display: block; width: min(360px, 70vw); height: 2px; background: var(--cyan); box-shadow: var(--glow-cyan); }
+.boot__log { margin: 0; min-height: 6.5em; color: var(--cyan); font: 500 .9rem/1.6 ui-monospace, Consolas, monospace; text-shadow: var(--glow-cyan); white-space: pre; }
+.boot__skip { position: absolute; right: var(--space-4); bottom: var(--space-4); padding: .5rem 1rem; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--cyan); font: 600 .85rem var(--font-body); cursor: pointer; }
