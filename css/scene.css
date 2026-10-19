@@ -17,8 +17,8 @@
   --porthole-x: 41.8%; --porthole-y: 31.9%; --porthole-size: 14.8%;
   --robo-x: 72%; --robo-y: 32.5%; --robo-h: 67%; --robo-ratio: 600 / 1147;
   --robo-shoulder: 69.5% 36.2%; --robo-eye-x: 42.8%; --robo-eye-y: 7.6%; --robo-tap-x: 8%; --robo-tap-y: 48%;
-  --cliente-x: 21%; --cliente-y: 58%; --cliente-h: 30%; --cliente-ratio: 3 / 4;
-  --cliente-shoulder: 70% 35%;
+  --cliente-x: 25.5%; --cliente-y: 40.4%; --cliente-h: 43%; --cliente-ratio: 711 / 987;
+  --cliente-shoulder: 81.9% 53.5%;
   --fog: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006 .02' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .6 0 0 0 0 .8 0 0 0 0 .85 0 0 0 1.1 -.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
 }
 

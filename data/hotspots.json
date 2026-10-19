@@ -1,6 +1,6 @@
 [
   { "id": "mundo", "label": "O Mundo", "nav": "O Mundo", "x": 49, "y": 45, "depth": 0.25, "side": "right", "zoom": { "scale": 2, "x": 49, "y": 45 } },
-  { "id": "habitantes", "label": "Habitantes", "nav": "Habitantes", "x": 27, "y": 66, "depth": 0.5, "side": "left", "zoom": { "scale": 1.5, "x": 27, "y": 68 } },
+  { "id": "habitantes", "label": "Habitantes", "nav": "Habitantes", "x": 27, "y": 56, "depth": 0.5, "side": "left", "zoom": { "scale": 1.5, "x": 27, "y": 58 } },
   { "id": "mural", "label": "Mural da Comunidade", "nav": "Mural", "x": 14.5, "y": 47, "depth": 0.15, "side": "right", "zoom": { "scale": 1.7, "x": 15, "y": 45 } },
   { "id": "portal", "label": "Fale com o Portal", "nav": "Fale com o Portal", "x": 79, "y": 33, "depth": 0.55, "side": "left", "zoom": { "scale": 1.6, "x": 82, "y": 45 } }
 ]

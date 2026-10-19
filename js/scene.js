@@ -40,12 +40,12 @@ export function initScene(scene) {
 
   // Cliente (Torak)
   const cArm = q('.actor--cliente .actor__arm');
-  tl.to(cArm, { rotation: 4, duration: .75, yoyo: true, repeat: 3 }, 0);           // 0–3 gesticula
-  tl.to(cArm, { rotation: -40, duration: 2 }, 3);                                  // 3–5 levanta a caneca
-  tl.to(cArm, { rotation: -48, duration: .5, yoyo: true, repeat: 1 }, 7);          // 7–8 brinde
-  tl.to(cArm, { rotation: -75, y: -6, duration: 1.5 }, 10);                        // 10–11.5 bebe
+  tl.to(cArm, { rotation: 3, duration: .75, yoyo: true, repeat: 3 }, 0);           // 0–3 gesticula
+  tl.to(cArm, { rotation: -8, duration: 2 }, 3);                                  // 3–5 levanta a caneca
+  tl.to(cArm, { rotation: -14, duration: .5, yoyo: true, repeat: 1 }, 7);          // 7–8 brinde
+  tl.to(cArm, { rotation: -20, y: -3, duration: 1.5 }, 10);                        // 10–11.5 bebe
   tl.to(cArm, { rotation: 0, y: 0, duration: 2.5 }, 14);                           // 14–16.5 pousa
-  tl.to(cArm, { rotation: 4, duration: .375, yoyo: true, repeat: 3 }, 16.5);       // 16.5–18 → pose inicial
+  tl.to(cArm, { rotation: 3, duration: .375, yoyo: true, repeat: 3 }, 16.5);       // 16.5–18 → pose inicial
 
   console.assert(Math.abs(tl.duration() - LOOP) < 1e-6, `loop com ${tl.duration()}s, esperado ${LOOP}s`);
 
