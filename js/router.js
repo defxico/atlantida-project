@@ -1,7 +1,7 @@
 import { parseHash } from './lib/route.js';
 import { setArea } from './hud.js';
 
-const FOCUSABLE = 'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export function initRouter({ hotspots, scene }) {
   const ids = hotspots.map(h => h.id);
@@ -11,13 +11,14 @@ export function initRouter({ hotspots, scene }) {
   const frame = panel.querySelector('.panel__frame');
   const body = document.getElementById('panel-body');
   const closeBtn = panel.querySelector('.panel__close');
-  const nav = document.getElementById('hud-nav');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const d = s => (reduce ? 0 : s);
   let current = null;
   let returnFocus = null;
+  let seq = 0;
 
   async function open(id) {
+    const token = ++seq;
     const h = hotspots.find(x => x.id === id);
     if (!current) returnFocus = document.activeElement;
     current = id;
@@ -25,21 +26,31 @@ export function initRouter({ hotspots, scene }) {
     document.body.classList.add('is-panel-open');
     viewport.classList.add('is-dimmed');
     setArea(id, h.label);
+    gsap.killTweensOf(camera);
     gsap.to(camera, { scale: h.zoom.scale, transformOrigin: `${h.zoom.x}% ${h.zoom.y}%`, duration: d(0.8), ease: 'power2.inOut' });
-    const mod = await import(`./areas/${id}.js`);
-    if (current !== id) return;
-    body.innerHTML = '';
-    await mod.render(body);
-    if (current !== id) return;
-    panel.hidden = false;
-    body.scrollTop = 0;
-    gsap.fromTo(frame,
-      { clipPath: 'inset(0 0 100% 0)', opacity: 0 },
-      { clipPath: 'inset(0 0 0% 0)', opacity: 1, duration: d(0.5), delay: d(0.3), ease: 'power2.out' });
-    closeBtn.focus();
+    try {
+      const mod = await import(`./areas/${id}.js`);
+      if (token !== seq) return;
+      const tmp = document.createElement('div');
+      await mod.render(tmp);
+      if (token !== seq) return;
+      body.replaceChildren(...tmp.childNodes);
+      body.scrollTop = 0;
+      if (!panel.hidden) return;
+      panel.hidden = false;
+      gsap.fromTo(frame,
+        { clipPath: 'inset(0 0 100% 0)', opacity: 0 },
+        { clipPath: 'inset(0 0 0% 0)', opacity: 1, duration: d(0.5), delay: d(0.3), ease: 'power2.out' });
+      closeBtn.focus();
+    } catch (err) {
+      if (token !== seq) return;
+      console.error(err);
+      goHome();
+    }
   }
 
   function close() {
+    seq++;
     current = null;
     scene.setSpeed(1);
     document.body.classList.remove('is-panel-open');
@@ -47,6 +58,7 @@ export function initRouter({ hotspots, scene }) {
     panel.hidden = true;
     body.innerHTML = '';
     setArea('', 'Início');
+    gsap.killTweensOf(camera);
     gsap.to(camera, { scale: 1, duration: d(0.8), ease: 'power2.inOut' });
     if (returnFocus && document.contains(returnFocus)) returnFocus.focus();
   }
@@ -57,18 +69,19 @@ export function initRouter({ hotspots, scene }) {
     else if (!id && current) close();
   }
 
-  const goHome = () => { location.hash = ''; };
+  const goHome = () => { close(); location.hash = ''; };
   closeBtn.addEventListener('click', goHome);
   panel.addEventListener('click', e => { if (e.target === panel) goHome(); });
   document.addEventListener('keydown', e => {
-    if (panel.hidden) return;
-    if (e.key === 'Escape') { goHome(); return; }
-    if (e.key !== 'Tab') return;
-    const items = [...frame.querySelectorAll(FOCUSABLE), ...nav.querySelectorAll('a')]
-      .filter(el => !el.closest('[hidden]'));
+    if (e.key === 'Escape' && current) { goHome(); return; }
+    if (e.key !== 'Tab' || panel.hidden) return;
+    const items = [...document.querySelectorAll('#hud-nav a, #panel .panel__frame *')]
+      .filter(el => el.matches(FOCUSABLE) && !el.closest('[hidden]'));
+    if (!items.length) return;
     const first = items[0];
     const last = items[items.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    if (!items.includes(document.activeElement)) { e.preventDefault(); first.focus(); }
+    else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
   window.addEventListener('hashchange', sync);
