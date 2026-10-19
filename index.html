@@ -27,54 +27,48 @@
 
   <main id="viewport" class="viewport" aria-label="Taverna do Náutilus">
     <div id="camera" class="camera">
-      <div id="scene" class="scene">
-        <img class="layer layer--bg" data-depth="0.15" src="assets/img/taverna-fundo.webp"
-             alt="Interior da Taverna do Náutilus: mesas de madeira, lanternas, um robô no balcão e uma grande vigia para o oceano.">
-        <div class="layer porthole" data-depth="0.25" aria-hidden="true">
-          <div class="porthole__fish"></div>
-          <div class="bubbles"></div>
-        </div>
-        <div class="layer porthole porthole--silhouette" data-depth="0.25" aria-hidden="true">
-          <img class="porthole__shark" src="assets/img/tubarao.webp" alt="">
-        </div>
-        <div class="layer fog fog--back" data-depth="0.35" aria-hidden="true"></div>
-        <div class="layer actor actor--cliente" data-depth="0.5" aria-hidden="true">
-          <img class="actor__body" src="assets/img/cliente-corpo.webp" alt="">
-          <img class="actor__arm" src="assets/img/cliente-braco.webp" alt="">
-        </div>
-        <div class="layer actor actor--robo" data-depth="0.55" aria-hidden="true">
-          <img class="actor__body" src="assets/img/robo-corpo.webp" alt="">
-          <span class="robo__eye"></span>
-          <span class="robo__pour"></span>
-          <img class="actor__arm" src="assets/img/robo-braco.webp" alt="">
-        </div>
-        <div class="layer glows" data-depth="0.55" aria-hidden="true">
-          <span class="glow" style="--x:7.5;--y:29"></span>
-          <span class="glow" style="--x:30;--y:37"></span>
-          <span class="glow" style="--x:65;--y:66"></span>
-          <span class="glow" style="--x:91.5;--y:29"></span>
-        </div>
-        <div class="layer dust" data-depth="0.7" aria-hidden="true"></div>
-        <div class="layer fog fog--front" data-depth="0.85" aria-hidden="true"></div>
-        <div id="hotspots" class="layer hotspots"></div>
+      <div id="scene" class="scene" data-parallax="0.35">
+        <video id="scene-video" class="scene__video" src="assets/video/taverna-loop.mp4" poster="assets/video/taverna-poster.jpg"
+               muted loop playsinline preload="auto"
+               aria-label="Interior animado da Taverna do Náutilus: clientes bebendo, um robô servindo no balcão e peixes passando pela vigia."></video>
+        <div id="hotspots" class="hotspots"></div>
       </div>
     </div>
   </main>
+
+  <div class="lens" aria-hidden="true">
+    <div class="lens__clip">
+      <div class="lens__glass"></div>
+      <div class="lens__scan"></div>
+      <div class="lens__grain"></div>
+    </div>
+    <div class="lens__window"></div>
+    <div class="lens__reticle" data-parallax="-0.6"><i></i></div>
+  </div>
 
   <div class="hud">
     <span class="hud__corner hud__corner--tl" aria-hidden="true"></span>
     <span class="hud__corner hud__corner--tr" aria-hidden="true"></span>
     <span class="hud__corner hud__corner--bl" aria-hidden="true"></span>
     <span class="hud__corner hud__corner--br" aria-hidden="true"></span>
-    <div class="hud__scan" aria-hidden="true"></div>
+
     <p class="hud__status">
       <span class="hud__depth">↓ <span id="hud-depth">3.000</span> m</span>
       <span id="hud-area" class="hud__area">Início</span>
     </p>
+    <div class="hud__compass" aria-hidden="true"><span class="hud__heading">O · 274°</span></div>
     <p class="hud__brand">Rede Náutilus <small>A comunidade de Atlântida</small></p>
+
+    <ul class="hud__gauges" aria-hidden="true">
+      <li><span>O₂</span><b style="--v:94"></b><em>94%</em></li>
+      <li><span>Pressão</span><b style="--v:71"></b><em>301 atm</em></li>
+      <li><span>Energia</span><b style="--v:87"></b><em>87%</em></li>
+    </ul>
+    <p class="hud__link" aria-hidden="true"><i class="hud__signal"><u></u><u></u><u></u><u></u></i>Rede Náutilus <strong>online</strong></p>
+
     <section class="hud__intro" aria-labelledby="intro-title">
       <h1 id="intro-title">A cidade é grande. Nossa comunidade é maior.</h1>
-      <p>Conectando habitantes, compartilhando histórias e mantendo Atlântida unida, uma mensagem de cada vez. Olhe em volta: seus óculos marcam cada canto da taverna.</p>
+      <p>Conectando habitantes, compartilhando histórias e mantendo Atlântida unida, uma mensagem de cada vez.</p>
       <a class="btn" href="#mural">Entrar na comunidade →</a>
     </section>
     <nav id="hud-nav" class="hud__nav" aria-label="Áreas do portal"></nav>
@@ -88,8 +82,10 @@
   </div>
 
   <div id="boot" class="boot">
-    <div class="boot__lid boot__lid--top"></div>
-    <div class="boot__lid boot__lid--bottom"></div>
+    <div class="boot__stage">
+      <video class="boot__video" src="assets/video/intro-oculos.mp4" poster="assets/video/taverna-poster.jpg" muted playsinline preload="auto"></video>
+    </div>
+    <div class="boot__flash"></div>
     <div class="boot__screen">
       <span class="boot__line"></span>
       <pre class="boot__log"></pre>

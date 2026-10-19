@@ -1,6 +1,6 @@
 export function renderHotspots(container, hotspots) {
   container.innerHTML = hotspots.map(h => `
-    <a class="hotspot hotspot--${h.side}" href="#${h.id}" data-depth="${h.depth}" style="--x:${h.x};--y:${h.y}">
+    <a class="hotspot hotspot--${h.side}" href="#${h.id}" style="--x:${h.x};--y:${h.y}">
       <span class="hotspot__dot" aria-hidden="true"></span>
       <span class="hotspot__line" aria-hidden="true"></span>
       <span class="hotspot__label">${h.label}</span>
@@ -22,9 +22,12 @@ export function setArea(id, label) {
 
 export function revealHud() {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const clearProps = 'opacity,scale,x,y';
   gsap.timeline()
-    .from('.hud__corner', { scale: 1.6, opacity: 0, duration: .5, stagger: .06, ease: 'back.out(2)', clearProps: 'opacity,scale,x,y' })
-    .from('.hud__status, .hud__brand, .hud__nav', { opacity: 0, y: -8, duration: .4, stagger: .08, clearProps: 'opacity,scale,x,y' }, '-=.2')
-    .from('.hud__intro', { opacity: 0, x: -20, duration: .5, clearProps: 'opacity,scale,x,y' }, '-=.2')
-    .from('.hotspot', { opacity: 0, scale: .6, duration: .4, stagger: .15, ease: 'back.out(2)', clearProps: 'opacity,scale,x,y' }, '-=.1');
+    .from('.lens__window', { opacity: 0, duration: .9, ease: 'power2.out', clearProps: 'opacity' })
+    .from('.hud__corner', { scale: 1.8, opacity: 0, duration: .5, stagger: .07, ease: 'back.out(2)', clearProps }, '-=.6')
+    .from('.hud__status, .hud__brand, .hud__compass, .hud__nav', { opacity: 0, y: -10, duration: .45, stagger: .08, clearProps }, '-=.3')
+    .from('.hud__gauges li, .hud__link', { opacity: 0, x: -16, duration: .4, stagger: .1, clearProps }, '-=.3')
+    .from('.hud__intro', { opacity: 0, x: -24, duration: .55, clearProps }, '-=.2')
+    .from('.hotspot', { opacity: 0, scale: .6, duration: .45, stagger: .16, ease: 'back.out(2)', clearProps }, '-=.1');
 }

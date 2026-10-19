@@ -7,19 +7,16 @@ import { initRouter } from './router.js';
 let started = false;
 let hotspots = [];
 try {
-hotspots = await fetch('data/hotspots.json').then(r => r.json());
-const viewport = document.getElementById('viewport');
-const sceneEl = document.getElementById('scene');
+  hotspots = await fetch('data/hotspots.json').then(r => r.json());
+  renderHotspots(document.getElementById('hotspots'), hotspots);
+  renderNav(document.getElementById('hud-nav'), hotspots);
+  const scene = initScene();
+  initLook(document.getElementById('viewport'));
 
-renderHotspots(document.getElementById('hotspots'), hotspots);
-renderNav(document.getElementById('hud-nav'), hotspots);
-const scene = initScene(sceneEl);
-initLook(viewport, sceneEl);
-
-await runBoot();
-revealHud();
-started = true;
-initRouter({ hotspots, scene });
+  await runBoot();
+  revealHud();
+  started = true;
+  initRouter({ hotspots, scene });
 } catch (err) {
   console.error(err);
   document.documentElement.classList.remove('will-boot');

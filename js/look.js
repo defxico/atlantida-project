@@ -1,14 +1,15 @@
-const MAX = 28;
+const MAX = 34;
 const clamp = v => Math.max(-1, Math.min(1, v));
 
-export function initLook(viewport, scene) {
+// Cada elemento com data-parallax acompanha a "cabeça" do usuário: >0 anda ao contrário do mouse, <0 a favor.
+export function initLook(viewport) {
   if (matchMedia('(hover: none)').matches) {
     viewport.scrollLeft = (viewport.scrollWidth - viewport.clientWidth) / 2;
   }
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const layers = [...scene.querySelectorAll('[data-depth]')].map(el => ({
-    depth: Number(el.dataset.depth),
+  const layers = [...document.querySelectorAll('[data-parallax]')].map(el => ({
+    depth: Number(el.dataset.parallax),
     x: gsap.quickTo(el, 'x', { duration: .9, ease: 'power3.out' }),
     y: gsap.quickTo(el, 'y', { duration: .9, ease: 'power3.out' }),
   }));

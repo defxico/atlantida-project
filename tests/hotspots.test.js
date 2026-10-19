@@ -10,7 +10,7 @@ test('as 4 áreas obrigatórias existem, na ordem do menu', () => {
 
 test('cada hotspot tem campos completos e um módulo de área', () => {
   for (const h of hotspots) {
-    for (const k of ['label', 'nav', 'x', 'y', 'depth', 'side', 'zoom']) assert.ok(h[k] !== undefined, `${h.id} sem ${k}`);
+    for (const k of ['label', 'nav', 'x', 'y', 'side', 'zoom']) assert.ok(h[k] !== undefined, `${h.id} sem ${k}`);
     assert.ok(['left', 'right'].includes(h.side));
     for (const k of ['scale', 'x', 'y']) assert.equal(typeof h.zoom[k], 'number');
     assert.ok(existsSync(new URL(`../js/areas/${h.id}.js`, import.meta.url)), `falta js/areas/${h.id}.js`);
