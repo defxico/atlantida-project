@@ -1,0 +1,8 @@
+[
+  { "id": "p1", "autorId": "livia", "data": "2026-10-12", "categoria": "Pedido de ajuda", "texto": "Alguém tem um kit de primeiros socorros extra? Minha vizinha da Cúpula Residencial está precisando e não consegue sair de casa agora." },
+  { "id": "p2", "autorId": "kael", "data": "2026-10-11", "categoria": "Aviso", "texto": "A manutenção da cúpula oeste será amanhã, das 14h às 18h. Evitem a área durante esse período — as portas estanques ficarão fechadas." },
+  { "id": "p3", "autorId": "nami", "data": "2026-10-10", "categoria": "Oferta", "texto": "Estou doando livros e materiais de estudo sobre a vida marinha. Interessados, me chamem aqui no Mural ou passem no Setor Científico." },
+  { "id": "p4", "autorId": "seren", "data": "2026-10-09", "categoria": "Conhecimento", "texto": "Dica rápida: se o filtro de ar do seu módulo estiver chiando, limpe a grade de entrada antes de trocar a peça. Resolve 8 em cada 10 casos." },
+  { "id": "p5", "autorId": "torak", "data": "2026-10-08", "categoria": "Amizade", "texto": "Voltei da fenda norte com histórias novas. Quarta à noite, mesa da frente da Taverna do Náutilus. A primeira rodada é por minha conta." },
+  { "id": "p6", "autorId": "darian", "data": "2026-10-07", "categoria": "Aviso", "texto": "O correio pneumático do Setor Comercial voltou a funcionar. Encomendas atrasadas serão entregues até sexta." }
+]
