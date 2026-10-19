@@ -2,7 +2,7 @@ export async function render(container) {
   const m = await fetch('data/mundo.json').then(r => r.json());
 
   container.innerHTML = `
-    <div class="mundo" style="--bg:url('${m.imagem}')">
+    <div class="mundo" style="--bg:url('${new URL(m.imagem, document.baseURI).href}')">
       <header class="panel__header">
         <p class="eyebrow">A cidade no fundo do mar</p>
         <h2 id="panel-title">O Mundo</h2>
