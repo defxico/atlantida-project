@@ -34,7 +34,7 @@ export function initRouter({ hotspots, scene }) {
       const tmp = document.createElement('div');
       await mod.render(tmp);
       if (token !== seq) return;
-      body.replaceChildren(...tmp.childNodes);
+      body.replaceChildren(tmp);
       body.scrollTop = 0;
       if (!panel.hidden) return;
       panel.hidden = false;

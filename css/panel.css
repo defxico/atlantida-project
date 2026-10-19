@@ -1,11 +1,11 @@
 .panel {
   position: fixed; inset: 0; z-index: 15;
-  display: grid; place-items: center;
+  display: grid; place-items: center; grid-template-rows: minmax(0, 1fr);
   padding: clamp(72px, 10vh, 96px) clamp(16px, 4vw, 48px) 96px;
 }
 .panel[hidden] { display: none; }
 .panel__frame {
-  position: relative; width: min(1100px, 100%); max-height: 100%;
+  position: relative; width: min(1100px, 100%); max-height: 100%; min-height: 0;
   display: flex; flex-direction: column;
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   box-shadow: 0 0 40px rgb(66 214 208 / .15), inset 0 0 60px rgb(37 37 107 / .5);
@@ -21,7 +21,7 @@
   border: 1px solid var(--line); background: var(--abyss); color: var(--cyan);
   font-size: 1.1rem; cursor: pointer;
 }
-.panel__body { overflow-y: auto; padding: clamp(20px, 4vw, 48px); }
+.panel__body { overflow-y: auto; min-height: 0; padding: clamp(20px, 4vw, 48px); }
 .panel__header { margin-bottom: var(--space-4); max-width: 62ch; }
 .panel__header h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
 .eyebrow { margin: 0 0 var(--space-2); color: var(--cyan); font: 600 .75rem var(--font-body); letter-spacing: .25em; text-transform: uppercase; }
