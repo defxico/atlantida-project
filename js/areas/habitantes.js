@@ -1,31 +1,47 @@
-const card = h => `
-  <li class="card" tabindex="0">
-    <figure class="card__media">
-      <img src="${h.img}" alt="Retrato de ${h.nome}" loading="lazy">
-      <span class="card__scan" aria-hidden="true"></span>
-    </figure>
-    <div class="card__body">
-      ${h.naTaverna ? '<span class="tag tag--live">● na taverna agora</span>' : ''}
-      <h3>${h.nome}</h3>
-      <p class="card__role">${h.funcao}</p>
-      <p>${h.descricao}</p>
-      <dl class="sheet">
-        <div><dt>Setor</dt><dd>${h.setor}</dd></div>
-        <div><dt>Especialidade</dt><dd>${h.especialidade}</dd></div>
-      </dl>
+export const bare = true; // sem moldura de página: ficha em HUD
+
+const ficha = (h, i, total) => `
+  <article class="ficha" aria-labelledby="ficha-nome">
+    <header class="ficha__head"><b>Rede Náutilus / Registros de habitantes</b><span>Ficha ${String(i + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}</span></header>
+    <div class="ficha__main">
+      <figure class="ficha__foto"><img src="${h.img}" alt="Retrato de ${h.nome}"></figure>
+      <div class="ficha__info">
+        <p class="ficha__reg">Registro ${h.registro}</p>
+        <h3 id="ficha-nome">${h.nome}</h3>
+        <p class="ficha__role">${h.funcao} · ${h.especialidade}</p>
+        <dl class="ficha__dados">
+          <div><dt>Mora</dt><dd>${h.mora}</dd></div>
+          <div><dt>Atua</dt><dd>${h.atua}</dd></div>
+        </dl>
+        <p class="ficha__lbl">Quem é</p>
+        <p class="ficha__txt">${h.descricao}</p>
+        <p class="ficha__lbl ficha__lbl--gold">Situação atual</p>
+        <p class="ficha__txt">${h.situacao}</p>
+        <a class="ficha__mural" href="#mural">Ver mensagens no mural →</a>
+      </div>
     </div>
-  </li>`;
+  </article>`;
 
 export async function render(container) {
-  const habitantes = await fetch('data/habitantes.json').then(r => r.json());
+  const hs = await fetch('data/habitantes.json').then(r => r.json());
   container.innerHTML = `
-    <header class="panel__header">
-      <p class="eyebrow">Quem vive aqui</p>
-      <h2 id="panel-title">Habitantes</h2>
-      <p class="lead">Conheça as pessoas que fazem parte de Atlântida. Cada morador tem uma história, um talento e um papel na cidade. Passe o olhar sobre um card para escanear a ficha.</p>
-    </header>
-    <ul class="grid grid--cards" role="list">${habitantes.map(card).join('')}</ul>`;
+    <div class="habs">
+      <h2 id="panel-title" class="sr-only">Habitantes de Atlântida</h2>
+      <div class="habs__stage" aria-live="polite"></div>
+      <p class="map__hint">Navegue pelos nomes dos habitantes</p>
+      <div class="habs__nav" role="group" aria-label="Habitantes">
+        ${hs.map(h => `<button type="button" class="map__node habs__btn" data-id="${h.id}" aria-pressed="false">${h.nome}</button>`).join('')}
+      </div>
+    </div>`;
 
-  container.querySelectorAll('.card__media img').forEach(img =>
-    img.addEventListener('error', () => img.classList.add('is-missing'), { once: true }));
+  const stage = container.querySelector('.habs__stage');
+  const btns = [...container.querySelectorAll('.habs__btn')];
+  const show = (i, animate = true) => {
+    stage.innerHTML = ficha(hs[i], i, hs.length);
+    btns.forEach((b, j) => { b.classList.toggle('is-active', j === i); b.setAttribute('aria-pressed', j === i); });
+    if (animate && window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches)
+      gsap.from(stage.firstElementChild, { opacity: 0, y: 10, duration: .35, ease: 'power2.out' });
+  };
+  btns.forEach((b, i) => b.addEventListener('click', () => show(i)));
+  show(0, false);
 }

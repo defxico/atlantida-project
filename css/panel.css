@@ -31,25 +31,31 @@
 .tag--live { background: rgb(66 214 208 / .15); color: var(--cyan); }
 .tag[data-cat="Pedido de ajuda"] { background: rgb(216 180 90 / .2); color: var(--gold); }
 
-/* Habitantes */
-.grid--cards { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-.card { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: rgb(37 37 107 / .35); transition: border-color .3s, translate .3s var(--ease-out); }
-.card:hover, .card:focus-visible { border-color: var(--cyan); translate: 0 -4px; }
-.card__media { position: relative; margin: 0; aspect-ratio: 4 / 5; background: linear-gradient(160deg, var(--deep), var(--violet)); }
-.card__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.card__media img.is-missing { visibility: hidden; }
-.card__scan { position: absolute; inset: 0 0 auto; height: 3px; background: var(--cyan); box-shadow: var(--glow-cyan); opacity: 0; }
-.card:hover .card__scan, .card:focus-visible .card__scan { opacity: 1; animation: card-scan 1.2s var(--ease-out) forwards; }
-@keyframes card-scan { from { top: 0; } to { top: 100%; opacity: 0; } }
-.card__body { padding: var(--space-3); }
-.card__body h3 { font-size: 1.15rem; margin: var(--space-2) 0 0; }
-.card__role { margin: 0 0 var(--space-2); color: var(--gold); font-weight: 600; font-size: .85rem; }
-.card__body p { margin: 0; font-size: .9rem; color: var(--text-dim); }
-.sheet { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); margin: var(--space-3) 0 0; padding-top: var(--space-2); border-top: 1px dashed var(--line); font-size: .8rem; max-height: 0; opacity: 0; overflow: hidden; transition: max-height .4s, opacity .4s; }
-.card:hover .sheet, .card:focus-visible .sheet { max-height: 120px; opacity: 1; }
-.sheet dt { color: var(--cyan); text-transform: uppercase; letter-spacing: .1em; font-size: .65rem; }
-.sheet dd { margin: 0; }
-@media (hover: none) { .sheet { max-height: none; opacity: 1; } }
+/* Habitantes: ficha em HUD, mesmo desenho da caixa de transmissões */
+.habs { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3); }
+.habs__stage { width: min(100%, 980px); }
+.ficha { position: relative; border: 1px solid rgb(66 214 208 / .55); background: linear-gradient(180deg, rgb(8 13 43 / .92), rgb(8 13 43 / .8)); backdrop-filter: blur(8px); box-shadow: 0 0 24px rgb(66 214 208 / .22), inset 0 0 0 1px rgb(66 214 208 / .08); }
+.ficha::before, .ficha::after { content: ''; position: absolute; width: 14px; height: 14px; border: 2px solid var(--cyan); filter: drop-shadow(var(--glow-cyan)); }
+.ficha::before { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
+.ficha::after { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
+.ficha__head { display: flex; justify-content: space-between; gap: 1rem; padding: .55rem 1rem; border-bottom: 1px solid rgb(66 214 208 / .3); background: rgb(66 214 208 / .1); font: 700 .68rem/1 var(--font-hud); letter-spacing: .22em; text-transform: uppercase; color: var(--cyan); }
+.ficha__head span { color: var(--text-dim); font-weight: 500; white-space: nowrap; }
+.ficha__main { display: grid; grid-template-columns: minmax(0, 260px) 1fr; gap: clamp(16px, 3vw, 32px); padding: clamp(14px, 2.4vw, 26px); }
+.ficha__foto { margin: 0; aspect-ratio: 2 / 3; align-self: start; }
+.ficha__foto img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ficha__reg { margin: 0; color: var(--gold); font: 700 .72rem/1 var(--font-hud); letter-spacing: .24em; text-transform: uppercase; }
+.ficha__info h3 { margin: .4rem 0 0; font: 700 clamp(1.6rem, 3.4vw, 2.4rem)/1.1 var(--font-title); }
+.ficha__role { margin: .35rem 0 0; color: var(--text); font-weight: 600; }
+.ficha__dados { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); margin: var(--space-3) 0; }
+.ficha__dados div { padding: .55rem .75rem; border: 1px solid var(--line); background: rgb(37 37 107 / .3); }
+.ficha__dados dt, .ficha__lbl { margin: 0; color: var(--cyan); font: 700 .66rem/1 var(--font-hud); letter-spacing: .22em; text-transform: uppercase; }
+.ficha__dados dd { margin: .35rem 0 0; font-weight: 600; }
+.ficha__lbl--gold { margin-top: var(--space-3); color: var(--gold); }
+.ficha__txt { margin: .35rem 0 0; color: var(--text); font-size: .95rem; }
+.ficha__mural { display: inline-block; margin-top: var(--space-3); color: var(--gold); font: 700 .74rem/1 var(--font-hud); letter-spacing: .18em; text-transform: uppercase; text-decoration: none; }
+.ficha__mural:hover, .ficha__mural:focus-visible { text-decoration: underline; }
+.habs__nav { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); }
+.habs .habs__btn { position: static; translate: none; font-size: .8rem; }
 
 /* Mural */
 .filters { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); }
@@ -130,7 +136,21 @@
   .panel { padding: 52px 0 calc(var(--lens-bottom) + 58px); }
   .panel__frame { width: 100%; height: 100%; max-height: none; border-radius: 0; }
   .map__node { padding: .2rem .35rem; letter-spacing: .06em; }
-  .panel--bare { padding: calc(var(--pad-t) + 52px) 8px calc(var(--lens-bottom) + 64px); }
+  .ficha__main { grid-template-columns: 96px 1fr; gap: 12px; padding: 12px; }
+  .ficha__head { font-size: .56rem; letter-spacing: .12em; }
+  .ficha__head b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ficha__dados { margin: 8px 0; }
+  .ficha__dados div { padding: .35rem .5rem; }
+  .ficha__dados dd { font-size: .78rem; margin-top: .25rem; }
+  .ficha__info h3 { font-size: 1.3rem; }
+  .ficha__role { font-size: .78rem; }
+  .ficha__lbl--gold { margin-top: 8px; }
+  .ficha__mural { margin-top: 8px; font-size: .66rem; }
+  .ficha__txt { font-size: .76rem; line-height: 1.4; }
+  .habs { justify-content: flex-start; gap: var(--space-2); }
+  .habs .map__hint { display: none; }
+  .habs__btn { font-size: .62rem; padding: .3rem .5rem; }
+  .panel--bare { padding: calc(var(--lens-top) + 66px) 8px calc(var(--lens-bottom) + 64px); }
   .map-stage { width: 100%; }
   .map__card { position: fixed; top: auto; bottom: calc(var(--lens-bottom) + 66px); left: 10px !important; right: 10px !important; translate: 0 0; width: auto; }
   .map__card .tx__text { font-size: .82rem; }

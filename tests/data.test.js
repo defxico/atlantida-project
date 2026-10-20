@@ -9,7 +9,7 @@ test('habitantes: ao menos 6, todos os campos preenchidos, ids únicos', () => {
   const hs = load('habitantes.json');
   assert.ok(hs.length >= 6);
   for (const h of hs) {
-    for (const k of ['id', 'nome', 'funcao', 'setor', 'especialidade', 'descricao', 'img']) {
+    for (const k of ['id', 'nome', 'funcao', 'setor', 'especialidade', 'descricao', 'img', 'registro', 'mora', 'atua', 'situacao']) {
       assert.ok(h[k], `${h.id ?? '?'} sem ${k}`);
     }
     assert.equal(typeof h.naTaverna, 'boolean');
