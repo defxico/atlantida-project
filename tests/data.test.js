@@ -22,7 +22,7 @@ test('mural: ao menos 5 posts, autor existe, data ISO, categoria válida', () =>
   const posts = load('mural.json');
   assert.ok(posts.length >= 5);
   for (const p of posts) {
-    assert.ok(ids.has(p.autorId), `${p.id}: autor ${p.autorId} não existe`);
+    assert.ok(p.autorId ? ids.has(p.autorId) : p.autor, `${p.id}: autor ${p.autorId ?? '?'} inválido`);
     assert.match(p.data, /^\d{4}-\d{2}-\d{2}$/);
     assert.ok(CATEGORIAS.includes(p.categoria), `${p.id}: categoria ${p.categoria}`);
     assert.ok(p.texto.length > 20);

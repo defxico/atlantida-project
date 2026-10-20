@@ -2,6 +2,8 @@ import { sortByDateDesc, filterByCategoria, formatDate } from '../lib/mural.js';
 
 const CATEGORIAS = ['todos', 'Aviso', 'Pedido de ajuda', 'Oferta', 'Conhecimento', 'Amizade'];
 
+const MORADOR = { setor: 'Morador', img: 'assets/img/avatar-morador.svg' };
+
 const post = (p, a) => `
   <li class="post">
     <img class="post__avatar" src="${a.img}" alt="" loading="lazy">
@@ -35,7 +37,7 @@ export async function render(container) {
   const status = container.querySelector('[role="status"]');
   const draw = cat => {
     const items = filterByCategoria(sortByDateDesc(posts), cat);
-    feed.innerHTML = items.map(p => post(p, autores[p.autorId])).join('')
+    feed.innerHTML = items.map(p => post(p, autores[p.autorId] ?? { ...MORADOR, nome: p.autor })).join('')
       || '<li class="feed__empty">Nenhuma publicação nessa categoria.</li>';
     status.textContent = (items.length === 1 ? '1 publicação' : `${items.length} publicações`) + (cat !== 'todos' ? ` em ${cat}` : '');
   };

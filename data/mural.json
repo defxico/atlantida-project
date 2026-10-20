@@ -1,8 +1,107 @@
 [
-  { "id": "p1", "autorId": "livia", "data": "2026-10-12", "categoria": "Pedido de ajuda", "texto": "Alguém tem um kit de primeiros socorros extra? Minha vizinha da Cúpula Residencial está precisando e não consegue sair de casa agora." },
-  { "id": "p2", "autorId": "kael", "data": "2026-10-11", "categoria": "Aviso", "texto": "A manutenção da cúpula oeste será amanhã, das 14h às 18h. Evitem a área durante esse período — as portas estanques ficarão fechadas." },
-  { "id": "p3", "autorId": "nami", "data": "2026-10-10", "categoria": "Oferta", "texto": "Estou doando livros e materiais de estudo sobre a vida marinha. Interessados, me chamem aqui no Mural ou passem no Setor Científico." },
-  { "id": "p4", "autorId": "seren", "data": "2026-10-09", "categoria": "Conhecimento", "texto": "Dica rápida: se o filtro de ar do seu módulo estiver chiando, limpe a grade de entrada antes de trocar a peça. Resolve 8 em cada 10 casos." },
-  { "id": "p5", "autorId": "torak", "data": "2026-10-08", "categoria": "Amizade", "texto": "Voltei da fenda norte com histórias novas. Quarta à noite, mesa da frente da Taverna do Náutilus. A primeira rodada é por minha conta." },
-  { "id": "p6", "autorId": "darian", "data": "2026-10-07", "categoria": "Aviso", "texto": "O correio pneumático do Setor Comercial voltou a funcionar. Encomendas atrasadas serão entregues até sexta." }
+  {
+    "id": "p1",
+    "autorId": "livia",
+    "data": "2026-10-12",
+    "categoria": "Pedido de ajuda",
+    "texto": "Estou no abrigo do Residencial B com moradores que saíram do Setor A. Uma das famílias precisa de um kit de primeiros socorros lacrado. Se alguém tiver um disponível, responda aqui para combinarmos a entrega."
+  },
+  {
+    "id": "p2",
+    "autorId": "kael",
+    "data": "2026-10-11",
+    "categoria": "Aviso",
+    "texto": "A partir de amanhã, os geradores de oxigênio do Residencial A serão isolados para manutenção. O acesso ao setor e as linhas A e B ficarão fechados até a liberação da equipe. Náutilos atualizará as rotas disponíveis pela Rede."
+  },
+  {
+    "id": "p3",
+    "autorId": "nami",
+    "data": "2026-10-10",
+    "categoria": "Oferta",
+    "texto": "Digitalizei mapas antigos da Fenda Norte e anotações dos primeiros exploradores. Quem estiver estudando as rotas pode consultar os originais no museu ou me pedir uma cópia pela Rede."
+  },
+  {
+    "id": "p4",
+    "autorId": "seren",
+    "data": "2026-10-09",
+    "categoria": "Conhecimento",
+    "texto": "Se o filtro de ar do seu módulo começar a chiar, anote o número do equipamento e avise a manutenção pela Rede. Não abra o sistema por conta própria: a equipe precisa verificar a pressão antes de mexer nele."
+  },
+  {
+    "id": "p5",
+    "autorId": "torak",
+    "data": "2026-10-08",
+    "categoria": "Amizade",
+    "texto": "Voltei da Fenda Norte com imagens de uma formação que não encontrei nos mapas que levamos. Quarta à noite vou mostrá-las na Taverna do Náutilus. Quem quiser ajudar a comparar os registros será bem-vindo. A primeira rodada é por minha conta."
+  },
+  {
+    "id": "p6",
+    "autorId": "darian",
+    "data": "2026-10-07",
+    "categoria": "Aviso",
+    "texto": "O correio pneumático entre o Comercial e o Cívico voltou a funcionar. Os recados continuam chegando pela Rede; as encomendas físicas que ficaram retidas serão entregues até sexta."
+  },
+  {
+    "id": "p7",
+    "autorId": "darian",
+    "data": "2026-10-20",
+    "categoria": "Amizade",
+    "texto": "Ainda estou tentando entender como virei Personalidade do Mês. Obrigado a quem indicou meu nome. Se alguma entrega minha ajudou você nos últimos dias, o mérito também é de quem manteve as rotas abertas e recebeu cada encomenda do outro lado."
+  },
+  {
+    "id": "p8",
+    "autor": "Mara Rell",
+    "data": "2026-10-19",
+    "categoria": "Aviso",
+    "texto": "As linhas A e B continuam interditadas. Hoje precisei atravessar três setores para chegar ao trabalho. Náutilos, por favor, mostre os horários das rotas alternativas antes de sairmos de casa. Muita gente só descobre a mudança quando chega à estação."
+  },
+  {
+    "id": "p9",
+    "autor": "Ivo",
+    "data": "2026-10-18",
+    "categoria": "Conhecimento",
+    "texto": "Perguntei a Náutilos como a cidade funciona durante uma oscilação dos servidores. Segundo ela, os sistemas essenciais têm prioridade: pressão, oxigênio e energia. As respostas da Rede podem demorar, mas o controle dessas estruturas continua ativo."
+  },
+  {
+    "id": "p10",
+    "autor": "Ayla",
+    "data": "2026-10-17",
+    "categoria": "Pedido de ajuda",
+    "texto": "A Rede caiu por alguns minutos no meu módulo e não consegui falar com minha mãe, que está no abrigo do Residencial B. Se alguém estiver lá, pode pedir que ela me envie uma mensagem quando a conexão voltar? O nome dela é Celina."
+  },
+  {
+    "id": "p11",
+    "autorId": "nami",
+    "data": "2026-10-16",
+    "categoria": "Conhecimento",
+    "texto": "Comparei os registros da Fenda Norte com os dados recentes de Náutilos. Há oscilações nos dois conjuntos, mas ainda não sabemos se estão relacionadas. Deixei as medições na biblioteca para quem quiser ajudar na análise."
+  },
+  {
+    "id": "p12",
+    "autorId": "seren",
+    "data": "2026-10-15",
+    "categoria": "Aviso",
+    "texto": "A equipe entrou no Residencial A para verificar os geradores de oxigênio. O setor permanece fechado enquanto medimos pressão e qualidade do ar. Avisaremos pela Rede assim que houver uma previsão segura de reabertura."
+  },
+  {
+    "id": "p13",
+    "autor": "Elis",
+    "data": "2026-10-14",
+    "categoria": "Oferta",
+    "texto": "O museu digitalizou os relatos dos primeiros moradores de Atlântida. Quem estiver abrigando uma família do Setor A pode solicitar uma cópia pela Rede. Talvez ajude as crianças a conhecer a história da cidade enquanto estão longe de casa."
+  },
+  {
+    "id": "p14",
+    "autorId": "livia",
+    "data": "2026-10-13",
+    "categoria": "Pedido de ajuda",
+    "texto": "O abrigo do Residencial B recebeu mais moradores do Setor A nesta manhã. Precisamos de cobertores secos e pessoas para organizar as chegadas. Quem puder ajudar, responda aqui informando o que consegue trazer."
+  },
+  {
+    "id": "p15",
+    "autor": "Caio Neris",
+    "data": "2026-10-13",
+    "categoria": "Amizade",
+    "texto": "Hoje uma mesa inteira da Taverna do Náutilus ficou esperando notícias do Setor A. Quando chegou a mensagem de que todas as famílias tinham alcançado os abrigos, alguém pediu uma rodada para desconhecidos. Ninguém perguntou quem pagaria."
+  }
 ]

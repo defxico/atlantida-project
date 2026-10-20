@@ -63,7 +63,7 @@
 .chip[aria-pressed="true"] { background: var(--cyan); border-color: var(--cyan); color: var(--abyss); }
 .feed { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
 .post { display: grid; grid-template-columns: 48px 1fr; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--line); border-radius: var(--radius); background: rgb(37 37 107 / .3); }
-.post__avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: var(--violet); }
+.post__avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: 50% 22%; background: var(--violet); }
 .post__meta { margin: 0 0 var(--space-2); font-size: .8rem; color: var(--text-dim); }
 .post__meta strong { color: var(--text); }
 .post p:last-child { margin: var(--space-2) 0 0; }
