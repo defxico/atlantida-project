@@ -2,9 +2,10 @@ import { sortByDateDesc, filterByCategoria, formatDate } from '../lib/mural.js';
 import { validateField } from '../lib/validate.js';
 export const bare = true; // sem moldura de página: cartões em HUD
 
-const CATEGORIAS = ['todos', 'Aviso', 'Pedido de ajuda', 'Oferta', 'Conhecimento', 'Amizade', 'Visitantes'];
+const CATEGORIAS = ['todos', 'Aviso', 'Pedido de ajuda', 'Oferta', 'Conhecimento', 'Amizade', 'Visitantes', 'Personalidades do mês'];
 const VISITANTES = 'Visitantes';
-const TIPOS = CATEGORIAS.slice(1, -1);
+const PERSONALIDADES = 'Personalidades do mês'; // posts dos 6 habitantes; não é um tipo de mensagem
+const TIPOS = CATEGORIAS.slice(1, -2);
 const STORE = 'nautilus.visitantes';
 
 const MORADOR = { setor: 'Morador', img: 'assets/img/avatar-morador.svg' };
@@ -68,7 +69,7 @@ export async function render(container) {
 
   const draw = () => {
     const todos = [...visitantes.map(v => ({ ...v, categoria: VISITANTES })), ...fixos];
-    const items = filterByCategoria(sortByDateDesc(todos), cat);
+    const items = cat === PERSONALIDADES ? sortByDateDesc(fixos.filter(p => p.autorId)) : filterByCategoria(sortByDateDesc(todos), cat);
     feed.innerHTML = items.map(p => post(p, p.autorId ? autores[p.autorId] : { ...(p.categoria === VISITANTES ? VISITANTE : MORADOR), nome: p.autor })).join('')
       || `<li class="feed__empty">${cat === VISITANTES ? 'Nenhum visitante deixou mensagem ainda. Seja o primeiro!' : 'Nenhuma publicação nessa categoria.'}</li>`;
     status.textContent = (items.length === 1 ? '1 publicação' : `${items.length} publicações`) + (cat !== 'todos' ? ` em ${cat}` : '');
