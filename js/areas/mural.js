@@ -2,10 +2,10 @@ import { sortByDateDesc, filterByCategoria, formatDate } from '../lib/mural.js';
 import { validateField } from '../lib/validate.js';
 export const bare = true; // sem moldura de página: cartões em HUD
 
-const CATEGORIAS = ['todos', 'Aviso', 'Pedido de ajuda', 'Oferta', 'Conhecimento', 'Amizade', 'Visitantes', 'Personalidades do mês'];
+const CATEGORIAS = ['todos', 'Personalidades do mês', 'Aviso', 'Pedido de ajuda', 'Oferta', 'Conhecimento', 'Amizade', 'Visitantes'];
 const VISITANTES = 'Visitantes';
 const PERSONALIDADES = 'Personalidades do mês'; // posts dos 6 habitantes; não é um tipo de mensagem
-const TIPOS = CATEGORIAS.slice(1, -2);
+const TIPOS = CATEGORIAS.slice(2, -1);
 const STORE = 'nautilus.visitantes';
 
 const MORADOR = { setor: 'Morador', img: 'assets/img/avatar-morador.svg' };
