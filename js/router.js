@@ -17,6 +17,19 @@ export function initRouter({ hotspots, scene }) {
   let returnFocus = null;
   let seq = 0;
 
+  // nos painéis sem moldura, "Voltar" fica na mesma linha do título em HUD (.map__hint)
+  function dockClose() {
+    const hint = panel.classList.contains('panel--bare') && body.querySelector('.map__hint');
+    if (!hint) return;
+    const bar = document.createElement('div');
+    bar.className = 'hintbar';
+    hint.before(bar);
+    bar.append(hint, closeBtn);
+  }
+  function restoreClose() {
+    if (closeBtn.parentNode !== frame) frame.insertBefore(closeBtn, body);
+  }
+
   async function open(id) {
     const token = ++seq;
     const h = hotspots.find(x => x.id === id);
@@ -35,7 +48,9 @@ export function initRouter({ hotspots, scene }) {
       await mod.render(tmp);
       if (token !== seq) return;
       panel.classList.toggle('panel--bare', !!mod.bare);
+      restoreClose();
       body.replaceChildren(tmp);
+      dockClose();
       body.scrollTop = 0;
       if (!panel.hidden) return;
       panel.hidden = false;
@@ -58,6 +73,7 @@ export function initRouter({ hotspots, scene }) {
     viewport.classList.remove('is-dimmed');
     panel.hidden = true;
     panel.classList.remove('panel--bare');
+    restoreClose();
     body.innerHTML = '';
     setArea('', 'Início');
     gsap.killTweensOf(camera);
