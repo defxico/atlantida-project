@@ -31,6 +31,8 @@
         <video id="scene-video" class="scene__video" src="assets/video/taverna-loop.mp4" poster="assets/video/taverna-poster.jpg"
                muted loop playsinline preload="auto"
                aria-label="Interior animado da Taverna do Náutilus: clientes bebendo, um robô servindo no balcão e peixes passando pela vigia."></video>
+        <video id="intro-video" class="scene__video" data-src="assets/video/intro-oculos.mp4" poster="assets/video/intro-poster.jpg"
+               muted playsinline preload="none" aria-hidden="true" hidden></video>
         <div id="hotspots" class="hotspots"></div>
       </div>
     </div>
@@ -56,7 +58,7 @@
       <span class="hud__depth">↓ <span id="hud-depth">3.000</span> m</span>
       <span id="hud-area" class="hud__area">Início</span>
     </p>
-    <div class="hud__compass" aria-hidden="true"><span class="hud__heading">O · 274°</span></div>
+    <div class="hud__compass" aria-hidden="true"><span id="hud-heading" class="hud__heading">O · 274°</span></div>
     <p class="hud__brand"><span class="hud__logo" role="img" aria-label="Rede Náutilus — A comunidade de Atlântida"></span></p>
 
     <ul class="hud__gauges" aria-hidden="true">
@@ -64,7 +66,7 @@
       <li><span>Pressão</span><b style="--v:71"></b><em>301 atm</em></li>
       <li><span>Energia</span><b style="--v:87"></b><em>87%</em></li>
     </ul>
-    <p class="hud__link" aria-hidden="true"><i class="hud__signal"><u></u><u></u><u></u><u></u></i>Rede Náutilus <strong>online</strong></p>
+    <p class="hud__link" aria-hidden="true"><i class="hud__signal"><u></u><u></u><u></u><u></u></i>Rede Náutilus <strong id="hud-net">online</strong></p>
 
     <section class="hud__msg" aria-labelledby="intro-title">
       <header class="hud__msg-head"><b>Nova mensagem</b><span>Rede Náutilus</span></header>
@@ -74,6 +76,7 @@
         <a class="btn-hud" href="#mural"><span>Entrar na comunidade <b aria-hidden="true">→</b></span></a>
       </div>
     </section>
+    <pre class="hud__bootlog" aria-hidden="true"></pre>
     <nav id="hud-nav" class="hud__nav" aria-label="Áreas do portal"></nav>
   </div>
 
@@ -86,10 +89,6 @@
 
   <div id="boot" class="boot">
     <div class="boot__flash"></div>
-    <div class="boot__screen">
-      <span class="boot__line"></span>
-      <pre class="boot__log"></pre>
-    </div>
     <button type="button" class="boot__skip">Pular</button>
   </div>
 </body>
