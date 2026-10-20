@@ -4,6 +4,7 @@ export const bare = true; // sem moldura de página: cartões em HUD
 
 const CATEGORIAS = ['todos', 'Aviso', 'Pedido de ajuda', 'Oferta', 'Conhecimento', 'Amizade', 'Visitantes'];
 const VISITANTES = 'Visitantes';
+const TIPOS = CATEGORIAS.slice(1, -1);
 const STORE = 'nautilus.visitantes';
 
 const MORADOR = { setor: 'Morador', img: 'assets/img/avatar-morador.svg' };
@@ -21,7 +22,7 @@ const saveVisitantes = list => {
 
 const post = (p, a) => `
   <li class="msg" data-cat="${p.categoria}">
-    <header class="msg__head"><b>${p.categoria}</b><time datetime="${p.data}">${formatDate(p.data)}</time></header>
+    <header class="msg__head"><b>${p.categoria}${p.tipo ? ` · ${p.tipo}` : ''}</b><time datetime="${p.data}">${formatDate(p.data)}</time></header>
     <div class="msg__body">
       <img class="post__avatar" src="${a.img}" alt="" loading="lazy">
       <div>
@@ -49,6 +50,7 @@ export async function render(container) {
       <form class="vform" novalidate hidden>
         <div class="vform__row">
           <label class="vform__f"><span>Seu nome</span><input name="nome" type="text" maxlength="40" autocomplete="name" aria-describedby="vf-err"></label>
+          <label class="vform__f"><span>Tipo</span><select name="tipo" aria-describedby="vf-err"><option value="">Selecione</option>${TIPOS.map(t => `<option>${t}</option>`).join('')}</select></label>
           <label class="vform__f vform__f--msg"><span>Sua mensagem</span><textarea name="mensagem" rows="2" maxlength="280" aria-describedby="vf-err"></textarea></label>
           <button class="vform__send" type="submit">Transmitir</button>
         </div>
@@ -88,9 +90,12 @@ export async function render(container) {
     e.preventDefault();
     const nome = form.elements.nome.value.trim();
     const texto = form.elements.mensagem.value.trim();
-    err.textContent = validateField('nome', nome) || validateField('mensagem', texto);
-    if (err.textContent) { form.elements[validateField('nome', nome) ? 'nome' : 'mensagem'].focus(); return; }
-    visitantes = [{ id: `v${Date.now()}`, autor: nome, data: new Date().toLocaleDateString('sv'), texto }, ...visitantes];
+    const tipo = form.elements.tipo.value;
+    const erros = { nome: validateField('nome', nome), tipo: validateField('tipo', tipo), mensagem: validateField('mensagem', texto) };
+    const campo = Object.keys(erros).find(k => erros[k]);
+    err.textContent = erros[campo] ?? '';
+    if (campo) { form.elements[campo].focus(); return; }
+    visitantes = [{ id: `v${Date.now()}`, autor: nome, tipo, data: new Date().toLocaleDateString('sv'), texto }, ...visitantes];
     saveVisitantes(visitantes);
     form.reset();
     draw();
