@@ -73,8 +73,8 @@
 .hud__compass::before { content: ''; position: absolute; inset: 0 0 12px; background: repeating-linear-gradient(90deg, rgb(66 214 208 / .8) 0 1px, transparent 1px 10px), repeating-linear-gradient(90deg, var(--cyan) 0 2px, transparent 2px 50px); background-size: 100% 6px, 100% 12px; background-repeat: repeat-x; background-position: 0 100%, 0 100%; animation: compass 30s ease-in-out infinite alternate; }
 @keyframes compass { to { background-position: 120px 100%, 120px 100%; } }
 .hud__heading { position: absolute; inset: auto 0 0; font: 600 .72rem/1 var(--font-hud); letter-spacing: .24em; color: var(--cyan); text-shadow: var(--glow-cyan); }
-.hud__brand { position: absolute; top: var(--pad-t); right: var(--pad-x); margin: 0; text-align: right; color: var(--gold); font: 700 1.2rem/1 var(--font-hud); letter-spacing: .26em; text-transform: uppercase; text-shadow: 0 0 12px rgb(216 180 90 / .45); }
-.hud__brand small { display: block; margin-top: 6px; color: var(--text-dim); font: 500 .62rem/1 var(--font-hud); letter-spacing: .32em; text-shadow: none; }
+.hud__brand { position: absolute; top: calc(var(--pad-t) - 10px); right: var(--pad-x); margin: 0; }
+.hud__logo { display: block; width: 138px; aspect-ratio: 1484 / 1060; background: var(--gold); -webkit-mask: url(../assets/brand/logo-mono.svg) center / contain no-repeat; mask: url(../assets/brand/logo-mono.svg) center / contain no-repeat; filter: drop-shadow(0 0 10px rgb(216 180 90 / .45)); }
 
 .hud__gauges { position: absolute; left: var(--pad-x); top: calc(var(--pad-t) + 34px); margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; font: 600 .68rem/1 var(--font-hud); letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); opacity: .9; }
 .hud__gauges li { display: grid; grid-template-columns: 58px 74px auto; align-items: center; gap: 8px; }
@@ -84,7 +84,7 @@
 .hud__gauges li:nth-child(3) b::after { animation-duration: 9s; }
 @keyframes gauge { to { width: calc(var(--v) * 1% - 6%); } }
 .hud__gauges em { color: var(--cyan); font-style: normal; }
-.hud__link { position: absolute; right: var(--pad-x); top: calc(var(--pad-t) + 44px); margin: 0; display: flex; align-items: center; gap: 8px; font: 600 .68rem/1 var(--font-hud); letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); opacity: .95; }
+.hud__link { position: absolute; right: var(--pad-x); top: calc(var(--pad-t) + 108px); margin: 0; display: flex; align-items: center; gap: 8px; font: 600 .68rem/1 var(--font-hud); letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); opacity: .95; }
 .hud__link strong { color: var(--cyan); animation: blink 2.4s ease-in-out infinite; }
 @keyframes blink { 50% { opacity: .35; } }
 .hud__signal { display: flex; align-items: flex-end; gap: 2px; height: 12px; }
@@ -96,7 +96,7 @@
 
 /* mensagem recebida no HUD */
 .hud__msg {
-  position: absolute; right: var(--pad-x); top: calc(var(--pad-t) + 76px); width: min(340px, 26vw);
+  position: absolute; right: var(--pad-x); top: calc(var(--pad-t) + 140px); width: min(340px, 26vw);
   border: 1px solid rgb(66 214 208 / .55);
   background: linear-gradient(180deg, rgb(8 13 43 / .88), rgb(8 13 43 / .72));
   backdrop-filter: blur(8px);
@@ -175,9 +175,8 @@
   .hud__corner { width: calc(var(--lr-x) + 8vw); height: calc(var(--lr-y) + 3vh); }
   .hud__gauges, .hud__link, .hud__compass { display: none; }
   .hud__status { font-size: .8rem; gap: var(--space-2); }
-  .hud__brand { font-size: .85rem; letter-spacing: .2em; }
-  .hud__brand small { display: none; }
-  .hud__msg { left: calc(var(--lens-side) + 12px); right: calc(var(--lens-side) + 12px); width: auto; top: calc(var(--pad-t) + 34px); }
+  .hud__logo { width: 84px; }
+  .hud__msg { left: calc(var(--lens-side) + 12px); right: calc(var(--lens-side) + 12px); width: auto; top: calc(var(--pad-t) + 52px); }
   .hud__msg p { display: none; }
   .hud__msg-body { padding: .7rem .8rem .8rem; }
   .hud__nav { left: calc(var(--lens-side) + 10px); right: calc(var(--lens-side) + 10px); translate: none; bottom: calc(var(--lens-bottom) + 12px); justify-content: space-between; overflow-x: auto; gap: 4px; }
