@@ -143,8 +143,6 @@
 
 /* caixa de texto do setor: mesmo desenho da caixa de transmissões do HUD */
 .map__card { position: absolute; top: 50%; translate: 0 -50%; width: min(380px, 34%); z-index: 3; border: 1px solid rgb(66 214 208 / .55); background: linear-gradient(180deg, rgb(8 13 43 / .92), rgb(8 13 43 / .8)); backdrop-filter: blur(8px); box-shadow: 0 0 24px rgb(66 214 208 / .22), inset 0 0 0 1px rgb(66 214 208 / .08); }
-.map__card[data-lado="dir"] { right: 2%; }
-.map__card[data-lado="esq"] { left: 2%; }
 .map__card::before, .map__card::after { content: ''; position: absolute; width: 12px; height: 12px; border: 2px solid var(--cyan); filter: drop-shadow(var(--glow-cyan)); }
 .map__card::before { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
 .map__card::after { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
