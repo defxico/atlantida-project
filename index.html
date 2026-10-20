@@ -8,7 +8,7 @@
   <script>
     try {
       if (!localStorage.getItem('nautilus.booted') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.documentElement.classList.add('will-boot');
+        document.documentElement.classList.add('will-boot', 'boot-on');
       }
     } catch (e) {}
   </script>
@@ -88,7 +88,13 @@
   </div>
 
   <div id="boot" class="boot">
+    <div class="boot__black"></div>
+    <canvas class="boot__static" aria-hidden="true"></canvas>
     <div class="boot__flash"></div>
+    <div class="boot__screen" aria-hidden="true">
+      <span class="boot__line"></span>
+      <pre class="boot__log"></pre>
+    </div>
     <button type="button" class="boot__skip">Pular</button>
   </div>
 </body>
