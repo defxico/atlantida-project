@@ -1,4 +1,3 @@
-const KEY = 'nautilus.booted';
 const LENS_AT = 3.7; // segundo do vídeo em que os óculos chegam ao olho
 const LINES = [
   'Rede Náutilus · OS v3.0',
@@ -59,7 +58,6 @@ export function runBoot() {
       if (finished) return;
       finished = true;
       root.classList.remove('will-boot');
-      try { localStorage.setItem(KEY, '1'); } catch {}
       resolve();
       setTimeout(() => { stopStatic(); root.classList.remove('boot-on'); }, 1600);
     };

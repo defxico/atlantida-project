@@ -7,7 +7,7 @@
   <meta name="description" content="Portal da comunidade de Atlântida, visto pelos seus óculos.">
   <script>
     try {
-      if (!localStorage.getItem('nautilus.booted') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (!location.hash.slice(1) && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.classList.add('will-boot', 'boot-on');
       }
     } catch (e) {}
