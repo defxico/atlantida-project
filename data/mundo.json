@@ -2,29 +2,131 @@
   "intro": "Conheça a história, o cotidiano e os desafios de Atlântida, a cidade que vive a 3.000 metros de profundidade.",
   "imagem": "assets/img/cidade.webp",
   "abas": [
-    { "id": "historia", "titulo": "História", "paragrafos": [
-      "Há séculos, exploradores e cientistas encontraram nas profundezas os primeiros vestígios de uma civilização perdida. Pessoas de diferentes povos desceram para estudá-los e, cúpula por cúpula, ergueram Atlântida sobre as ruínas.",
-      "A primeira construção foi uma taverna: o Náutilus, um velho submarino encalhado no leito do mar, onde os pioneiros se reuniam para trocar notícias. Foi dali que nasceu a ideia de uma rede que conectasse todos."
-    ]},
-    { "id": "cotidiano", "titulo": "Cotidiano", "paragrafos": [
-      "A luz do sol não chega até aqui. O dia é marcado pelo brilho das cúpulas, que esquenta pela manhã e esfria à noite. Os moradores se deslocam por túneis pressurizados e cápsulas que ligam os bairros.",
-      "Cada setor tem sua vocação: ciência, comércio, indústria, moradia e exploração. No fim do expediente, muita gente acaba no mesmo lugar — a mesa de alguém, no Náutilus."
-    ]},
-    { "id": "regras", "titulo": "Regras e Desafios", "paragrafos": [
-      "O oxigênio é o recurso mais precioso: cada cúpula tem cota diária, e desperdício é assunto da comunidade inteira. Portas estanques fecham automaticamente em qualquer variação de pressão.",
-      "As distâncias entre os bairros são grandes e o oceano é ao mesmo tempo proteção e ameaça. Vazamentos, falhas de energia e criaturas das fendas fazem parte da rotina — e ninguém enfrenta isso sozinho."
-    ]},
-    { "id": "portal", "titulo": "Por que o Portal?", "paragrafos": [
-      "Numa cidade onde sair de casa exige atravessar túneis sob pressão, uma mensagem pode salvar uma vida. A Rede Náutilus é o lugar onde os habitantes se conhecem, se comunicam, pedem e oferecem ajuda.",
-      "Por isso todo morador usa os óculos da Rede: eles mostram quem está por perto, o que está acontecendo e onde alguém precisa de você."
-    ]}
+    {
+      "id": "historia",
+      "titulo": "História",
+      "paragrafos": [
+        "Há séculos, exploradores e cientistas encontraram nas profundezas os primeiros vestígios de uma civilização perdida. Pessoas de diferentes povos desceram para estudá-los e, cúpula por cúpula, ergueram Atlântida sobre as ruínas.",
+        "A primeira construção foi uma taverna: o Náutilus, um velho submarino encalhado no leito do mar, onde os pioneiros se reuniam para trocar notícias. Foi dali que nasceu a ideia de uma rede que conectasse todos."
+      ]
+    },
+    {
+      "id": "cotidiano",
+      "titulo": "Cotidiano",
+      "paragrafos": [
+        "A luz do sol não chega até aqui. O dia é marcado pelo brilho das cúpulas, que esquenta pela manhã e esfria à noite. Os moradores se deslocam por túneis pressurizados e cápsulas que ligam os bairros.",
+        "Cada setor tem sua vocação: ciência, comércio, indústria, moradia e exploração. No fim do expediente, muita gente acaba no mesmo lugar — a mesa de alguém, no Náutilus."
+      ]
+    },
+    {
+      "id": "regras",
+      "titulo": "Regras e Desafios",
+      "paragrafos": [
+        "O oxigênio é o recurso mais precioso: cada cúpula tem cota diária, e desperdício é assunto da comunidade inteira. Portas estanques fecham automaticamente em qualquer variação de pressão.",
+        "As distâncias entre os bairros são grandes e o oceano é ao mesmo tempo proteção e ameaça. Vazamentos, falhas de energia e criaturas das fendas fazem parte da rotina — e ninguém enfrenta isso sozinho."
+      ]
+    },
+    {
+      "id": "portal",
+      "titulo": "Por que o Portal?",
+      "paragrafos": [
+        "Numa cidade onde sair de casa exige atravessar túneis sob pressão, uma mensagem pode salvar uma vida. A Rede Náutilus é o lugar onde os habitantes se conhecem, se comunicam, pedem e oferecem ajuda.",
+        "Por isso todo morador usa os óculos da Rede: eles mostram quem está por perto, o que está acontecendo e onde alguém precisa de você."
+      ]
+    }
   ],
   "setores": [
-    { "id": "central", "nome": "Cúpula Central", "descricao": "Coração de Atlântida: administração, posto médico e a Taverna do Náutilus.", "x": 50, "y": 30 },
-    { "id": "cientifico", "nome": "Setor Científico", "descricao": "Laboratórios de pesquisa marinha e engenharia das cúpulas.", "x": 22, "y": 14 },
-    { "id": "comercial", "nome": "Setor Comercial", "descricao": "Mercados, oficinas de troca e o correio pneumático.", "x": 78, "y": 14 },
-    { "id": "residencial", "nome": "Setor Residencial", "descricao": "Onde a maioria dos habitantes vive, em módulos conectados por túneis.", "x": 18, "y": 46 },
-    { "id": "industrial", "nome": "Setor Industrial", "descricao": "Geradores, filtros de oxigênio e fábricas de peças.", "x": 82, "y": 46 },
-    { "id": "exploracao", "nome": "Setor de Exploração", "descricao": "Base das expedições às fendas e ao leito oceânico.", "x": 50, "y": 54 }
+    {
+      "id": "nucleo",
+      "nome": "Núcleo da IA",
+      "x": 50,
+      "y": 55,
+      "estado": "aberto",
+      "descricao": "Central da rede: servidores e comunicações que mantêm toda Atlântida conectada."
+    },
+    {
+      "id": "cientifico",
+      "nome": "Científico",
+      "x": 50,
+      "y": 15,
+      "estado": "aberto",
+      "descricao": "Museu, biblioteca e laboratórios de pesquisa marinha e engenharia das cúpulas."
+    },
+    {
+      "id": "industrial",
+      "nome": "Industrial",
+      "x": 80,
+      "y": 22,
+      "estado": "aberto",
+      "descricao": "Energia, filtros de oxigênio e oficinas de peças."
+    },
+    {
+      "id": "exploracao",
+      "nome": "Exploração",
+      "x": 19,
+      "y": 23,
+      "estado": "aberto",
+      "descricao": "Docas e observatório: base das expedições às fendas e ao leito oceânico."
+    },
+    {
+      "id": "residencial-c",
+      "nome": "Residencial C",
+      "x": 13,
+      "y": 47,
+      "estado": "aberto",
+      "descricao": "Moradias e a escola da cidade, ligadas ao núcleo por túnel pressurizado e trem a vapor."
+    },
+    {
+      "id": "residencial-a",
+      "nome": "Residencial A",
+      "x": 88,
+      "y": 53,
+      "estado": "fechado",
+      "descricao": "Fechado: geradores em manutenção. Linhas A e B interrompidas; quem precisa sair pode pedir abrigo pelo mural."
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial",
+      "x": 20,
+      "y": 74,
+      "estado": "aberto",
+      "descricao": "Mercado, serviços e oficinas de troca."
+    },
+    {
+      "id": "civico",
+      "nome": "Cívico",
+      "x": 50,
+      "y": 83,
+      "estado": "aberto",
+      "descricao": "Administração, posto médico e a Taverna do Náutilus."
+    },
+    {
+      "id": "residencial-b",
+      "nome": "Residencial B",
+      "x": 80,
+      "y": 77,
+      "estado": "aberto",
+      "descricao": "Moradias e abrigo temporário para quem deixa setores em manutenção."
+    }
+  ],
+  "video": "assets/video/holograma-o-mundo.mp4",
+  "poster": "assets/video/holograma-o-mundo-poster.jpg",
+  "legenda": [
+    {
+      "tipo": "aberta",
+      "texto": "Linha aberta"
+    },
+    {
+      "tipo": "anel",
+      "texto": "Anel externo"
+    },
+    {
+      "tipo": "fechada",
+      "texto": "Linha fechada"
+    },
+    {
+      "tipo": "setor",
+      "texto": "Setor fechado"
+    }
   ]
 }

@@ -29,12 +29,13 @@ test('mural: ao menos 5 posts, autor existe, data ISO, categoria válida', () =>
   }
 });
 
-test('mundo: 4 abas obrigatórias e 6 setores', () => {
+test('mundo: 4 abas obrigatórias e 9 setores do mapa', () => {
   const m = load('mundo.json');
   assert.deepEqual(m.abas.map(a => a.id), ['historia', 'cotidiano', 'regras', 'portal']);
   for (const a of m.abas) assert.ok(a.paragrafos.length >= 2);
-  assert.equal(m.setores.length, 6);
-  assert.ok(m.setores.some(s => s.id === 'central'));
+  assert.equal(m.setores.length, 9);
+  assert.ok(m.setores.some(s => s.id === 'nucleo'));
+  assert.ok(m.setores.some(s => s.estado === 'fechado'));
 });
 
 test('transmissões: pelo menos 8 mensagens com origem, assunto, tipo e texto', () => {

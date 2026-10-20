@@ -17,11 +17,12 @@ export async function render(container) {
         </section>`).join('')}
       <h3 class="mundo__subtitle">Setores de Atlântida</h3>
       <div class="map">
-        <svg class="map__svg" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
-          ${m.setores.filter(s => s.id !== 'central').map(s => `<line x1="50" y1="30" x2="${s.x}" y2="${s.y}"/>`).join('')}
-        </svg>
-        ${m.setores.map((s, i) => `<button type="button" class="map__node${i === 0 ? ' is-active' : ''}" style="--x:${s.x};--y:${s.y}" data-id="${s.id}" aria-describedby="map-info">${s.nome}</button>`).join('')}
+        <video class="map__video" src="${m.video}" poster="${m.poster}" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        ${m.setores.map((s, i) => `<button type="button" class="map__node${i === 0 ? ' is-active' : ''}${s.estado === 'fechado' ? ' is-closed' : ''}" style="--x:${s.x};--y:${s.y}" data-id="${s.id}" aria-describedby="map-info">${s.nome}</button>`).join('')}
       </div>
+      <ul class="map__legend" aria-label="Legenda do mapa">
+        ${m.legenda.map(l => `<li><i class="map__key map__key--${l.tipo}" aria-hidden="true"></i>${l.texto}</li>`).join('')}
+      </ul>
       <p id="map-info" class="map__info" aria-live="polite">${m.setores[0].descricao}</p>
     </div>`;
 
@@ -47,7 +48,12 @@ export async function render(container) {
   const nodes = [...container.querySelectorAll('.map__node')];
   const activate = node => {
     nodes.forEach(n => n.classList.toggle('is-active', n === node));
-    info.textContent = m.setores.find(s => s.id === node.dataset.id).descricao;
+    const setor = m.setores.find(s => s.id === node.dataset.id);
+    info.textContent = setor.descricao;
+    info.classList.toggle('is-closed', setor.estado === 'fechado');
   };
   nodes.forEach(n => ['mouseenter', 'focus', 'click'].forEach(ev => n.addEventListener(ev, () => activate(n))));
+
+  const video = container.querySelector('.map__video');
+  if (video && !matchMedia('(prefers-reduced-motion: reduce)').matches) video.play().catch(() => {});
 }

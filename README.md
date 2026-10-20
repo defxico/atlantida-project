@@ -19,6 +19,7 @@ Abrir `index.html` direto (`file://`) não funciona: módulos ES e `fetch` exige
 - **Conteúdo:** `data/*.json`
 - **Nova área:** adicione uma entrada em `data/hotspots.json` (posição `x`/`y` em % da cena) e crie `js/areas/<id>.js` exportando `render(container)`. O menu e o hotspot aparecem sozinhos.
 - **Cena da home:** vídeo em loop de 20 s em 1080p (`assets/video/taverna-loop.mp4`, Kling Keyframes com primeiro e último quadro = `docs/referencia_inicial/the-nautilus-contraste-suave-3840x2160.png`). A abertura (mãos colocando os óculos, 5 s) é `assets/video/intro-oculos.mp4`; `LENS_AT` em `js/boot.js` marca o segundo em que as lentes passam pelo olho e o HUD começa a ligar (`revealHud` em `js/hud.js`). Os masters sem compressão ficam em `media-src/` (fora do git). Para trocar a cena, troque o vídeo e ajuste `x`/`y` em `data/hotspots.json` (% do quadro).
+- **Mapa de O Mundo:** vídeo holográfico (`assets/video/holograma-o-mundo.mp4`, fundo preto + `mix-blend-mode: screen`) com os 9 setores como botões em cima; posições `x`/`y` (% do quadro), estado (`aberto`/`fechado`) e descrições em `data/mundo.json`. Master em `media-src/`.
 - **HUD / lente dos óculos:** `css/hud.css` (moldura, vinheta, reflexo, scanlines, bússola, telemetria). Abertura: `js/boot.js`.
 - **Logo:** `assets/brand/` (`logo-mono.svg` vetorizado, cor via CSS `mask`; `logo-navy.svg`; `logo-dourada.png`). Originais em `docs/referencia_inicial/logo_*`.
 - **Retratos e cidade (Leonardo AI):** `docs/assets-leonardo.md`
