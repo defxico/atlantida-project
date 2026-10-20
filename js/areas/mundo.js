@@ -42,15 +42,15 @@ export async function render(container) {
     if (refocus) n.focus();
   };
 
-  // a caixa abre colada ao botão do setor: à direita dele na metade esquerda do mapa, à esquerda na metade direita
+  // a caixa abre ao lado do domo (não sobre ele): à direita na metade esquerda do mapa, à esquerda na metade direita
   const stage = container.querySelector('.map-stage');
   const mobile = matchMedia('(max-width: 767px)');
-  const place = (node, s) => {
+  const DOMO = 11; // meia largura de um domo, em % da largura do mapa
+  const place = s => {
     card.style.left = card.style.right = card.style.top = '';
     if (mobile.matches) return;
-    const gap = node.offsetWidth / 2 + 14;
-    if (s.x <= 50) card.style.left = `calc(${s.x}% + ${gap}px)`;
-    else card.style.right = `calc(${100 - s.x}% + ${gap}px)`;
+    if (s.x <= 50) card.style.left = `calc(${s.x + DOMO}% + 12px)`;
+    else card.style.right = `calc(${100 - s.x + DOMO}% + 12px)`;
     const h = card.offsetHeight / 2;
     card.style.top = `${Math.min(Math.max(s.y / 100 * stage.clientHeight, h), stage.clientHeight - h)}px`;
   };
@@ -65,7 +65,7 @@ export async function render(container) {
     src.lastChild.textContent = s.titulo;
     text.textContent = s.texto;
     card.hidden = false;
-    place(node, s);
+    place(s);
     if (!reduce) gsap.fromTo(card, { opacity: 0, x: s.x <= 50 ? -24 : 24 }, { opacity: 1, x: 0, duration: .35, ease: 'power3.out', clearProps: 'transform' });
   };
 
