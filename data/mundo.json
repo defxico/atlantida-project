@@ -1,113 +1,4 @@
 {
-  "intro": "Conheça a história, o cotidiano e os desafios de Atlântida, a cidade que vive a 3.000 metros de profundidade.",
-  "abas": [
-    {
-      "id": "historia",
-      "titulo": "História",
-      "paragrafos": [
-        "Há séculos, exploradores e cientistas encontraram nas profundezas os primeiros vestígios de uma civilização perdida. Pessoas de diferentes povos desceram para estudá-los e, cúpula por cúpula, ergueram Atlântida sobre as ruínas.",
-        "A primeira construção foi uma taverna: o Náutilus, um velho submarino encalhado no leito do mar, onde os pioneiros se reuniam para trocar notícias. Foi dali que nasceu a ideia de uma rede que conectasse todos."
-      ]
-    },
-    {
-      "id": "cotidiano",
-      "titulo": "Cotidiano",
-      "paragrafos": [
-        "A luz do sol não chega até aqui. O dia é marcado pelo brilho das cúpulas, que esquenta pela manhã e esfria à noite. Os moradores se deslocam por túneis pressurizados e cápsulas que ligam os bairros.",
-        "Cada setor tem sua vocação: ciência, comércio, indústria, moradia e exploração. No fim do expediente, muita gente acaba no mesmo lugar — a mesa de alguém, no Náutilus."
-      ]
-    },
-    {
-      "id": "regras",
-      "titulo": "Regras e Desafios",
-      "paragrafos": [
-        "O oxigênio é o recurso mais precioso: cada cúpula tem cota diária, e desperdício é assunto da comunidade inteira. Portas estanques fecham automaticamente em qualquer variação de pressão.",
-        "As distâncias entre os bairros são grandes e o oceano é ao mesmo tempo proteção e ameaça. Vazamentos, falhas de energia e criaturas das fendas fazem parte da rotina — e ninguém enfrenta isso sozinho."
-      ]
-    },
-    {
-      "id": "portal",
-      "titulo": "Por que o Portal?",
-      "paragrafos": [
-        "Numa cidade onde sair de casa exige atravessar túneis sob pressão, uma mensagem pode salvar uma vida. A Rede Náutilus é o lugar onde os habitantes se conhecem, se comunicam, pedem e oferecem ajuda.",
-        "Por isso todo morador usa os óculos da Rede: eles mostram quem está por perto, o que está acontecendo e onde alguém precisa de você."
-      ]
-    }
-  ],
-  "setores": [
-    {
-      "id": "nucleo",
-      "nome": "Núcleo da IA",
-      "x": 50,
-      "y": 55,
-      "estado": "aberto",
-      "descricao": "Central da rede: servidores e comunicações que mantêm toda Atlântida conectada."
-    },
-    {
-      "id": "cientifico",
-      "nome": "Científico",
-      "x": 50,
-      "y": 15,
-      "estado": "aberto",
-      "descricao": "Museu, biblioteca e laboratórios de pesquisa marinha e engenharia das cúpulas."
-    },
-    {
-      "id": "industrial",
-      "nome": "Industrial",
-      "x": 80,
-      "y": 22,
-      "estado": "aberto",
-      "descricao": "Energia, filtros de oxigênio e oficinas de peças."
-    },
-    {
-      "id": "exploracao",
-      "nome": "Exploração",
-      "x": 19,
-      "y": 23,
-      "estado": "aberto",
-      "descricao": "Docas e observatório: base das expedições às fendas e ao leito oceânico."
-    },
-    {
-      "id": "residencial-c",
-      "nome": "Residencial C",
-      "x": 13,
-      "y": 47,
-      "estado": "aberto",
-      "descricao": "Moradias e a escola da cidade, ligadas ao núcleo por túnel pressurizado e trem a vapor."
-    },
-    {
-      "id": "residencial-a",
-      "nome": "Residencial A",
-      "x": 88,
-      "y": 53,
-      "estado": "fechado",
-      "descricao": "Fechado: geradores em manutenção. Linhas A e B interrompidas; quem precisa sair pode pedir abrigo pelo mural."
-    },
-    {
-      "id": "comercial",
-      "nome": "Comercial",
-      "x": 20,
-      "y": 74,
-      "estado": "aberto",
-      "descricao": "Mercado, serviços e oficinas de troca."
-    },
-    {
-      "id": "civico",
-      "nome": "Cívico",
-      "x": 50,
-      "y": 83,
-      "estado": "aberto",
-      "descricao": "Administração, posto médico e a Taverna do Náutilus."
-    },
-    {
-      "id": "residencial-b",
-      "nome": "Residencial B",
-      "x": 80,
-      "y": 77,
-      "estado": "aberto",
-      "descricao": "Moradias e abrigo temporário para quem deixa setores em manutenção."
-    }
-  ],
   "video": "assets/video/holograma-o-mundo.mp4",
   "poster": "assets/video/holograma-o-mundo-poster.jpg",
   "legenda": [
@@ -126,6 +17,98 @@
     {
       "tipo": "setor",
       "texto": "Setor fechado"
+    }
+  ],
+  "setores": [
+    {
+      "id": "nucleo",
+      "nome": "Núcleo da IA",
+      "x": 50,
+      "y": 55,
+      "estado": "aberto",
+      "regiao": "Centro",
+      "titulo": "Núcleo da IA e Central da Rede",
+      "texto": "Foi para manter esta IA funcionando que Atlântida nasceu no fundo do mar. Seus servidores ocupam o centro da cidade. Náutilos coordena os sistemas e os trens; pela Rede, os moradores compartilham o que acontece entre as cúpulas e pedem ajuda uns aos outros."
+    },
+    {
+      "id": "cientifico",
+      "nome": "Científico",
+      "x": 50,
+      "y": 15,
+      "estado": "aberto",
+      "regiao": "Norte",
+      "titulo": "Setor Científico",
+      "texto": "No museu, os primeiros projetos mostram como uma base de manutenção se tornou uma cidade. A biblioteca guarda os relatos de quem veio cuidar do núcleo e decidiu ficar. Nos laboratórios, novas equipes estudam a IA e o oceano que cerca Atlântida."
+    },
+    {
+      "id": "industrial",
+      "nome": "Industrial",
+      "x": 80,
+      "y": 22,
+      "estado": "aberto",
+      "regiao": "Nordeste",
+      "titulo": "Setor Industrial",
+      "texto": "Geradores fornecem energia; filtros renovam o oxigênio; comportas preservam a pressão das cúpulas. Tudo exige manutenção constante. Uma falha aqui pode interromper um trem ou deixar moradores isolados antes que seja possível fazer o reparo."
+    },
+    {
+      "id": "exploracao",
+      "nome": "Exploração",
+      "x": 19,
+      "y": 23,
+      "estado": "aberto",
+      "regiao": "Noroeste",
+      "titulo": "Setor de Exploração",
+      "texto": "Das docas, equipes saem para inspecionar estruturas e mapear o fundo do mar. Lá fora, a pressão torna qualquer reparo mais difícil e uma rota pode precisar ser fechada sem aviso. Suas descobertas chegam à cidade pela Rede antes mesmo de a equipe retornar."
+    },
+    {
+      "id": "residencial-c",
+      "nome": "Residencial C",
+      "x": 13,
+      "y": 47,
+      "estado": "aberto",
+      "regiao": "Oeste",
+      "titulo": "Setor Residencial C",
+      "texto": "Técnicos, pesquisadores, comerciantes e suas famílias vivem aqui. Pela manhã, os trens a vapor levam moradores aos demais setores, seguindo rotas gerenciadas por Náutilos. Ao voltar, encontram na Rede os recados da escola e dos vizinhos."
+    },
+    {
+      "id": "residencial-a",
+      "nome": "Residencial A",
+      "x": 88,
+      "y": 53,
+      "estado": "fechado",
+      "regiao": "Leste",
+      "titulo": "Setor Residencial A — fechado",
+      "texto": "Os geradores de oxigênio do setor estão em manutenção. O acesso foi bloqueado e as linhas A e B dos trens a vapor foram interrompidas. Pela Rede, os moradores acompanham os avisos e combinam onde ficar até poderem voltar para casa."
+    },
+    {
+      "id": "comercial",
+      "nome": "Comercial",
+      "x": 20,
+      "y": 74,
+      "estado": "aberto",
+      "regiao": "Sudoeste",
+      "titulo": "Setor Comercial",
+      "texto": "O mercado reúne alimentos, peças e serviços vindos de diferentes cúpulas. Quando um túnel fecha, uma entrega pode não chegar. Comerciantes usam a Rede para avisar sobre atrasos e encontrar quem consegue levar o que está faltando."
+    },
+    {
+      "id": "civico",
+      "nome": "Cívico",
+      "x": 50,
+      "y": 83,
+      "estado": "aberto",
+      "regiao": "Sul",
+      "titulo": "Setor Cívico",
+      "texto": "Aqui ficam a administração e a Taverna do Náutilus. Avisos oficiais chegam pela Rede, mas é na conversa entre moradores que uma notícia vira ação: alguém oferece uma rota, outro encontra uma ferramenta, outro abre a porta de casa."
+    },
+    {
+      "id": "residencial-b",
+      "nome": "Residencial B",
+      "x": 80,
+      "y": 77,
+      "estado": "aberto",
+      "regiao": "Sudeste",
+      "titulo": "Setor Residencial B",
+      "texto": "O abrigo comunitário recebe vizinhos do Setor A. Há quem ofereça um quarto, uma refeição ou ajuda para transportar pertences. Náutilos informa quais rotas estão disponíveis; os próprios moradores organizam a acolhida pela Rede."
     }
   ]
 }

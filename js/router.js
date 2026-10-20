@@ -34,6 +34,7 @@ export function initRouter({ hotspots, scene }) {
       const tmp = document.createElement('div');
       await mod.render(tmp);
       if (token !== seq) return;
+      panel.classList.toggle('panel--bare', !!mod.bare);
       body.replaceChildren(tmp);
       body.scrollTop = 0;
       if (!panel.hidden) return;
@@ -56,6 +57,7 @@ export function initRouter({ hotspots, scene }) {
     document.body.classList.remove('is-panel-open');
     viewport.classList.remove('is-dimmed');
     panel.hidden = true;
+    panel.classList.remove('panel--bare');
     body.innerHTML = '';
     setArea('', 'Início');
     gsap.killTweensOf(camera);

@@ -1,59 +1,65 @@
+export const bare = true; // sem moldura de página: só o holograma e elementos do HUD
+
 export async function render(container) {
   const m = await fetch('data/mundo.json').then(r => r.json());
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   container.innerHTML = `
     <div class="mundo">
-      <header class="panel__header">
-        <p class="eyebrow">A cidade no fundo do mar</p>
-        <h2 id="panel-title">O Mundo</h2>
-        <p class="lead">${m.intro}</p>
-      </header>
-      <h3 class="sr-only">Setores de Atlântida</h3>
-      <div class="map">
-        <video class="map__video" src="${m.video}" poster="${m.poster}" muted loop playsinline preload="metadata" aria-hidden="true"></video>
-        ${m.setores.map((s, i) => `<button type="button" class="map__node${i === 0 ? ' is-active' : ''}${s.estado === 'fechado' ? ' is-closed' : ''}" style="--x:${s.x};--y:${s.y}" data-id="${s.id}" aria-describedby="map-info">${s.nome}</button>`).join('')}
+      <h2 id="panel-title" class="sr-only">O Mundo — mapa holográfico de Atlântida</h2>
+      <div class="map-stage">
+        <div class="map">
+          <video class="map__video" src="${m.video}" poster="${m.poster}" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+          ${m.setores.map(s => `<button type="button" class="map__node${s.estado === 'fechado' ? ' is-closed' : ''}" style="--x:${s.x};--y:${s.y}" data-id="${s.id}" aria-haspopup="true" aria-expanded="false">${s.nome}</button>`).join('')}
+        </div>
+        <section class="map__card" role="region" aria-live="polite" hidden>
+          <header class="hud__msg-head"><b>Atlântida · Mapa</b><span>Rede Náutilus</span></header>
+          <div class="map__card-body">
+            <p class="tx__src"><b></b><span></span></p>
+            <p class="tx__text"></p>
+          </div>
+          <footer class="tx__foot"><span></span><button type="button" class="map__card-close">Fechar ✕</button></footer>
+        </section>
       </div>
       <ul class="map__legend" aria-label="Legenda do mapa">
         ${m.legenda.map(l => `<li><i class="map__key map__key--${l.tipo}" aria-hidden="true"></i>${l.texto}</li>`).join('')}
       </ul>
-      <p id="map-info" class="map__info" aria-live="polite">${m.setores[0].descricao}</p>
-      <div class="tabs" role="tablist" aria-label="Sobre Atlântida">
-        ${m.abas.map((a, i) => `<button type="button" role="tab" id="tab-${a.id}" aria-controls="tp-${a.id}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${a.titulo}</button>`).join('')}
-      </div>
-      ${m.abas.map((a, i) => `
-        <section role="tabpanel" id="tp-${a.id}" aria-labelledby="tab-${a.id}" ${i ? 'hidden' : ''}>
-          ${a.paragrafos.map(p => `<p>${p}</p>`).join('')}
-        </section>`).join('')}
     </div>`;
 
-  const tabs = [...container.querySelectorAll('[role="tab"]')];
-  const select = tab => {
-    tabs.forEach(t => {
-      const on = t === tab;
-      t.setAttribute('aria-selected', String(on));
-      t.tabIndex = on ? 0 : -1;
-      container.querySelector(`#${t.getAttribute('aria-controls')}`).hidden = !on;
-    });
-    tab.focus();
+  const card = container.querySelector('.map__card');
+  const nodes = [...container.querySelectorAll('.map__node')];
+  const src = card.querySelector('.tx__src');
+  const text = card.querySelector('.tx__text');
+  let active = null;
+
+  const close = ({ refocus = true } = {}) => {
+    if (!active) return;
+    const n = active;
+    active = null;
+    nodes.forEach(x => { x.classList.remove('is-active'); x.setAttribute('aria-expanded', 'false'); });
+    card.hidden = true;
+    if (refocus) n.focus();
   };
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => select(t));
-    t.addEventListener('keydown', e => {
-      const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
-      if (step) select(tabs[(i + step + tabs.length) % tabs.length]);
-    });
+
+  const open = node => {
+    const s = m.setores.find(x => x.id === node.dataset.id);
+    nodes.forEach(x => { const on = x === node; x.classList.toggle('is-active', on); x.setAttribute('aria-expanded', String(on)); });
+    active = node;
+    card.dataset.tipo = s.estado === 'fechado' ? 'alerta' : 'info';
+    card.dataset.lado = s.x < 50 ? 'dir' : 'esq';
+    src.firstChild.textContent = s.regiao;
+    src.lastChild.textContent = s.titulo;
+    text.textContent = s.texto;
+    card.hidden = false;
+    if (!reduce) gsap.fromTo(card, { opacity: 0, x: s.x < 50 ? 24 : -24 }, { opacity: 1, x: 0, duration: .35, ease: 'power3.out', clearProps: 'transform' });
+  };
+
+  nodes.forEach(n => n.addEventListener('click', () => (n === active ? close() : open(n))));
+  card.querySelector('.map__card-close').addEventListener('click', () => close());
+  container.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && active) { e.stopPropagation(); close(); }
   });
 
-  const info = container.querySelector('#map-info');
-  const nodes = [...container.querySelectorAll('.map__node')];
-  const activate = node => {
-    nodes.forEach(n => n.classList.toggle('is-active', n === node));
-    const setor = m.setores.find(s => s.id === node.dataset.id);
-    info.textContent = setor.descricao;
-    info.classList.toggle('is-closed', setor.estado === 'fechado');
-  };
-  nodes.forEach(n => ['mouseenter', 'focus', 'click'].forEach(ev => n.addEventListener(ev, () => activate(n))));
-
   const video = container.querySelector('.map__video');
-  if (video && !matchMedia('(prefers-reduced-motion: reduce)').matches) video.play().catch(() => {});
+  if (video && !reduce) video.play().catch(() => {});
 }
