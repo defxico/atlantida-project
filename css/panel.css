@@ -133,6 +133,8 @@
 .panel--bare .panel__close { top: auto; bottom: -6px; right: 0; width: auto; height: auto; padding: .45rem .9rem; border-radius: 0; border: 1px solid var(--line); background: rgb(8 13 43 / .78); color: var(--cyan); font: 700 .78rem/1 var(--font-hud); letter-spacing: .16em; text-transform: uppercase; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
 .panel--bare .panel__close::before { content: 'Voltar '; }
 .hintbar { position: relative; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; width: 100%; }
+.mundo .hintbar { width: min(100%, calc((100dvh - var(--lens-top) - var(--lens-bottom) - 250px) * 16 / 9)); }
+.habs .hintbar { width: min(100%, 980px); }
 .hintbar .map__hint { margin: 0; grid-column: 2; }
 .hintbar .panel__close { position: static; grid-column: 3; justify-self: end; }
 .mundo { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3); }
@@ -187,7 +189,7 @@
   .ficha__mural { margin-top: 8px; font-size: .66rem; }
   .ficha__txt { font-size: .76rem; line-height: 1.4; }
   .habs { justify-content: flex-start; gap: var(--space-2); }
-  .hintbar { grid-template-columns: 1fr auto; gap: .5rem; }
+  .hintbar, .mundo .hintbar, .habs .hintbar { width: 100%; grid-template-columns: 1fr auto; gap: .5rem; }
   .hintbar .map__hint { grid-column: 1; text-align: left; font-size: .62rem; letter-spacing: .14em; }
   .hintbar .panel__close { grid-column: 2; }
   .habs__btn { font-size: .62rem; padding: .3rem .5rem; }
