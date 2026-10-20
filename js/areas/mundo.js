@@ -21,7 +21,8 @@ export async function render(container) {
           <footer class="tx__foot"><span></span><button type="button" class="map__card-close">Fechar ✕</button></footer>
         </section>
       </div>
-      <ul class="map__legend" aria-label="Legenda do mapa">
+      <p class="map__hint">Navegue pelos nomes dos setores</p>
+      <ul class="map__legend"aria-label="Legenda do mapa">
         ${m.legenda.map(l => `<li><i class="map__key map__key--${l.tipo}" aria-hidden="true"></i>${l.texto}</li>`).join('')}
       </ul>
     </div>`;

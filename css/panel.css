@@ -116,6 +116,10 @@
 .map__card-close { margin-left: auto; padding: 0; border: 0; background: none; color: var(--gold); font: 700 .72rem/1 var(--font-hud); letter-spacing: .18em; text-transform: uppercase; cursor: pointer; }
 .map__card-close:hover, .map__card-close:focus-visible { text-decoration: underline; }
 .map__legend { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2) var(--space-4); margin: 0; padding: 0; list-style: none; color: var(--text-dim); font: 600 .72rem/1 var(--font-hud); letter-spacing: .14em; text-transform: uppercase; }
+.map__hint { margin: 0 0 var(--space-2); text-align: center; color: var(--cyan); font: 700 .78rem/1 var(--font-hud); letter-spacing: .24em; text-transform: uppercase; text-shadow: var(--glow-cyan); }
+.map__hint::before { content: "▸ "; animation: map-blink 1.2s steps(2) infinite; }
+@keyframes map-blink { 50% { opacity: .2; } }
+@media (prefers-reduced-motion: reduce) { .map__hint::before { animation: none; } }
 .map__legend li { display: flex; align-items: center; gap: .5rem; }
 .map__key { display: inline-block; width: 26px; height: 4px; border-radius: 2px; background: var(--cyan); box-shadow: var(--glow-cyan); }
 .map__key--anel { background: var(--gold); box-shadow: none; }
