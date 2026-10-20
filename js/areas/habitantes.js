@@ -28,7 +28,7 @@ export async function render(container) {
     <div class="habs">
       <h2 id="panel-title" class="sr-only">Habitantes de Atlântida</h2>
       <div class="habs__stage" aria-live="polite"></div>
-      <p class="map__hint">Navegue pelos nomes dos habitantes</p>
+      <p class="map__hint">Personalidades em destaque este mês</p>
       <div class="habs__nav" role="group" aria-label="Habitantes">
         ${hs.map(h => `<button type="button" class="map__node habs__btn" data-id="${h.id}" aria-pressed="false">${h.nome}</button>`).join('')}
       </div>
