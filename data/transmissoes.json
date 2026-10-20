@@ -1,0 +1,10 @@
+[
+  { "origem": "Náutilos", "assunto": "Sistemas", "tipo": "info", "texto": "Oscilações detectadas nos servidores centrais. Serviços essenciais de Atlântida seguem ativos. Próxima atualização em breve." },
+  { "origem": "Náutilos", "assunto": "Transporte", "tipo": "info", "texto": "Linhas A e B dos trens a vapor temporariamente interrompidas. Quem está em trânsito deve seguir as orientações da estação mais próxima." },
+  { "origem": "Setor A", "assunto": "Pedido de ajuda", "tipo": "alerta", "texto": "Geradores de oxigênio em manutenção. Moradores que precisam deixar o setor podem solicitar abrigo pelo mural." },
+  { "origem": "Cúpula Central", "assunto": "Comunidade", "tipo": "comunidade", "texto": "Famílias do Setor A: há vagas disponíveis aqui. Enviem uma mensagem para combinarmos a chegada." },
+  { "origem": "Náutilos", "assunto": "Energia", "tipo": "info", "texto": "Consumo acima do previsto no Setor Industrial. Evitem equipamentos de alto consumo até a próxima atualização." },
+  { "origem": "Setor Científico", "assunto": "Observação", "tipo": "info", "texto": "As oscilações começaram antes da manutenção programada. Estamos verificando a origem." },
+  { "origem": "Taverna do Náutilus", "assunto": "Ponto de encontro", "tipo": "comunidade", "texto": "Sem trem para a Cúpula Central? Estamos organizando grupos para percorrer a rota segura a pé." },
+  { "origem": "Náutilos", "assunto": "Sistemas", "tipo": "info", "texto": "Rota alternativa liberada. Obrigado aos moradores que responderam aos pedidos de ajuda." }
+]

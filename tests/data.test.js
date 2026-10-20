@@ -36,3 +36,12 @@ test('mundo: 4 abas obrigatórias e 6 setores', () => {
   assert.equal(m.setores.length, 6);
   assert.ok(m.setores.some(s => s.id === 'central'));
 });
+
+test('transmissões: pelo menos 8 mensagens com origem, assunto, tipo e texto', () => {
+  const tx = JSON.parse(readFileSync(new URL('../data/transmissoes.json', import.meta.url), 'utf8'));
+  assert.ok(tx.length >= 8);
+  for (const m of tx) {
+    for (const k of ['origem', 'assunto', 'texto']) assert.ok(m[k] && m[k].length > 3, k + ' vazio');
+    assert.ok(['info', 'alerta', 'comunidade'].includes(m.tipo));
+  }
+});
