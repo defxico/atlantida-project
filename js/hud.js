@@ -38,7 +38,7 @@ export function revealHud() {
     .from('.hud__corner', { scale: 1.8, opacity: 0, duration: .45, stagger: .06, ease: 'back.out(2)', clearProps }, .15)
     .from('.lens__reticle i', { scale: 3, rotate: 90, opacity: 0, duration: .7, ease: 'power3.out', clearProps }, .3)
     .to('.lens__reticle i', { keyframes: [{ scale: 1.25, duration: .12 }, { scale: 1, duration: .25 }], clearProps: 'scale' }, 1.0)
-    .from('.hud__status, .hud__brand, .hud__compass', { opacity: 0, y: -10, duration: .4, stagger: .08, clearProps }, .4);
+    .from('.hud__status, .hud__brand, .hud__compass, .hud__place', { opacity: 0, y: -10, duration: .4, stagger: .08, clearProps }, .4);
 
   // bússola gira até a direção atual
   const hd = { v: 0 };

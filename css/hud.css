@@ -73,6 +73,8 @@
 .hud__compass::before { content: ''; position: absolute; inset: 0 0 12px; background: repeating-linear-gradient(90deg, rgb(66 214 208 / .8) 0 1px, transparent 1px 10px), repeating-linear-gradient(90deg, var(--cyan) 0 2px, transparent 2px 50px); background-size: 100% 6px, 100% 12px; background-repeat: repeat-x; background-position: 0 100%, 0 100%; animation: compass 30s ease-in-out infinite alternate; }
 @keyframes compass { to { background-position: 120px 100%, 120px 100%; } }
 .hud__heading { position: absolute; inset: auto 0 0; font: 600 .72rem/1 var(--font-hud); letter-spacing: .24em; color: var(--cyan); text-shadow: var(--glow-cyan); }
+.hud__place { position: absolute; top: calc(var(--lens-top) + 60px); left: 50%; translate: -50% 0; margin: 0; white-space: nowrap; font: 700 .82rem/1 var(--font-hud); letter-spacing: .2em; text-transform: uppercase; text-align: center; color: var(--cyan); text-shadow: 0 0 6px rgb(2 5 18 / .95), 0 0 2px rgb(2 5 18 / .95), var(--glow-cyan); }
+.hud__place strong { font-weight: 700; }
 .hud__brand { position: absolute; top: calc(var(--pad-t) - 10px); right: var(--pad-x); margin: 0; }
 .hud__logo { display: block; width: 138px; aspect-ratio: 1484 / 1060; background: var(--gold); -webkit-mask: url(../assets/brand/logo-mono.svg) center / contain no-repeat; mask: url(../assets/brand/logo-mono.svg) center / contain no-repeat; filter: drop-shadow(0 0 10px rgb(216 180 90 / .45)); }
 
@@ -191,9 +193,10 @@
   .hud { --pad-x: calc(var(--lens-side) + 26px); --pad-t: calc(var(--lens-top) + 24px); --gap: 6px; }
   .hud__corner { width: calc(var(--lr-x) + 8vw); height: calc(var(--lr-y) + 3vh); }
   .hud__gauges, .hud__link, .hud__compass { display: none; }
+  .hud__place { top: calc(var(--pad-t) + 30px); font-size: .62rem; letter-spacing: .14em; }
   .hud__status { font-size: .8rem; gap: var(--space-2); }
   .hud__logo { width: 84px; }
-  .hud__msg { left: calc(var(--lens-side) + 12px); right: calc(var(--lens-side) + 12px); width: auto; top: calc(var(--pad-t) + 52px); }
+  .hud__msg { left: calc(var(--lens-side) + 12px); right: calc(var(--lens-side) + 12px); width: auto; top: calc(var(--pad-t) + 56px); }
   .hud__msg-body { padding: .6rem .8rem .4rem; min-height: 7.6em; }
   .tx__text { min-height: 4.4em; font-size: .82rem; }
   .tx__src { font-size: .7rem; }
