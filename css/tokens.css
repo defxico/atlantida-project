@@ -12,6 +12,7 @@
   --line: rgb(66 214 208 / .45);
   --glow-cyan: 0 0 12px rgb(66 214 208 / .6);
 
+  --yellow: #FFD84D; /* destaque dos visitantes */
   --font-title: 'Cinzel', Georgia, serif;
   --font-body: 'Montserrat', system-ui, sans-serif;
   --font-hud: 'Rajdhani', 'Montserrat', system-ui, sans-serif;

@@ -59,11 +59,11 @@
 
 /* Mural */
 /* Mural: transmissões da comunidade em cartões de HUD */
-.mural { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); width: min(100%, 1040px); margin-inline: auto; }
+.mural { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); width: min(100%, 1040px); height: calc(100dvh - var(--lens-top) - var(--lens-bottom) - 190px); margin-inline: auto; }
 .mural .map__hint { margin: 0; }
 .mural__filters { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); }
 .mural .mural__chip { position: static; translate: none; font-size: .78rem; }
-.feed { list-style: none; margin: 0; padding: 4px 8px 4px 4px; width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); align-content: start; max-height: calc(100dvh - var(--lens-top) - var(--lens-bottom) - 250px); overflow-y: auto;}
+.feed { list-style: none; margin: 0; padding: 4px 8px 4px 4px; width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); align-content: start; flex: 1; min-height: 0; overflow-y: auto;}
 .feed::-webkit-scrollbar { width: 8px; }
 .feed::-webkit-scrollbar-track { background: rgb(66 214 208 / .08); border-left: 1px solid rgb(66 214 208 / .3); }
 .feed::-webkit-scrollbar-thumb { background: var(--cyan); border: 2px solid rgb(8 13 43); box-shadow: 0 0 8px var(--cyan); clip-path: polygon(0 3px, 3px 0, 100% 0, 100% calc(100% - 3px), calc(100% - 3px) 100%, 0 100%); }
@@ -85,6 +85,24 @@
 .msg__src { margin: 0; display: flex; flex-wrap: wrap; gap: .1rem .6rem; align-items: baseline; font: 700 .7rem/1.3 var(--font-hud); letter-spacing: .14em; text-transform: uppercase; }
 .msg__src strong { color: var(--gold); }
 .msg__src span { color: var(--text-dim); font-weight: 500; }
+/* Visitantes (FIAP NEXT): mesmo modelo, em amarelo */
+.mural .mural__chip[data-cat="Visitantes"] { color: var(--yellow); border-color: rgb(255 216 77 / .55); }
+.mural .mural__chip[data-cat="Visitantes"]:hover, .mural .mural__chip[data-cat="Visitantes"]:focus-visible, .mural .mural__chip[data-cat="Visitantes"].is-active { background: rgb(255 216 77 / .22); border-color: var(--yellow); color: #fff; box-shadow: 0 0 14px rgb(255 216 77 / .55); }
+.msg[data-cat="Visitantes"] { border-color: rgb(255 216 77 / .55); box-shadow: 0 0 18px rgb(255 216 77 / .15); }
+.msg[data-cat="Visitantes"]::before { border-color: var(--yellow); filter: drop-shadow(0 0 6px rgb(255 216 77 / .7)); }
+.msg[data-cat="Visitantes"] .msg__head { border-bottom-color: rgb(255 216 77 / .35); background: rgb(255 216 77 / .1); color: var(--yellow); }
+.msg[data-cat="Visitantes"] .msg__head b::before { background: var(--yellow); box-shadow: 0 0 8px var(--yellow); }
+.msg[data-cat="Visitantes"] .msg__src strong { color: var(--yellow); }
+.msg[data-cat="Visitantes"] .post__avatar { border-color: rgb(255 216 77 / .5); filter: sepia(1) saturate(3) hue-rotate(-5deg); }
+.vform { width: 100%; padding: .7rem .85rem .4rem; border: 1px solid rgb(255 216 77 / .55); background: linear-gradient(180deg, rgb(8 13 43 / .92), rgb(8 13 43 / .8)); }
+.vform[hidden] { display: none; }
+.vform__row { display: grid; grid-template-columns: minmax(0, 200px) 1fr auto; gap: .75rem; align-items: end; }
+.vform__f span { display: block; margin-bottom: .3rem; color: var(--yellow); font: 700 .62rem/1 var(--font-hud); letter-spacing: .22em; text-transform: uppercase; }
+.vform input, .vform textarea { width: 100%; padding: .45rem .6rem; border: 1px solid rgb(255 216 77 / .4); background: rgb(8 13 43 / .7); color: var(--text); font: 500 .88rem/1.4 var(--font-body); resize: none; }
+.vform input:focus-visible, .vform textarea:focus-visible { outline: 0; border-color: var(--yellow); box-shadow: 0 0 10px rgb(255 216 77 / .45); }
+.vform__send { padding: .6rem 1.1rem; border: 1px solid var(--yellow); background: rgb(255 216 77 / .2); color: var(--yellow); font: 700 .78rem/1 var(--font-hud); letter-spacing: .18em; text-transform: uppercase; cursor: pointer; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
+.vform__send:hover, .vform__send:focus-visible { background: rgb(255 216 77 / .4); color: #fff; }
+.vform__err { min-height: 1.1em; margin: .3rem 0 0; color: #FF9A9A; font-size: .78rem; }
 .msg__text { margin: .4rem 0 0; font-size: .86rem; line-height: 1.5; color: var(--text); }
 .feed__empty { color: var(--text-dim); }
 
@@ -169,7 +187,9 @@
   .habs { justify-content: flex-start; gap: var(--space-2); }
   .habs__btn { font-size: .62rem; padding: .3rem .5rem; }
   .mural .mural__chip { font-size: .62rem; padding: .3rem .5rem; }
-  .feed { grid-template-columns: 1fr; max-height: calc(100dvh - var(--lens-top) - var(--lens-bottom) - 250px); }
+  .feed { grid-template-columns: 1fr; }
+  .mural { height: calc(100dvh - var(--lens-top) - var(--lens-bottom) - 170px); }
+  .vform__row { grid-template-columns: 1fr; }
   .panel--bare { padding: calc(var(--lens-top) + 66px) 8px calc(var(--lens-bottom) + 64px); }
   .map-stage { width: 100%; }
   .map__card { position: fixed; top: auto; bottom: calc(var(--lens-bottom) + 66px); left: 10px !important; right: 10px !important; translate: 0 0; width: auto; }
