@@ -98,9 +98,9 @@
 .vform[hidden] { display: none; }
 .vform__row { display: grid; grid-template-columns: minmax(0, 200px) 1fr auto; gap: .75rem; align-items: end; }
 .vform__f span { display: block; margin-bottom: .3rem; color: var(--yellow); font: 700 .62rem/1 var(--font-hud); letter-spacing: .22em; text-transform: uppercase; }
-.vform input, .vform textarea { width: 100%; padding: .45rem .6rem; border: 1px solid rgb(255 216 77 / .4); background: rgb(8 13 43 / .7); color: var(--text); font: 500 .88rem/1.4 var(--font-body); resize: none; }
+.vform input, .vform textarea { display: block; width: 100%; height: 3.2rem; box-sizing: border-box; padding: .45rem .6rem; border: 1px solid rgb(255 216 77 / .4); background: rgb(8 13 43 / .7); color: var(--text); font: 500 .88rem/1.4 var(--font-body); resize: none; }
 .vform input:focus-visible, .vform textarea:focus-visible { outline: 0; border-color: var(--yellow); box-shadow: 0 0 10px rgb(255 216 77 / .45); }
-.vform__send { padding: .6rem 1.1rem; border: 1px solid var(--yellow); background: rgb(255 216 77 / .2); color: var(--yellow); font: 700 .78rem/1 var(--font-hud); letter-spacing: .18em; text-transform: uppercase; cursor: pointer; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
+.vform__send { height: 3.2rem; padding: 0 1.3rem; border: 1px solid var(--yellow); background: rgb(255 216 77 / .2); color: var(--yellow); font: 700 .78rem/1 var(--font-hud); letter-spacing: .18em; text-transform: uppercase; cursor: pointer; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
 .vform__send:hover, .vform__send:focus-visible { background: rgb(255 216 77 / .4); color: #fff; }
 .vform__err { min-height: 1.1em; margin: .3rem 0 0; color: #FF9A9A; font-size: .78rem; }
 .msg__text { margin: .4rem 0 0; font-size: .86rem; line-height: 1.5; color: var(--text); }
