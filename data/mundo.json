@@ -1,6 +1,5 @@
 {
   "intro": "Conheça a história, o cotidiano e os desafios de Atlântida, a cidade que vive a 3.000 metros de profundidade.",
-  "imagem": "assets/img/cidade.webp",
   "abas": [
     {
       "id": "historia",

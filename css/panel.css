@@ -82,7 +82,7 @@
 @keyframes signal { from { scale: 1; opacity: .8; } to { scale: 2.2; opacity: 0; } }
 
 /* O Mundo */
-.mundo { margin: calc(-1 * clamp(20px, 4vw, 48px)); padding: clamp(20px, 4vw, 48px); background: linear-gradient(180deg, rgb(8 13 43 / .55), var(--abyss) 420px), var(--bg) top / cover no-repeat; }
+.mundo { margin: calc(-1 * clamp(20px, 4vw, 48px)); padding: clamp(20px, 4vw, 48px); }
 .tabs { display: flex; flex-wrap: wrap; gap: var(--space-1); margin: var(--space-4) 0; border-bottom: 1px solid var(--line); }
 .tabs [role="tab"] { padding: .6rem 1rem; border: 0; border-bottom: 2px solid transparent; background: none; color: var(--text-dim); font: 600 .9rem var(--font-body); cursor: pointer; }
 .tabs [aria-selected="true"] { color: var(--gold); border-bottom-color: var(--gold); }
