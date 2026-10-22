@@ -175,11 +175,18 @@ export async function render(container) {
   regForm.querySelector('.mform__cancel').addEventListener('click', () => { abrirRegistro(false); regBtn.focus(); });
   regForm.addEventListener('submit', e => { e.preventDefault(); enviarRegistro(); });
 
-  // se o painel for fechado no meio de uma resposta, para de escrever
-  new MutationObserver(() => { if (!container.isConnected) vivo = false; }).observe(document.body, { childList: true, subtree: true });
+  // o router só encaixa este container na página depois do render: só conta como "fechado" quem já esteve na página
+  let jaNaPagina = false;
+  new MutationObserver(() => {
+    if (container.isConnected) jaNaPagina = true;
+    else if (jaNaPagina) vivo = false;
+  }).observe(document.body, { childList: true, subtree: true });
 
+  // a saudação roda depois do render, para não segurar a abertura do painel
   ocupado = true;
-  await new Promise(r => setTimeout(r, reduce ? 0 : 500));
-  await falar(BOAS_VINDAS);
-  ocupado = false;
+  (async () => {
+    await new Promise(r => setTimeout(r, reduce ? 0 : 500));
+    await falar(BOAS_VINDAS);
+    ocupado = false;
+  })();
 }
