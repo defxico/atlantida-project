@@ -33,6 +33,37 @@ export function respostaLocal(texto, { setores = [], habitantes = [] } = {}) {
   return SEM_SINAL;
 }
 
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export function validarRegistro(d) {
+  const e = {};
+  if (d.nome.trim().length < 3) e.nome = 'O nome precisa de pelo menos 3 letras.';
+  if (!d.setor) e.setor = 'Escolha o setor onde vai morar.';
+  if (d.ocupacao.trim().length < 3) e.ocupacao = 'Conte sua ocupação ou talento (mínimo 3 letras).';
+  if (!EMAIL.test(d.email.trim())) e.email = 'Esse e-mail não parece válido (ex: nome@nautilus.at).';
+  if (d.frase.trim().length < 10) e.frase = 'Escreva pelo menos 10 caracteres sobre como você ajuda a cidade.';
+  return e;
+}
+
+// processa um registro de habitante; devolve { ok, texto, protocolo?, setorFinal? }
+export async function registrar(d, { registros = [], setores = [] } = {}) {
+  if (ENDPOINT) {
+    try {
+      const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tipo: 'registro', ...d }) });
+      if (r.ok) return await r.json();
+    } catch { /* sem resposta da API */ }
+    return { ok: false, texto: 'Perdi o sinal com a Rede e não consegui processar seu registro. Tente novamente em instantes.' };
+  }
+  const dup = registros.find(r => norm(r.email) === norm(d.email.trim()));
+  if (dup) return { ok: false, texto: `Este canal já consta no registro ${dup.protocolo}. Use outro e-mail ou converse comigo por aqui.` };
+  const fechado = setores.find(s => s.nome === d.setor)?.estado === 'fechado';
+  const setorFinal = fechado ? 'Residencial B' : d.setor;
+  const protocolo = `RN-${Math.floor(1000 + Math.random() * 9000)}`;
+  const quem = d.nome.trim().split(' ')[0];
+  const onde = fechado ? 'O Residencial A está em manutenção, então você foi acolhido no Residencial B.' : `Você foi cadastrado no setor ${d.setor}.`;
+  return { ok: true, protocolo, setorFinal, texto: `Registro ${protocolo} processado. Bem-vindo a Atlântida, ${quem}. ${onde} Sua mensagem de boas-vindas já está no Mural.` };
+}
+
 export async function responder(texto, contexto) {
   if (ENDPOINT) {
     try {

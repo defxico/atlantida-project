@@ -173,7 +173,9 @@
 @media (prefers-reduced-motion: reduce) { .ia__core, .ia__ring, .ia__orb::before { animation: none !important; } .ia__ring { opacity: .25; scale: 1.3; } }
 .ia__status { margin: 0 0 .6rem; color: var(--text-dim); font: 700 .66rem/1 var(--font-hud); letter-spacing: .24em; text-transform: uppercase; }
 .ia__status span { color: var(--cyan); }
-.ia__log { width: 100%; max-height: 32%; min-height: 3.6rem; overflow-y: auto; display: grid; gap: .5rem; align-content: start; padding-right: 6px; scrollbar-width: none; }
+.ia__chat { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.ia__chat[hidden], .ia__regform[hidden], .ia__reg[hidden] { display: none; }
+.ia__log { width: 100%; max-height: clamp(5rem, 24vh, 11rem); min-height: 3.6rem; overflow-y: auto; display: grid; gap: .5rem; align-content: start; padding-right: 6px; scrollbar-width: none; }
 .ia__msg { margin: 0; max-width: 86%; font-size: .9rem; line-height: 1.5; }
 .ia__msg--ia { color: var(--text); }
 .ia__msg--ia::before { content: 'NÁUTILOS ▸ '; color: var(--cyan); font: 700 .66rem/1 var(--font-hud); letter-spacing: .18em; }
@@ -190,6 +192,29 @@
 .ia__form input::placeholder { color: var(--text-dim); opacity: .7; }
 .ia__form button { padding: 0 .5rem; border: 0; background: none; color: var(--cyan); font-size: 1.1rem; cursor: pointer; }
 .ia__form button:hover { color: #fff; }
+
+/* Registro de novo habitante: botão e formulário em amarelo */
+.ia__reg { margin: 0 0 .7rem; padding: .5rem 1.2rem; border: 1px solid var(--yellow); background: rgb(255 216 77 / .18); color: var(--yellow); font: 700 .76rem/1 var(--font-hud); letter-spacing: .2em; text-transform: uppercase; cursor: pointer; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
+.ia__reg:hover, .ia__reg:focus-visible { background: rgb(255 216 77 / .38); color: #fff; box-shadow: 0 0 14px rgb(255 216 77 / .5); }
+.ia.is-reg { --size-reg: 72px; }
+.ia.is-reg .ia__orb { --size: var(--size-reg); min-height: calc(var(--size) * 1.5); flex: none; }
+.ia__regform { width: 100%; flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: .6rem .2rem 0; }
+.ia__regtitulo { margin: 0 0 .7rem; color: var(--yellow); font: 700 .74rem/1 var(--font-hud); letter-spacing: .24em; text-transform: uppercase; text-align: center; }
+.ia__regcampos { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem .9rem; }
+.ia__regfull { grid-column: 1 / -1; }
+.ia__regform .vform__f span { color: var(--yellow); }
+.ia__regform input, .ia__regform select { display: block; width: 100%; box-sizing: border-box; padding: .5rem .6rem; border: 1px solid rgb(255 216 77 / .4); background: rgb(8 13 43 / .7); color: var(--text); font: 500 .88rem/1.4 var(--font-body); }
+.ia__regform select option { background: #080D2B; color: var(--text); }
+.ia__regform input:focus-visible, .ia__regform select:focus-visible { outline: 0; border-color: var(--yellow); box-shadow: 0 0 10px rgb(255 216 77 / .45); }
+.ia__regform [aria-invalid="true"] { border-color: #FF6B6B; }
+.ia__err { display: block; min-height: 1.1em; margin-top: .2rem; color: #FF9A9A; font-size: .74rem; font-style: normal; }
+.ia__regbtns { display: flex; justify-content: center; align-items: center; gap: var(--space-4); margin-top: .5rem; }
+.ia__regbtns .vform__send { height: auto; padding: .6rem 1.3rem; }
+.ia__retry { justify-self: start; padding: .4rem .9rem; border: 1px solid var(--yellow); background: none; color: var(--yellow); font: 700 .7rem/1 var(--font-hud); letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
+.ia__retry:hover, .ia__retry:focus-visible { background: rgb(255 216 77 / .25); color: #fff; }
+.ia__orb[data-state="erro"] { --orb-a: #FF6B6B; --orb-b: #FFE0E0; }
+.ia__orb[data-state="erro"] .ia__core { animation-duration: 1.2s; }
+.ia__orb[data-state="erro"] .ia__ring { animation-duration: 1.4s; }
 
 /* Visitantes (FIAP NEXT): mesmo modelo, em amarelo */
 .mural .mural__chip[data-cat="Visitantes"] { color: var(--yellow); border-color: rgb(255 216 77 / .55); }
@@ -306,6 +331,8 @@
   .mform { grid-template-columns: 1fr; }
   .portal { height: calc(100dvh - var(--lens-top) - var(--lens-bottom) - 170px); }
   .ia { padding: .7rem .8rem .8rem; }
+  .ia__regcampos { grid-template-columns: 1fr; gap: .4rem; }
+  .ia.is-reg { --size-reg: 48px; }
   .ia__orb { --size: clamp(80px, 16vh, 130px); }
   .mform__trio { grid-template-columns: 1fr 1fr; }
   .mis__foot { grid-template-columns: 1fr; }

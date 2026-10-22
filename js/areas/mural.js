@@ -2,24 +2,16 @@ import { sortByDateDesc, filterByCategoria, formatDate } from '../lib/mural.js';
 import { validateField } from '../lib/validate.js';
 import { esc } from '../lib/html.js';
 import { mountMissoes } from '../missoes.js';
+import { loadVisitantes, saveVisitantes } from '../lib/visitantes.js';
 export const bare = true; // sem moldura de página: cartões em HUD
 
 const CATEGORIAS = ['todos', 'Personalidades do mês', 'Aviso', 'Pedido de ajuda', 'Oferta', 'Conhecimento', 'Amizade', 'Visitantes'];
 const VISITANTES = 'Visitantes';
 const PERSONALIDADES = 'Personalidades do mês'; // posts dos 6 habitantes; não é um tipo de mensagem
 const TIPOS = CATEGORIAS.slice(2, -1);
-const STORE = 'nautilus.visitantes';
 
 const MORADOR = { setor: 'Morador', img: 'assets/img/avatar-morador.svg' };
 const VISITANTE = { setor: 'Visitante · FIAP NEXT', img: 'assets/img/avatar-morador.svg' };
-
-// mensagens dos visitantes ficam neste navegador (site estático, sem servidor)
-const loadVisitantes = () => {
-  try { return JSON.parse(localStorage.getItem(STORE)) ?? []; } catch { return []; }
-};
-const saveVisitantes = list => {
-  try { localStorage.setItem(STORE, JSON.stringify(list)); } catch { /* sem armazenamento: a mensagem vale só nesta sessão */ }
-};
 
 const post = (p, a) => `
   <li class="msg" data-cat="${p.categoria}">
