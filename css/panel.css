@@ -63,7 +63,7 @@
 .mural .map__hint { margin: 0; }
 .mural__filters { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); }
 .mural .mural__chip, .mural .mural__mode { position: static; translate: none; font-size: .78rem; }
-.feed { list-style: none; margin: 0; padding: 4px 8px 4px 4px; width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); align-content: start; flex: 1; min-height: 0; overflow-y: auto;}
+.feed { list-style: none; margin: 0; padding: 4px 8px 4px 4px; width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); align-content: start; flex: 1; min-height: 0; overflow-y: auto; scrollbar-gutter: stable;}
 .feed::-webkit-scrollbar { width: 8px; }
 .feed::-webkit-scrollbar-track { background: rgb(66 214 208 / .08); border-left: 1px solid rgb(66 214 208 / .3); }
 .feed::-webkit-scrollbar-thumb { background: var(--cyan); border: 2px solid rgb(8 13 43); box-shadow: 0 0 8px var(--cyan); clip-path: polygon(0 3px, 3px 0, 100% 0, 100% calc(100% - 3px), calc(100% - 3px) 100%, 0 100%); }
@@ -90,8 +90,8 @@
 .mural__pane[hidden], .mis__bar[hidden], .mis__passos[hidden], .mis__feed[hidden] { display: none; }
 .mural__modes { display: flex; gap: var(--space-2); }
 .mural .mural__mode { font-size: .85rem; padding: .4rem 1.2rem; }
-.mis__bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-2) var(--space-4); width: 100%; }
-.mis__acoes { display: flex; align-items: center; gap: var(--space-3); }
+.mis__bar { display: flex; flex-direction: column; align-items: stretch; gap: var(--space-2); width: 100%; box-sizing: border-box; padding: 0 16px 0 4px; }
+.mis__acoes { display: flex; align-items: center; gap: var(--space-3); align-self: flex-end; }
 .mis__nivel { color: var(--gold); font: 700 .74rem/1 var(--font-hud); letter-spacing: .2em; text-transform: uppercase; }
 .mis__nova { height: auto; padding: .55rem 1.1rem; border-color: var(--gold); background: rgb(216 180 90 / .2); color: var(--gold); }
 .mis__nova:hover, .mis__nova:focus-visible { background: rgb(216 180 90 / .4); color: #fff; }
