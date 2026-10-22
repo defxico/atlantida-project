@@ -66,7 +66,7 @@ export function mountMissoes(pane, { fixas, habitantes }) {
         ${['todas', ...TIPOS].map(t => `<button type="button" class="map__node mural__chip${t === 'todas' ? ' is-active' : ''}" data-tipo="${t}" aria-pressed="${t === 'todas'}">${t === 'todas' ? 'Todas' : t}</button>`).join('')}
         <button type="button" class="map__node mural__chip" data-vagas aria-pressed="false">Com vagas</button>
       </div>
-      <div class="mis__acoes"><span class="mis__nivel" aria-live="polite"></span><button type="button" class="vform__send mis__nova">+ Nova missão</button></div>
+      <div class="mis__acoes" data-dock-left><span class="mis__nivel" aria-live="polite"></span><button type="button" class="vform__send mis__nova">+ Nova missão</button></div>
     </div>
     <p class="mis__passos"><b>1</b> Publique uma missão <i>›</i> <b>2</b> Habitantes embarcam <i>›</i> <b>3</b> Conectem-se: e-mail, LinkedIn e GitHub liberados a bordo</p>
     <p class="sr-only" role="status"></p>
@@ -125,6 +125,7 @@ export function mountMissoes(pane, { fixas, habitantes }) {
   const abrirForm = aberto => {
     form.hidden = !aberto;
     feed.hidden = bar.hidden = passos.hidden = aberto;
+    pane.closest('.mural').classList.toggle('mis-form-open', aberto);
     if (aberto) { previa(); form.elements.titulo.focus(); }
   };
 

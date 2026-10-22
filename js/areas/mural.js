@@ -115,6 +115,7 @@ export async function render(container) {
     if (!b) return;
     container.querySelectorAll('.mural__mode').forEach(m => { m.classList.toggle('is-active', m === b); m.setAttribute('aria-pressed', String(m === b)); });
     container.querySelectorAll('.mural__pane').forEach(p => { p.hidden = p.dataset.pane !== b.dataset.modo; });
+    container.querySelector('.mural').classList.toggle('modo-recados', b.dataset.modo !== 'missoes');
     hint.textContent = b.dataset.modo === 'missoes' ? 'Missões da comunidade' : 'Transmissões da comunidade';
   });
 }

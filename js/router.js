@@ -24,7 +24,12 @@ export function initRouter({ hotspots, scene }) {
     const bar = document.createElement('div');
     bar.className = 'hintbar';
     hint.before(bar);
-    bar.append(hint, closeBtn);
+    // controles da área (data-dock-left) ficam ao lado esquerdo do "Voltar"; no celular não há espaço, então ficam onde estão
+    const extras = matchMedia('(min-width: 768px)').matches ? [...body.querySelectorAll('[data-dock-left]')] : [];
+    const direita = document.createElement('div');
+    direita.className = 'hintbar__right';
+    direita.append(...extras, closeBtn);
+    bar.append(hint, direita);
   }
   function restoreClose() {
     if (closeBtn.parentNode !== frame) frame.insertBefore(closeBtn, body);
