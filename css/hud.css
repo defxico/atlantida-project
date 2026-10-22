@@ -76,7 +76,7 @@
 .hud__place { position: absolute; top: calc(var(--lens-top) + 60px); left: 50%; translate: -50% 0; margin: 0; white-space: nowrap; font: 600 .68rem/1 var(--font-hud); letter-spacing: .18em; text-transform: uppercase; text-align: center; color: var(--text-dim); opacity: .95; text-shadow: 0 0 6px rgb(2 5 18 / .95), 0 0 2px rgb(2 5 18 / .95); }
 .hud__place strong { color: var(--cyan); font-weight: 600; }
 .hud__brand { position: absolute; top: calc(var(--pad-t) - 10px); right: var(--pad-x); margin: 0; }
-.hud__logo { display: block; width: 138px; aspect-ratio: 1484 / 1060; background: var(--gold); -webkit-mask: url(../assets/brand/logo-mono.svg) center / contain no-repeat; mask: url(../assets/brand/logo-mono.svg) center / contain no-repeat; filter: drop-shadow(0 0 10px rgb(216 180 90 / .45)); }
+.hud__logo { display: block; width: 138px; aspect-ratio: 1484 / 1060; background: #fff; -webkit-mask: url(../assets/brand/logo-mono.svg) center / contain no-repeat; mask: url(../assets/brand/logo-mono.svg) center / contain no-repeat; filter: drop-shadow(0 0 10px rgb(255 255 255 / .4)); }
 
 .hud__gauges { position: absolute; left: var(--pad-x); top: calc(var(--pad-t) + 34px); margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; font: 600 .68rem/1 var(--font-hud); letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); opacity: .9; }
 .hud__gauges li { display: grid; grid-template-columns: 58px 74px auto; align-items: center; gap: 8px; }
