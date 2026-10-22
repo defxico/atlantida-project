@@ -2,7 +2,7 @@
 // Sem API ou se ela falhar, responde com o roteiro local abaixo.
 // Depois do deploy no Vercel, coloque a URL do projeto em VERCEL_URL para o site publicado no
 // GitHub Pages e o pen drive (localhost) também usarem a IA.
-const VERCEL_URL = null; // ex.: 'https://atlantida-project.vercel.app'
+const VERCEL_URL = 'https://atlantida-project.vercel.app';
 const ENDPOINT = typeof location === 'undefined' ? null
   : location.hostname.endsWith('.vercel.app') ? '/api/chat'
   : VERCEL_URL && `${VERCEL_URL}/api/chat`;
