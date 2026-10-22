@@ -145,6 +145,52 @@
 .mform__card { display: block; padding: 0; margin: .5rem 0 0; overflow: visible; max-height: none; }
 .mform__previa { align-self: start; }
 
+/* Fale com o Portal: conversa com o Náutilos IA (fundo plano, círculo pulsante) */
+.portal { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); width: min(100%, 860px); height: calc(100dvh - var(--lens-top) - var(--lens-bottom) - 190px); margin-inline: auto; }
+.portal .map__hint { margin: 0; }
+.ia { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; flex: 1; min-height: 0; padding: 1rem 1.25rem 1.1rem; border: 1px solid rgb(66 214 208 / .45); background: #050918; box-shadow: 0 0 24px rgb(66 214 208 / .15); }
+.ia::before, .ia::after { content: ''; position: absolute; width: 14px; height: 14px; border: 2px solid var(--cyan); filter: drop-shadow(var(--glow-cyan)); }
+.ia::before { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
+.ia::after { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
+.ia__orb { --orb-a: #42D6D0; --orb-b: #D8FBF9; --lvl: 0; --size: clamp(110px, 24vh, 220px); position: relative; flex: 1; min-height: calc(var(--size) * 1.1); display: grid; place-items: center; width: 100%; }
+.ia__core { position: relative; z-index: 1; width: var(--size); height: var(--size); border-radius: 50%; background: radial-gradient(circle at 36% 30%, var(--orb-b) 0, var(--orb-a) 38%, rgb(8 13 43 / .0) 72%); box-shadow: 0 0 calc(var(--size) * .35) var(--orb-a), inset 0 0 calc(var(--size) * .2) var(--orb-a); scale: calc(1 + var(--lvl) * .14); transition: scale .09s linear; animation: ia-breathe 4s ease-in-out infinite; }
+.ia__ring { position: absolute; width: var(--size); height: var(--size); border-radius: 50%; border: 1.5px solid var(--orb-a); opacity: 0; animation: ia-ring 4s ease-out infinite; }
+.ia__ring:nth-child(2) { animation-delay: 1.33s; }
+.ia__ring:nth-child(3) { animation-delay: 2.66s; }
+@keyframes ia-breathe { 50% { scale: 1.07; } }
+@keyframes ia-ring { from { scale: .95; opacity: .55; } to { scale: 2.1; opacity: 0; } }
+@keyframes ia-think { 0%, 100% { scale: .94; } 18% { scale: 1.1; } 32% { scale: .98; } 55% { scale: 1.14; } 70% { scale: 1; } }
+@keyframes ia-halo { to { rotate: 360deg; } }
+.ia__orb[data-state="listening"] { --orb-a: #D8B45A; --orb-b: #FFF3CF; }
+.ia__orb[data-state="listening"] .ia__core { animation-duration: 1.8s; }
+.ia__orb[data-state="listening"] .ia__ring { animation-duration: 2.4s; }
+.ia__orb[data-state="thinking"] { --orb-a: #6846AB; --orb-b: #42D6D0; }
+.ia__orb[data-state="thinking"] .ia__core { animation: ia-think .95s ease-in-out infinite; }
+.ia__orb[data-state="thinking"] .ia__ring { animation-duration: 1.2s; }
+.ia__orb[data-state="thinking"]::before { content: ''; position: absolute; width: calc(var(--size) * 1.35); height: calc(var(--size) * 1.35); border-radius: 50%; background: conic-gradient(from 0deg, transparent 0 55%, #42D6D0 80%, transparent); -webkit-mask: radial-gradient(circle, transparent 62%, #000 64%, #000 68%, transparent 70%); mask: radial-gradient(circle, transparent 62%, #000 64%, #000 68%, transparent 70%); animation: ia-halo 1.6s linear infinite; }
+.ia__orb[data-state="speaking"] .ia__core { animation: none; }
+.ia__orb[data-state="speaking"] .ia__ring { animation-duration: 1.5s; }
+@media (prefers-reduced-motion: reduce) { .ia__core, .ia__ring, .ia__orb::before { animation: none !important; } .ia__ring { opacity: .25; scale: 1.3; } }
+.ia__status { margin: 0 0 .6rem; color: var(--text-dim); font: 700 .66rem/1 var(--font-hud); letter-spacing: .24em; text-transform: uppercase; }
+.ia__status span { color: var(--cyan); }
+.ia__log { width: 100%; max-height: 32%; min-height: 3.6rem; overflow-y: auto; display: grid; gap: .5rem; align-content: start; padding-right: 6px; scrollbar-width: none; }
+.ia__msg { margin: 0; max-width: 86%; font-size: .9rem; line-height: 1.5; }
+.ia__msg--ia { color: var(--text); }
+.ia__msg--ia::before { content: 'NÁUTILOS ▸ '; color: var(--cyan); font: 700 .66rem/1 var(--font-hud); letter-spacing: .18em; }
+.ia__msg--eu { justify-self: end; text-align: right; color: var(--text-dim); }
+.ia__msg--eu::before { content: 'VOCÊ ▸ '; color: var(--gold); font: 700 .66rem/1 var(--font-hud); letter-spacing: .18em; }
+.ia__sugestoes { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin: .7rem 0 0; }
+.ia__sugestoes[hidden] { display: none; }
+.ia__sugestoes button { padding: .3rem .7rem; border: 1px solid var(--line); background: none; color: var(--text-dim); font: 600 .7rem/1 var(--font-hud); letter-spacing: .1em; cursor: pointer; }
+.ia__sugestoes button:hover, .ia__sugestoes button:focus-visible { border-color: var(--cyan); color: var(--cyan); }
+.ia__form { display: flex; width: 100%; margin-top: .8rem; border-bottom: 1px solid rgb(66 214 208 / .5); }
+.ia__form:focus-within { border-bottom-color: var(--cyan); box-shadow: 0 8px 14px -10px var(--cyan); }
+.ia__form input { flex: 1; padding: .6rem .2rem; border: 0; background: none; color: var(--text); font: 500 .95rem/1.4 var(--font-body); }
+.ia__form input:focus-visible { outline: 0; }
+.ia__form input::placeholder { color: var(--text-dim); opacity: .7; }
+.ia__form button { padding: 0 .5rem; border: 0; background: none; color: var(--cyan); font-size: 1.1rem; cursor: pointer; }
+.ia__form button:hover { color: #fff; }
+
 /* Visitantes (FIAP NEXT): mesmo modelo, em amarelo */
 .mural .mural__chip[data-cat="Visitantes"] { color: var(--yellow); border-color: rgb(255 216 77 / .55); }
 .mural .mural__chip[data-cat="Visitantes"]:hover, .mural .mural__chip[data-cat="Visitantes"]:focus-visible, .mural .mural__chip[data-cat="Visitantes"].is-active { background: rgb(255 216 77 / .22); border-color: var(--yellow); color: #fff; box-shadow: 0 0 14px rgb(255 216 77 / .55); }
@@ -258,6 +304,9 @@
   .mural { height: calc(100dvh - var(--lens-top) - var(--lens-bottom) - 170px); }
   .vform__row { grid-template-columns: 1fr; }
   .mform { grid-template-columns: 1fr; }
+  .portal { height: calc(100dvh - var(--lens-top) - var(--lens-bottom) - 170px); }
+  .ia { padding: .7rem .8rem .8rem; }
+  .ia__orb { --size: clamp(80px, 16vh, 130px); }
   .mform__trio { grid-template-columns: 1fr 1fr; }
   .mis__foot { grid-template-columns: 1fr; }
   .mis__btn, .mis__canais { justify-self: start; }

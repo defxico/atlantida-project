@@ -1,67 +1,99 @@
-import { validateField, validateForm } from '../lib/validate.js';
+import { esc } from '../lib/html.js';
+import { responder, BOAS_VINDAS } from '../lib/nautilos.js';
+export const bare = true; // sem moldura de página: tela de IA em HUD
 
-const SETORES = ['Cúpula Central', 'Setor Científico', 'Setor Comercial', 'Setor Residencial', 'Setor Industrial', 'Setor de Exploração'];
-const TIPOS = ['Pedido de ajuda', 'Cadastro de habitante', 'Sugestão', 'Alerta de risco', 'Outro'];
-const REQUIRED = ['nome', 'email', 'tipo', 'mensagem'];
+const SUGESTOES = ['O que houve no Residencial A?', 'Quem é Kael Vetra?', 'Como funcionam as linhas de transporte?'];
+const MIN_PENSANDO = 1100; // a IA "pensa" ao menos isso, mesmo com resposta imediata
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const options = list => list.map(o => `<option>${o}</option>`).join('');
-const field = (name, label, control, required = true) => `
-  <div class="field">
-    <label for="f-${name}">${label}${required ? ' <span class="req" aria-hidden="true">*</span>' : ''}</label>
-    ${control}
-    <p class="field__error" aria-live="polite" id="err-${name}"></p>
-  </div>`;
+export async function render(container) {
+  const [setores, habitantes] = await Promise.all([
+    fetch('data/mundo.json').then(r => r.json()).then(m => m.setores),
+    fetch('data/habitantes.json').then(r => r.json()),
+  ]);
 
-export function render(container) {
   container.innerHTML = `
-    <header class="panel__header">
-      <p class="eyebrow">Canal direto</p>
-      <h2 id="panel-title">Fale com o Portal</h2>
-      <p class="lead">Precisa de ajuda, quer se cadastrar ou falar com a administração? Transmita sua mensagem pela Rede Náutilus.</p>
-    </header>
-    <form class="form" novalidate>
-      ${field('nome', 'Nome', '<input id="f-nome" name="nome" type="text" autocomplete="name" required aria-describedby="err-nome">')}
-      ${field('email', 'E-mail', '<input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="err-email">')}
-      ${field('setor', 'Seu setor', `<select id="f-setor" name="setor" aria-describedby="err-setor"><option value="">Prefiro não dizer</option>${options(SETORES)}</select>`, false)}
-      ${field('tipo', 'Tipo de mensagem', `<select id="f-tipo" name="tipo" required aria-describedby="err-tipo"><option value="">Selecione uma opção</option>${options(TIPOS)}</select>`)}
-      ${field('mensagem', 'Mensagem', '<textarea id="f-mensagem" name="mensagem" required aria-describedby="err-mensagem"></textarea>')}
-      <p class="form__hint"><span class="req">*</span> campos obrigatórios</p>
-      <button class="btn" type="submit">Transmitir mensagem</button>
-    </form>
-    <div class="form__success" tabindex="-1" role="status" hidden>
-      <span class="signal" aria-hidden="true"></span>
-      <h3>Transmissão enviada pela Rede Náutilus</h3>
-      <p>Sua mensagem chegou à administração. Em breve alguém da comunidade entra em contato.</p>
-      <button class="btn btn--ghost" type="button" data-again>Enviar outra mensagem</button>
+    <div class="portal">
+      <h2 id="panel-title" class="sr-only">Fale com o Portal: conversa com o Náutilos IA</h2>
+      <p class="map__hint">Converse com o Náutilos</p>
+      <section class="ia" aria-label="Conversa com o Náutilos IA">
+        <div class="ia__orb" data-state="idle" aria-hidden="true">
+          <i class="ia__ring"></i><i class="ia__ring"></i><i class="ia__ring"></i>
+          <span class="ia__core"></span>
+        </div>
+        <p class="ia__status">Náutilos IA · <span>online</span></p>
+        <div class="ia__log" role="log" aria-live="polite"></div>
+        <div class="ia__sugestoes">${SUGESTOES.map(s => `<button type="button">${esc(s)}</button>`).join('')}</div>
+        <form class="ia__form" novalidate>
+          <input name="msg" type="text" maxlength="240" autocomplete="off" placeholder="Pergunte algo ao Náutilos…" aria-label="Sua mensagem para o Náutilos">
+          <button type="submit" aria-label="Enviar mensagem">➤</button>
+        </form>
+      </section>
     </div>`;
 
-  const form = container.querySelector('form');
-  const success = container.querySelector('.form__success');
+  const orb = container.querySelector('.ia__orb');
+  const status = container.querySelector('.ia__status span');
+  const log = container.querySelector('.ia__log');
+  const form = container.querySelector('.ia__form');
+  const input = form.elements.msg;
+  const sugestoes = container.querySelector('.ia__sugestoes');
+  const STATUS = { idle: 'online', listening: 'ouvindo', thinking: 'processando', speaking: 'transmitindo' };
+  let ocupado = false;
+  let vivo = true;
 
-  const show = (name, msg) => {
-    container.querySelector(`#err-${name}`).textContent = msg;
-    form.elements[name].setAttribute('aria-invalid', msg ? 'true' : 'false');
+  const estado = s => { orb.dataset.state = s; status.textContent = STATUS[s]; };
+  const addMsg = (quem, texto = '') => {
+    const p = document.createElement('p');
+    p.className = `ia__msg ia__msg--${quem}`;
+    p.textContent = texto;
+    log.append(p);
+    log.scrollTop = log.scrollHeight;
+    return p;
   };
 
-  form.addEventListener('blur', e => {
-    if (REQUIRED.includes(e.target.name)) show(e.target.name, validateField(e.target.name, e.target.value));
-  }, true);
+  // escreve a resposta aos poucos e faz o círculo "falar" no ritmo do texto
+  const digitar = async (el, texto) => {
+    if (reduce) { el.textContent = texto; return; }
+    for (let i = 1; i <= texto.length && vivo; i++) {
+      el.textContent = texto.slice(0, i);
+      if (i % 3 === 0) orb.style.setProperty('--lvl', (0.25 + Math.random() * 0.75).toFixed(2));
+      log.scrollTop = log.scrollHeight;
+      await new Promise(r => setTimeout(r, 18));
+    }
+    orb.style.setProperty('--lvl', 0);
+  };
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const errors = validateForm(Object.fromEntries(new FormData(form)));
-    for (const name of REQUIRED) show(name, errors[name] ?? '');
-    const first = Object.keys(errors)[0];
-    if (first) { form.elements[first].focus(); return; }
-    form.reset();
-    form.hidden = true;
-    success.hidden = false;
-    success.focus();
-  });
+  const falar = async texto => {
+    estado('speaking');
+    await digitar(addMsg('ia'), texto);
+    if (vivo) estado('idle');
+  };
 
-  success.querySelector('[data-again]').addEventListener('click', () => {
-    success.hidden = true;
-    form.hidden = false;
-    form.elements.nome.focus();
-  });
+  const enviar = async texto => {
+    if (ocupado || !texto.trim()) return;
+    ocupado = true;
+    input.value = '';
+    input.disabled = true;
+    sugestoes.hidden = true;
+    addMsg('eu', texto.trim());
+    estado('thinking');
+    const [resposta] = await Promise.all([responder(texto, { setores, habitantes }), new Promise(r => setTimeout(r, reduce ? 0 : MIN_PENSANDO))]);
+    if (!vivo) return;
+    await falar(resposta);
+    ocupado = false;
+    input.disabled = false;
+    input.focus();
+  };
+
+  form.addEventListener('submit', e => { e.preventDefault(); enviar(input.value); });
+  input.addEventListener('input', () => { if (!ocupado) estado(input.value.trim() ? 'listening' : 'idle'); });
+  sugestoes.addEventListener('click', e => { const b = e.target.closest('button'); if (b) enviar(b.textContent); });
+
+  // se o painel for fechado no meio de uma resposta, para de escrever
+  new MutationObserver(() => { if (!container.isConnected) vivo = false; }).observe(document.body, { childList: true, subtree: true });
+
+  ocupado = true;
+  await new Promise(r => setTimeout(r, reduce ? 0 : 500));
+  await falar(BOAS_VINDAS);
+  ocupado = false;
 }
