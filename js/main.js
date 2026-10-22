@@ -1,4 +1,4 @@
-import { renderHotspots, renderNav, revealHud } from './hud.js';
+import { renderHotspots, renderNav, initMenu, revealHud } from './hud.js';
 import { initScene } from './scene.js';
 import { initLook } from './look.js';
 import { runBoot } from './boot.js';
@@ -14,6 +14,7 @@ try {
   txItems = tx;
   renderHotspots(document.getElementById('hotspots'), hotspots);
   renderNav(document.getElementById('hud-nav'), hotspots);
+  initMenu();
   const scene = initScene();
   initLook(document.getElementById('viewport'));
 

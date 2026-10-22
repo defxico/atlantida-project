@@ -141,6 +141,7 @@
 .hud__bootlog { position: absolute; left: 50%; bottom: calc(var(--lens-bottom) + 76px); translate: -50% 0; margin: 0; min-height: 6.4em; color: var(--cyan); font: 600 .82rem/1.6 var(--font-hud); letter-spacing: .14em; text-transform: uppercase; text-align: center; white-space: pre; text-shadow: var(--glow-cyan); opacity: 0; pointer-events: none; }
 
 /* menu dentro dos óculos */
+.hud__menubtn { display: none; }
 .hud__nav { position: absolute; left: 50%; bottom: calc(var(--lens-bottom) + 18px); translate: -50% 0; display: flex; gap: 6px; }
 .hud__nav a {
   display: flex; align-items: baseline; gap: .55rem; padding: .62rem 1.2rem .56rem;
@@ -200,8 +201,22 @@
   .hud__msg-body { padding: .6rem .8rem .4rem; min-height: 7.6em; }
   .tx__text { min-height: 4.4em; font-size: .82rem; }
   .tx__src { font-size: .7rem; }
-  .hud__nav { left: calc(var(--lens-side) + 10px); right: calc(var(--lens-side) + 10px); translate: none; bottom: calc(var(--lens-bottom) + 12px); justify-content: space-between; overflow-x: auto; gap: 4px; }
-  .hud__nav a { padding: .55rem .7rem; font-size: .74rem; letter-spacing: .1em; }
+  .hud__menubtn {
+    position: absolute; left: 50%; translate: -50% 0; bottom: calc(var(--lens-bottom) + 12px); z-index: 2;
+    display: flex; align-items: center; gap: .7rem; padding: .62rem 1.1rem .56rem;
+    border: 1px solid rgb(66 214 208 / .55); background: linear-gradient(180deg, rgb(8 13 43 / .7), rgb(8 13 43 / .9));
+    color: var(--text); font: 600 .8rem/1 var(--font-hud); letter-spacing: .16em; text-transform: uppercase; cursor: pointer;
+    transform: skewX(-16deg); backdrop-filter: blur(6px);
+  }
+  .hud__menubtn > * { transform: skewX(16deg); }
+  .hud__menubtn b { font-weight: 700; }
+  .hud__menubtn em { font-style: normal; color: var(--cyan); letter-spacing: .1em; }
+  .hud__menubtn-i { width: 14px; height: 10px; background: linear-gradient(var(--cyan) 0 2px, transparent 2px 4px, var(--cyan) 4px 6px, transparent 6px 8px, var(--cyan) 8px 10px); }
+  .menu-open .hud__menubtn { border-color: var(--cyan); box-shadow: 0 0 16px rgb(66 214 208 / .45); }
+  .menu-open .hud__menubtn-i { background: linear-gradient(45deg, transparent 4px, var(--cyan) 4px 6px, transparent 6px), linear-gradient(-45deg, transparent 4px, var(--cyan) 4px 6px, transparent 6px); }
+  .hud__nav { display: none; left: 50%; right: auto; width: min(260px, calc(100% - 2 * var(--lens-side) - 20px)); translate: -50% 0; flex-direction: column; align-items: stretch; gap: 6px; overflow: visible; bottom: calc(var(--lens-bottom) + 62px); z-index: 2; }
+  .menu-open .hud__nav { display: flex; }
+  .hud__nav a { justify-content: center; padding: .7rem .9rem; font-size: .85rem; }
   .hud__nav a i { display: none; }
   .hotspot__line { width: 48px; }
   .hotspot__label { left: 36px; top: -40px; }

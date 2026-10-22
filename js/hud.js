@@ -12,12 +12,27 @@ export function renderNav(nav, hotspots) {
     + hotspots.map((h, i) => `<a href="#${h.id}" data-area="${h.id}"><span><i>${String(i + 2).padStart(2, '0')}</i>${h.nav}</span></a>`).join('');
 }
 
+// no celular o menu fica recolhido num botão; abre ao tocar e fecha ao escolher uma área, tocar fora ou Esc
+export function initMenu() {
+  const btn = document.getElementById('hud-menubtn');
+  const nav = document.getElementById('hud-nav');
+  const hud = btn.closest('.hud');
+  const set = aberto => { hud.classList.toggle('menu-open', aberto); btn.setAttribute('aria-expanded', String(aberto)); };
+  btn.addEventListener('click', () => set(!hud.classList.contains('menu-open')));
+  nav.addEventListener('click', e => { if (e.target.closest('a')) set(false); });
+  document.addEventListener('click', e => { if (!e.target.closest('#hud-nav, #hud-menubtn')) set(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && hud.classList.contains('menu-open')) { set(false); btn.focus(); } });
+  matchMedia('(min-width: 768px)').addEventListener('change', e => { if (e.matches) set(false); });
+}
+
 export function setArea(id, label) {
   document.getElementById('hud-area').textContent = label;
   document.querySelectorAll('#hud-nav a').forEach(a => {
     if (a.dataset.area === id) a.setAttribute('aria-current', 'page');
     else a.removeAttribute('aria-current');
   });
+  const atual = document.querySelector('#hud-nav a[aria-current] span');
+  if (atual) document.getElementById('hud-menu-area').textContent = atual.lastChild.textContent;
 }
 
 const BOOT_LINES = ['Lentes calibradas', 'Pressão externa  301 atm', 'Suporte de vida  ok', 'Conectando à Rede Náutilus', 'Conexão estabelecida'];
@@ -80,7 +95,7 @@ export function revealHud() {
   tl.from('.hud__msg', { opacity: 0, x: 60, duration: .5, ease: 'power3.out', clearProps }, 2.6)
     .from('.hud__msg-body > *', { opacity: 0, y: 8, duration: .3, stagger: .1, clearProps }, 2.8)
     .from('.hotspot', { opacity: 0, scale: .6, duration: .4, stagger: .14, ease: 'back.out(2)', clearProps }, 2.9)
-    .from('.hud__nav', { opacity: 0, y: 10, duration: .4, clearProps }, 3.0)
+    .from('.hud__nav, .hud__menubtn', { opacity: 0, y: 10, duration: .4, clearProps }, 3.0)
     .to(log, { opacity: 0, duration: .5 }, 3.4);
   return tl;
 }
