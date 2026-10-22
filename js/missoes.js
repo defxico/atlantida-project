@@ -5,7 +5,8 @@ import { TIPOS, DIFICULDADES, repDe, nivel, ocupadas, temVaga, filtrar, validarM
 const STORE = 'nautilus.missoes';
 const BARRAS = { 'Fácil': 1, 'Média': 2, 'Difícil': 3 };
 const CANAIS = [['email', '@', 'E-mail'], ['linkedin', 'in', 'LinkedIn'], ['github', 'gh', 'GitHub']];
-const VOCE = { id: 'voce', nome: 'Você', setor: 'Novo habitante · FIAP NEXT' };
+const VISITANTE = { setor: 'Visitante · FIAP NEXT' };
+const iniciais = nome => nome.trim().split(/\s+/).slice(0, 2).map(p => p[0]).join('').toUpperCase() || '?';
 
 const load = () => {
   try { return { embarcadas: [], criadas: [], ...JSON.parse(localStorage.getItem(STORE)) }; } catch { return { embarcadas: [], criadas: [] }; }
@@ -23,14 +24,14 @@ export function mountMissoes(pane, { fixas, habitantes }) {
   const todas = () => [...state.criadas, ...fixas];
   const rep = () => todas().filter(m => state.embarcadas.includes(m.id)).reduce((t, m) => t + repDe(m), 0);
 
-  const avatar = (id, cls = 'mis__av') => {
+  const avatar = (id, cls = 'mis__av', nome = 'Você') => {
     const h = autores[id];
     return h ? `<img class="${cls}" src="${h.img}" alt="${esc(h.nome)}" title="${esc(h.nome)}">`
-      : `<span class="${cls} mis__av--voce" title="Você">VC</span>`;
+      : `<span class="${cls} mis__av--voce" title="${esc(nome)}">${esc(iniciais(nome))}</span>`;
   };
 
   const card = (m, { previa = false } = {}) => {
-    const a = autores[m.autorId] ?? VOCE;
+    const a = autores[m.autorId] ?? { ...VISITANTE, nome: m.autor };
     const a_bordo = state.embarcadas.includes(m.id);
     const ids = [...m.tripulacao, ...(a_bordo ? ['voce'] : [])];
     const slots = Array.from({ length: Math.min(m.vagas, 6) }, (_, i) => ids[i] ? avatar(ids[i]) : '<span class="mis__av mis__av--vaga"></span>').join('');
@@ -46,13 +47,13 @@ export function mountMissoes(pane, { fixas, habitantes }) {
         <header class="mis__head"><b>Missão ${esc(m.id)} · ${esc(m.tipo)}</b>
           <span class="mis__dif">${'<i></i>'.repeat(BARRAS[m.dificuldade])}${m.dificuldade}</span></header>
         <div class="mis__body">
-          <div class="mis__autor">${avatar(m.autorId ?? 'voce')}<p><strong>${esc(a.nome)}</strong><span>${esc(a.funcao ? `${a.funcao} · ${a.setor}` : a.setor)} · ${formatDate(m.data)}</span></p></div>
+          <div class="mis__autor">${avatar(m.autorId, 'mis__av', m.autor)}<p><strong>${esc(a.nome)}</strong><span>${esc(a.funcao ? `${a.funcao} · ${a.setor}` : a.setor)} · ${formatDate(m.data)}</span></p></div>
           <h3 class="mis__titulo">${esc(m.titulo)}</h3>
           <p class="mis__texto">${esc(m.texto)}</p>
           <p class="mis__tags">${m.habilidades.map(t => `<span>${esc(t)}</span>`).join('')}</p>
         </div>
         <footer class="mis__foot">
-          <div class="mis__crew">${slots}<span>${ocupadas(m, a_bordo)}/${m.vagas} tripulantes</span></div>
+          <div class="mis__crew">${slots}<span>${ocupadas(m, a_bordo)}/${m.vagas} membros</span></div>
           <div class="mis__canais">${canais}</div>
           <span class="mis__rep">+${repDe(m)} REP</span>${botao}
         </footer>
@@ -72,12 +73,12 @@ export function mountMissoes(pane, { fixas, habitantes }) {
     <ol class="feed mis__feed"></ol>
     <form class="mform" novalidate hidden>
       <div class="mform__campos">
-        <label class="vform__f"><span>Autor</span><select name="autor"><option value="voce">Você · novo habitante</option>${habitantes.map(h => `<option value="${h.id}">${esc(h.nome)}</option>`).join('')}</select></label>
+        <label class="vform__f"><span>Seu nome</span><input name="autor" maxlength="60" autocomplete="name" placeholder="Como você quer aparecer na missão"></label>
         <label class="vform__f"><span>Título</span><input name="titulo" maxlength="80" placeholder="Ex.: Montar um bot para a Rede Náutilus"></label>
         <div class="mform__trio">
           <label class="vform__f"><span>Tipo</span><select name="tipo">${TIPOS.map(t => `<option>${t}</option>`).join('')}</select></label>
           <label class="vform__f"><span>Dificuldade</span><select name="dificuldade">${Object.keys(DIFICULDADES).map(d => `<option>${d}</option>`).join('')}</select></label>
-          <label class="vform__f"><span>Tripulantes</span><input name="vagas" type="number" min="2" max="8" value="3"></label>
+          <label class="vform__f"><span>Membros</span><input name="vagas" type="number" min="2" max="8" value="3"></label>
         </div>
         <label class="vform__f"><span>Texto</span><textarea name="texto" rows="3" maxlength="400" placeholder="O que vocês vão construir, estudar ou resolver juntos?"></textarea></label>
         <label class="vform__f"><span>Habilidades buscadas (separe por vírgula)</span><input name="habilidades" maxlength="80" placeholder="Ex.: React, Design, Biologia"></label>
@@ -113,8 +114,8 @@ export function mountMissoes(pane, { fixas, habitantes }) {
       habilidades: get('habilidades'), contato: { email: get('email'), linkedin: get('linkedin'), github: get('github') } };
   };
   const paraMissao = (v, id) => ({
-    id, autorId: v.autor === 'voce' ? undefined : v.autor, data: new Date().toLocaleDateString('sv'), tipo: v.tipo, dificuldade: v.dificuldade,
-    vagas: Number(v.vagas) || 3, tripulacao: v.autor === 'voce' ? [] : [v.autor],
+    id, autor: v.autor.trim() || 'Você', data: new Date().toLocaleDateString('sv'), tipo: v.tipo, dificuldade: v.dificuldade,
+    vagas: Number(v.vagas) || 3, tripulacao: [],
     titulo: v.titulo.trim() || 'Título da missão', texto: v.texto.trim() || 'Descreva o que a tripulação vai fazer junta.',
     habilidades: v.habilidades.split(',').map(s => s.trim()).filter(Boolean),
     contato: Object.fromEntries(Object.entries(v.contato).map(([k, x]) => [k, x.trim()]).filter(([, x]) => x)),

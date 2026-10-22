@@ -130,7 +130,7 @@
 .mis__btn:hover:not(:disabled), .mis__btn:focus-visible { background: #fff; }
 .mis__btn.is-on { background: rgb(66 214 208 / .2); border-color: var(--cyan); color: var(--cyan); }
 .mis__btn:disabled { background: none; border-color: var(--line); color: var(--text-dim); cursor: default; opacity: .7; }
-.mform { display: grid; grid-template-columns: 1fr minmax(0, 420px); gap: var(--space-4); width: 100%; flex: 1; min-height: 0; overflow-y: auto; padding: .9rem 1rem; border: 1px solid rgb(66 214 208 / .45); background: linear-gradient(180deg, rgb(8 13 43 / .92), rgb(8 13 43 / .8)); }
+.mform { display: grid; grid-template-columns: 1fr minmax(0, 420px); gap: var(--space-4); width: 100%; flex: 0 1 auto; min-height: 0; overflow-y: auto; padding: .9rem 1rem; border: 1px solid rgb(66 214 208 / .45); background: linear-gradient(180deg, rgb(8 13 43 / .92), rgb(8 13 43 / .8)); }
 .mform[hidden] { display: none; }
 .mform__campos { display: grid; gap: .7rem; align-content: start; }
 .mform__trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; }

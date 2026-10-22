@@ -35,10 +35,12 @@ test('filtrar por tipo e por vagas', () => {
 });
 
 test('validarMissao', () => {
-  const ok = { titulo: 'Montar um bot', texto: 'Um bot que avisa a cidade sobre oscilações.', vagas: 3, contato: { email: 'a@b.co' } };
+  const ok = { autor: 'Ana Lis', titulo: 'Montar um bot', texto: 'Um bot que avisa a cidade sobre oscilações.', vagas: 3, contato: { email: 'a@b.co' } };
   assert.equal(validarMissao(ok), '');
   assert.match(validarMissao({ ...ok, titulo: 'ab' }), /título/);
-  assert.match(validarMissao({ ...ok, vagas: 9 }), /vagas/);
+  assert.match(validarMissao({ ...ok, vagas: 9 }), /membros/);
+  assert.match(validarMissao({ ...ok, autor: ' ' }), /nome/);
+  assert.ok(TIPOS.includes('Pesquisa e exploração'));
   assert.match(validarMissao({ ...ok, contato: {} }), /canal/);
   assert.match(validarMissao({ ...ok, contato: { email: 'x' } }), /e-mail/);
 });
