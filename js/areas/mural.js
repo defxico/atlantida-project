@@ -1,5 +1,7 @@
 import { sortByDateDesc, filterByCategoria, formatDate } from '../lib/mural.js';
 import { validateField } from '../lib/validate.js';
+import { esc } from '../lib/html.js';
+import { mountMissoes } from '../missoes.js';
 export const bare = true; // sem moldura de página: cartões em HUD
 
 const CATEGORIAS = ['todos', 'Personalidades do mês', 'Aviso', 'Pedido de ajuda', 'Oferta', 'Conhecimento', 'Amizade', 'Visitantes'];
@@ -10,8 +12,6 @@ const STORE = 'nautilus.visitantes';
 
 const MORADOR = { setor: 'Morador', img: 'assets/img/avatar-morador.svg' };
 const VISITANTE = { setor: 'Visitante · FIAP NEXT', img: 'assets/img/avatar-morador.svg' };
-
-const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 // mensagens dos visitantes ficam neste navegador (site estático, sem servidor)
 const loadVisitantes = () => {
@@ -34,9 +34,10 @@ const post = (p, a) => `
   </li>`;
 
 export async function render(container) {
-  const [fixos, habitantes] = await Promise.all([
+  const [fixos, habitantes, missoes] = await Promise.all([
     fetch('data/mural.json').then(r => r.json()),
     fetch('data/habitantes.json').then(r => r.json()),
+    fetch('data/missoes.json').then(r => r.json()),
   ]);
   const autores = Object.fromEntries(habitantes.map(h => [h.id, h]));
   let visitantes = loadVisitantes();
@@ -44,7 +45,13 @@ export async function render(container) {
   container.innerHTML = `
     <div class="mural">
       <h2 id="panel-title" class="sr-only">Mural da Comunidade</h2>
-      <p class="map__hint">Transmissões da comunidade</p>
+      <p class="map__hint">Missões da comunidade</p>
+      <div class="mural__modes" role="group" aria-label="Seção do mural">
+        <button type="button" class="map__node mural__mode is-active" data-modo="missoes" aria-pressed="true">Missões</button>
+        <button type="button" class="map__node mural__mode" data-modo="recados" aria-pressed="false">Recados</button>
+      </div>
+      <div class="mural__pane" data-pane="missoes"></div>
+      <div class="mural__pane" data-pane="recados" hidden>
       <div class="mural__filters" role="group" aria-label="Filtrar por categoria">
         ${CATEGORIAS.map(c => `<button type="button" class="map__node mural__chip" data-cat="${c}" aria-pressed="${c === 'todos'}">${c === 'todos' ? 'Todos' : c}</button>`).join('')}
       </div>
@@ -59,12 +66,15 @@ export async function render(container) {
       </form>
       <p class="sr-only" role="status"></p>
       <ol class="feed"></ol>
+      </div>
     </div>`;
 
-  const feed = container.querySelector('.feed');
-  const status = container.querySelector('[role="status"]');
-  const form = container.querySelector('.vform');
-  const err = container.querySelector('#vf-err');
+  const rec = container.querySelector('[data-pane="recados"]');
+  const hint = container.querySelector('.map__hint');
+  const feed = rec.querySelector('.feed');
+  const status = rec.querySelector('[role="status"]');
+  const form = rec.querySelector('.vform');
+  const err = rec.querySelector('#vf-err');
   let cat = 'todos';
 
   const draw = () => {
@@ -75,11 +85,11 @@ export async function render(container) {
     status.textContent = (items.length === 1 ? '1 publicação' : `${items.length} publicações`) + (cat !== 'todos' ? ` em ${cat}` : '');
   };
 
-  container.querySelector('.mural__filters').addEventListener('click', e => {
+  rec.querySelector('.mural__filters').addEventListener('click', e => {
     const btn = e.target.closest('[data-cat]');
     if (!btn) return;
     cat = btn.dataset.cat;
-    container.querySelectorAll('.mural__chip').forEach(c => {
+    rec.querySelectorAll('.mural__chip').forEach(c => {
       c.setAttribute('aria-pressed', String(c === btn));
       c.classList.toggle('is-active', c === btn);
     });
@@ -103,6 +113,16 @@ export async function render(container) {
     feed.scrollTop = 0;
   });
 
-  container.querySelector('.mural__chip').classList.add('is-active');
+  rec.querySelector('.mural__chip').classList.add('is-active');
   draw();
+
+  mountMissoes(container.querySelector('[data-pane="missoes"]'), { fixas: missoes, habitantes });
+
+  container.querySelector('.mural__modes').addEventListener('click', e => {
+    const b = e.target.closest('[data-modo]');
+    if (!b) return;
+    container.querySelectorAll('.mural__mode').forEach(m => { m.classList.toggle('is-active', m === b); m.setAttribute('aria-pressed', String(m === b)); });
+    container.querySelectorAll('.mural__pane').forEach(p => { p.hidden = p.dataset.pane !== b.dataset.modo; });
+    hint.textContent = b.dataset.modo === 'missoes' ? 'Missões da comunidade' : 'Transmissões da comunidade';
+  });
 }

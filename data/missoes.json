@@ -1,0 +1,18 @@
+[
+  { "id": "RN-4821", "autorId": "kael", "data": "2026-10-18", "tipo": "Projeto", "dificuldade": "Difícil", "vagas": 4, "tripulacao": ["kael"],
+    "titulo": "Reconstruir o painel de monitoramento das cúpulas",
+    "texto": "Os servidores estão oscilando e o painel atual não mostra a pressão em tempo real. Procuro gente de front-end e dados para montar um painel novo, aberto para toda a cidade.",
+    "habilidades": ["React", "Dados", "Sensores"], "contato": { "email": "kael.vetra@nautilus.at" } },
+  { "id": "RN-3307", "autorId": "nami", "data": "2026-10-17", "tipo": "Estudo em grupo", "dificuldade": "Fácil", "vagas": 6, "tripulacao": ["nami", "kael"],
+    "titulo": "Grupo de estudos: biologia das fendas abissais",
+    "texto": "Encontros semanais no Setor Científico para estudar a vida nas fendas. Não precisa saber nada — só curiosidade. Levo os livros!",
+    "habilidades": ["Biologia", "Curiosidade"], "contato": { "email": "nami.quelthar@nautilus.at" } },
+  { "id": "RN-2195", "autorId": "seren", "data": "2026-10-15", "tipo": "Mentoria", "dificuldade": "Média", "vagas": 3, "tripulacao": ["seren"],
+    "titulo": "Mentoria: manutenção de geradores para iniciantes",
+    "texto": "Ofereço 3 vagas de mentoria para quem quer aprender a cuidar dos geradores e sistemas de ar. Em troca, peço ajuda para documentar tudo.",
+    "habilidades": ["Mecânica", "Documentação"], "contato": { "email": "seren.velas@nautilus.at" } },
+  { "id": "RN-1760", "autorId": "darian", "data": "2026-10-12", "tipo": "Projeto", "dificuldade": "Média", "vagas": 3, "tripulacao": ["darian", "torak", "nami"],
+    "titulo": "Mapa colaborativo das rotas de entrega",
+    "texto": "Quero mapear os túneis e atalhos entre as cúpulas para agilizar as entregas. Preciso de quem desenhe mapas e de quem conheça as rotas abissais.",
+    "habilidades": ["Mapas", "Design", "Rotas"], "contato": { "email": "darian.flux@nautilus.at" } }
+]
