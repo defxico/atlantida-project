@@ -6,6 +6,7 @@ export const bare = true; // sem moldura de página: tela de IA em HUD
 const SUGESTOES = ['O que houve no Residencial A?', 'Quem é Kael Vetra?', 'Como funcionam as linhas de transporte?'];
 const MIN_PENSANDO = 1100; // a IA "pensa" ao menos isso, mesmo com resposta imediata
 const REGISTROS = 'nautilus.registros';
+const CAMPOS = ['nome', 'setor', 'ocupacao', 'email', 'linkedin', 'github', 'frase'];
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const loadRegistros = () => {
@@ -48,6 +49,8 @@ export async function render(container) {
             <label class="vform__f"><span>Setor onde vai morar</span><select name="setor" aria-describedby="rg-setor"><option value="">Selecione</option>${setores.map(s => `<option value="${esc(s.nome)}">${esc(s.nome)}${s.estado === 'fechado' ? ' (em manutenção)' : ''}</option>`).join('')}</select><em id="rg-setor" class="ia__err"></em></label>
             <label class="vform__f"><span>Ocupação ou talento</span><input name="ocupacao" maxlength="50" aria-describedby="rg-ocupacao"><em id="rg-ocupacao" class="ia__err"></em></label>
             <label class="vform__f"><span>Canal de retorno (e-mail)</span><input name="email" type="email" maxlength="80" autocomplete="email" aria-describedby="rg-email"><em id="rg-email" class="ia__err"></em></label>
+            <label class="vform__f"><span>LinkedIn (opcional)</span><input name="linkedin" maxlength="80" placeholder="linkedin.com/in/seu-usuario" aria-describedby="rg-linkedin"><em id="rg-linkedin" class="ia__err"></em></label>
+            <label class="vform__f"><span>GitHub (opcional)</span><input name="github" maxlength="80" placeholder="github.com/seu-usuario" aria-describedby="rg-github"><em id="rg-github" class="ia__err"></em></label>
             <label class="vform__f ia__regfull"><span>Como você ajuda a cidade?</span><input name="frase" maxlength="140" aria-describedby="rg-frase"><em id="rg-frase" class="ia__err"></em></label>
           </div>
           <div class="ia__regbtns"><button type="submit" class="vform__send">Enviar ao Náutilos</button><button type="button" class="mform__cancel">Cancelar</button></div>
@@ -121,7 +124,7 @@ export async function render(container) {
 
   // ---- registro de novo habitante ----
   const erros = (e = {}) => {
-    for (const campo of ['nome', 'setor', 'ocupacao', 'email', 'frase']) {
+    for (const campo of CAMPOS) {
       regForm.querySelector(`#rg-${campo}`).textContent = e[campo] ?? '';
       regForm.elements[campo].setAttribute('aria-invalid', e[campo] ? 'true' : 'false');
     }
@@ -130,13 +133,14 @@ export async function render(container) {
     regForm.hidden = !aberto;
     container.querySelector('.ia__chat').hidden = aberto;
     ia.classList.toggle('is-reg', aberto);
+    container.querySelector('.portal').classList.toggle('is-reg', aberto);
     regBtn.hidden = aberto;
     if (aberto) { estado('listening'); regForm.elements.nome.focus(); }
     else { estado('idle'); }
   };
 
   const enviarRegistro = async () => {
-    const dados = Object.fromEntries(['nome', 'setor', 'ocupacao', 'email', 'frase'].map(k => [k, regForm.elements[k].value]));
+    const dados = Object.fromEntries(CAMPOS.map(k => [k, regForm.elements[k].value]));
     const e = validarRegistro(dados);
     erros(e);
     const primeiro = Object.keys(e)[0];
@@ -148,7 +152,7 @@ export async function render(container) {
     const r = await pensar(registrar(dados, { registros, setores }));
     if (!vivo) return;
     if (r.ok) {
-      registros = [{ protocolo: r.protocolo, nome: dados.nome.trim(), setor: r.setorFinal, email: dados.email.trim() }, ...registros];
+      registros = [{ protocolo: r.protocolo, nome: dados.nome.trim(), setor: r.setorFinal, email: dados.email.trim(), linkedin: dados.linkedin.trim(), github: dados.github.trim() }, ...registros];
       saveRegistros(registros);
       saveVisitantes([{ id: `v${Date.now()}`, autor: dados.nome.trim(), tipo: 'Amizade', data: new Date().toLocaleDateString('sv'),
         texto: `Acabei de me registrar no Náutilos como ${dados.ocupacao.trim()} no setor ${r.setorFinal}. ${dados.frase.trim()}` }, ...loadVisitantes()]);

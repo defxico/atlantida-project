@@ -102,7 +102,7 @@ export default async function handler(req, res) {
   const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body ?? {});
 
   if (body.tipo === 'registro') {
-    const d = Object.fromEntries(['nome', 'setor', 'ocupacao', 'email', 'frase'].map(k => [k, String(body[k] ?? '').slice(0, 140)]));
+    const d = Object.fromEntries(['nome', 'setor', 'ocupacao', 'email', 'linkedin', 'github', 'frase'].map(k => [k, String(body[k] ?? '').slice(0, 140)]));
     if (Object.keys(validarRegistro(d)).length) return res.status(400).json({ ok: false, texto: 'Os dados do registro estão incompletos. Revise o formulário.' });
     return res.status(200).json(processarRegistro(d, { setores: mundo.setores }));
   }

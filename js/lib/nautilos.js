@@ -46,6 +46,8 @@ export function validarRegistro(d) {
   if (!d.setor) e.setor = 'Escolha o setor onde vai morar.';
   if (d.ocupacao.trim().length < 3) e.ocupacao = 'Conte sua ocupação ou talento (mínimo 3 letras).';
   if (!EMAIL.test(d.email.trim())) e.email = 'Esse e-mail não parece válido (ex: nome@nautilus.at).';
+  if (d.linkedin?.trim() && !/linkedin\.com\//i.test(d.linkedin)) e.linkedin = 'Use o endereço do seu perfil (ex: linkedin.com/in/seu-usuario).';
+  if (d.github?.trim() && !/github\.com\//i.test(d.github)) e.github = 'Use o endereço do seu perfil (ex: github.com/seu-usuario).';
   if (d.frase.trim().length < 10) e.frase = 'Escreva pelo menos 10 caracteres sobre como você ajuda a cidade.';
   return e;
 }

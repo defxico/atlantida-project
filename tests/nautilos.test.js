@@ -25,6 +25,8 @@ test('validarRegistro: campos vazios e válido', () => {
   const vazio = validarRegistro({ nome: '', setor: '', ocupacao: '', email: 'x', frase: '' });
   assert.deepEqual(Object.keys(vazio).sort(), ['email', 'frase', 'nome', 'ocupacao', 'setor']);
   assert.deepEqual(validarRegistro(reg), {});
+  assert.deepEqual(validarRegistro({ ...reg, linkedin: 'linkedin.com/in/ana', github: 'github.com/ana' }), {});
+  assert.deepEqual(Object.keys(validarRegistro({ ...reg, linkedin: 'xyz', github: 'abc' })).sort(), ['github', 'linkedin']);
 });
 
 test('registrar: sucesso, setor fechado acolhido no B e e-mail duplicado', async () => {

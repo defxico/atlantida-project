@@ -197,6 +197,8 @@
 .ia__reg { margin: 0 0 .7rem; padding: .5rem 1.2rem; border: 1px solid var(--yellow); background: rgb(255 216 77 / .18); color: var(--yellow); font: 700 .76rem/1 var(--font-hud); letter-spacing: .2em; text-transform: uppercase; cursor: pointer; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
 .ia__reg:hover, .ia__reg:focus-visible { background: rgb(255 216 77 / .38); color: #fff; box-shadow: 0 0 14px rgb(255 216 77 / .5); }
 .ia.is-reg { --size-reg: 72px; }
+.portal.is-reg .ia { flex: 0 1 auto; }
+.portal.is-reg .ia__regform { flex: 0 1 auto; }
 .ia.is-reg .ia__orb { --size: var(--size-reg); min-height: calc(var(--size) * 1.5); flex: none; }
 .ia__regform { width: 100%; flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: .6rem .2rem 0; }
 .ia__regtitulo { margin: 0 0 .7rem; color: var(--yellow); font: 700 .74rem/1 var(--font-hud); letter-spacing: .24em; text-transform: uppercase; text-align: center; }
