@@ -25,3 +25,14 @@ Abrir `index.html` direto (`file://`) não funciona: módulos ES e `fetch` exige
 - **Retratos e cidade (Leonardo AI):** `docs/assets-leonardo.md`
 
 GSAP 3.12.5 está versionado em `js/vendor/gsap.min.js` (funciona sem internet).
+
+## Publicar no Vercel e ligar a IA (Náutilos)
+
+O site continua estático; o Vercel só acrescenta a função `api/chat.js`, que guarda as chaves e conversa com a IA (Claude primeiro, OpenAI como reserva). Sem chaves ou sem internet, o Náutilos responde com o roteiro local de `js/lib/nautilos.js`.
+
+1. Em vercel.com, **Add New > Project** e importe o repositório do GitHub (Framework: *Other*; sem build). Cada push em `main` publica sozinho.
+2. Em **Settings > Environment Variables**, crie `ANTHROPIC_API_KEY` (e, se quiser reserva, `OPENAI_API_KEY`). Opcionais: `CLAUDE_MODEL`, `OPENAI_MODEL`, `ALLOWED_ORIGINS` (ex.: `https://defxico.github.io`). Modelo de exemplo em `.env.example`.
+3. Defina um **limite de gasto** nos painéis do Claude e da OpenAI. A função já limita 12 mensagens por minuto por visitante e respostas curtas.
+4. Em `js/lib/nautilos.js`, preencha `VERCEL_URL` com o endereço do projeto (ex.: `https://atlantida-project.vercel.app`) para o GitHub Pages e o pen drive (localhost) também usarem a IA. No próprio `*.vercel.app` ele usa `/api/chat`.
+
+Nunca coloque chaves no código nem no repositório.

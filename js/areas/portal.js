@@ -67,6 +67,7 @@ export async function render(container) {
   const STATUS = { idle: 'online', listening: 'ouvindo', thinking: 'processando', speaking: 'transmitindo', erro: 'falha no sinal' };
   let ocupado = false;
   let vivo = true;
+  const historico = []; // turnos enviados à IA para ela lembrar da conversa
 
   const estado = s => { orb.dataset.state = s; status.textContent = STATUS[s]; };
   const addMsg = (quem, texto = '') => {
@@ -109,8 +110,9 @@ export async function render(container) {
     input.disabled = true;
     sugestoes.hidden = true;
     addMsg('eu', texto.trim());
-    const resposta = await pensar(responder(texto, { setores, habitantes }));
+    const resposta = await pensar(responder(texto, { setores, habitantes }, historico));
     if (!vivo) return;
+    historico.push({ role: 'user', content: texto.trim() }, { role: 'assistant', content: resposta });
     await falar(resposta);
     ocupado = false;
     input.disabled = false;
