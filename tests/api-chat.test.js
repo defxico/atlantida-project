@@ -45,3 +45,8 @@ test('chat: usa o Claude quando responde e cai na OpenAI quando ele falha', asyn
     assert.equal(b.body.resposta, 'Olá da OpenAI.');
   } finally { globalThis.fetch = original; delete process.env.ANTHROPIC_API_KEY; delete process.env.OPENAI_API_KEY; }
 });
+
+test('corpo JSON inválido devolve 400 em vez de quebrar', async () => {
+  const r = res(); await handler(req('{quebrado'), r);
+  assert.equal(r.code, 400);
+});

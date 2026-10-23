@@ -99,7 +99,7 @@ export function initRouter({ hotspots, scene }) {
     if (e.key === 'Escape' && current) { goHome(); return; }
     if (e.key !== 'Tab' || panel.hidden) return;
     const items = [...document.querySelectorAll('#hud-nav a, #panel .panel__frame *')]
-      .filter(el => el.matches(FOCUSABLE) && !el.closest('[hidden]'));
+      .filter(el => el.matches(FOCUSABLE) && !el.closest('[hidden]') && el.getClientRects().length);
     if (!items.length) return;
     const first = items[0];
     const last = items[items.length - 1];

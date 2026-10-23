@@ -13,6 +13,15 @@ npm test
 
 Abrir `index.html` direto (`file://`) não funciona: módulos ES e `fetch` exigem servidor local.
 
+## Áreas
+
+- **O Mundo:** só o holograma; cada setor é um botão HUD que abre uma caixa ao lado do domo (`data/mundo.json`).
+- **Habitantes:** uma ficha por vez, com retrato (`data/habitantes.json`).
+- **Mural da Comunidade:** *Missões* (tripulações com vagas, reputação e formulário de nova missão, `data/missoes.json`) e *Recados* (avisos, personalidades do mês e mensagens de visitantes, `data/mural.json`).
+- **Fale com o Portal:** chat com o Náutilos IA (círculo pulsante) e registro de novo habitante.
+
+Visitantes, missões criadas, embarques e registros ficam no `localStorage` de cada navegador (site estático, sem banco). Para compartilhar entre aparelhos é preciso um backend.
+
 ## Como mexer (CODE DROP)
 
 - **Cores, fontes, espaços:** `css/tokens.css`
@@ -35,4 +44,9 @@ O site continua estático; o Vercel só acrescenta a função `api/chat.js`, que
 3. Defina um **limite de gasto** nos painéis do Claude e da OpenAI. A função já limita 12 mensagens por minuto por visitante e respostas curtas.
 4. Em `js/lib/nautilos.js`, preencha `VERCEL_URL` com o endereço do projeto (ex.: `https://atlantida-project.vercel.app`) para o GitHub Pages e o pen drive (localhost) também usarem a IA. No próprio `*.vercel.app` ele usa `/api/chat`.
 
-Nunca coloque chaves no código nem no repositório.
+Nunca coloque chaves no código nem no repositório. Rodando em `localhost` com `VERCEL_URL` preenchido, o chat usa a API de produção (consome crédito).
+
+## Antes do evento
+
+- O site usa fontes do Google Fonts (`index.html`): sem internet elas caem na fonte padrão. Para o pen drive, baixe as fontes para o projeto e use um servidor local (`file://` não funciona).
+- `docs/` é publicado junto com o site no GitHub Pages; remova de lá o que não deve ficar público.

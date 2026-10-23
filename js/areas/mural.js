@@ -14,8 +14,8 @@ const MORADOR = { setor: 'Morador', img: 'assets/img/avatar-morador.svg' };
 const VISITANTE = { setor: 'Visitante · FIAP NEXT', img: 'assets/img/avatar-morador.svg' };
 
 const post = (p, a) => `
-  <li class="msg" data-cat="${p.categoria}">
-    <header class="msg__head"><b>${p.categoria}${p.tipo ? ` · ${p.tipo}` : ''}</b><time datetime="${p.data}">${formatDate(p.data)}</time></header>
+  <li class="msg" data-cat="${esc(p.categoria)}">
+    <header class="msg__head"><b>${esc(p.categoria)}${p.tipo ? ` · ${esc(p.tipo)}` : ''}</b><time datetime="${p.data}">${formatDate(p.data)}</time></header>
     <div class="msg__body">
       <img class="post__avatar" src="${a.img}" alt="" loading="lazy">
       <div>

@@ -22,13 +22,8 @@
   font-size: 1.1rem; cursor: pointer;
 }
 .panel__body { overflow-y: auto; min-height: 0; padding: clamp(20px, 4vw, 48px); }
-.panel__header { margin-bottom: var(--space-4); max-width: 62ch; }
-.panel__header h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
-.eyebrow { margin: 0 0 var(--space-2); color: var(--cyan); font: 600 .75rem var(--font-body); letter-spacing: .25em; text-transform: uppercase; }
-.lead { color: var(--text-dim); margin: 0; }
 
 .tag { display: inline-block; padding: .15rem .6rem; border-radius: 999px; font-size: .72rem; font-weight: 600; background: rgb(104 70 171 / .35); color: #D9C9FF; }
-.tag--live { background: rgb(66 214 208 / .15); color: var(--cyan); }
 .tag[data-cat="Pedido de ajuda"] { background: rgb(216 180 90 / .2); color: var(--gold); }
 
 /* Habitantes: ficha em HUD, mesmo desenho da caixa de transmissões */
@@ -242,22 +237,9 @@
 .feed__empty { color: var(--text-dim); }
 
 /* Fale com o Portal */
-.form { display: grid; gap: var(--space-3); max-width: 640px; }
-.form[hidden] { display: none; }
-.field label { display: block; margin-bottom: var(--space-1); font-weight: 600; font-size: .9rem; }
-.req { color: var(--gold); }
-.field input, .field select, .field textarea { width: 100%; padding: .75rem .9rem; border-radius: 8px; border: 1px solid var(--line); background: rgb(8 13 43 / .7); color: var(--text); font: inherit; }
-.field textarea { min-height: 140px; resize: vertical; }
-.field [aria-invalid="true"] { border-color: var(--error); }
-.field__error { min-height: 1.2em; margin: var(--space-1) 0 0; color: var(--error); font-size: .82rem; }
 .form__hint { margin: 0; font-size: .8rem; color: var(--text-dim); }
-.form .btn { justify-self: start; }
 .form__success { max-width: 640px; padding: var(--space-5); text-align: center; border: 1px solid var(--cyan); border-radius: var(--radius); background: rgb(66 214 208 / .08); }
 .form__success:focus { outline: none; }
-.signal { position: relative; display: block; width: 64px; height: 64px; margin: 0 auto var(--space-3); border-radius: 50%; border: 2px solid var(--cyan); }
-.signal::before, .signal::after { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid var(--cyan); animation: signal 1.8s ease-out infinite; }
-.signal::after { animation-delay: .9s; }
-@keyframes signal { from { scale: 1; opacity: .8; } to { scale: 2.2; opacity: 0; } }
 
 /* O Mundo: só o holograma, sem moldura de página */
 .panel--bare { padding: calc(var(--lens-top) + 84px) clamp(16px, 4vw, 56px) calc(var(--lens-bottom) + 84px); }

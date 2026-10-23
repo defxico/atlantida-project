@@ -96,7 +96,9 @@ export async function render(container) {
 
   const falar = async (texto, final = 'idle') => {
     estado('speaking');
+    log.setAttribute('aria-busy', 'true'); // leitor de tela espera o texto completo em vez de anunciar letra a letra
     await digitar(addMsg('ia'), texto);
+    log.removeAttribute('aria-busy');
     if (vivo) estado(final);
   };
 
@@ -181,10 +183,11 @@ export async function render(container) {
 
   // o router só encaixa este container na página depois do render: só conta como "fechado" quem já esteve na página
   let jaNaPagina = false;
-  new MutationObserver(() => {
+  const observador = new MutationObserver(() => {
     if (container.isConnected) jaNaPagina = true;
-    else if (jaNaPagina) vivo = false;
-  }).observe(document.body, { childList: true, subtree: true });
+    else if (jaNaPagina) { vivo = false; observador.disconnect(); }
+  });
+  observador.observe(document.body, { childList: true, subtree: true });
 
   // a saudação roda depois do render, para não segurar a abertura do painel
   ocupado = true;

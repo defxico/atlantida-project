@@ -99,7 +99,8 @@ export default async function handler(req, res) {
   const ip = String(req.headers['x-forwarded-for'] ?? req.socket?.remoteAddress ?? '?').split(',')[0].trim();
   if (limitado(ip)) return res.status(429).json({ erro: 'Muitas mensagens em pouco tempo. Aguarde um instante.' });
 
-  const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body ?? {});
+  let body;
+  try { body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body ?? {}); } catch { return res.status(400).json({ erro: 'JSON inválido.' }); }
 
   if (body.tipo === 'registro') {
     const d = Object.fromEntries(['nome', 'setor', 'ocupacao', 'email', 'linkedin', 'github', 'frase'].map(k => [k, String(body[k] ?? '').slice(0, 140)]));
