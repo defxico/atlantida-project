@@ -46,7 +46,17 @@ O site continua estático; o Vercel só acrescenta a função `api/chat.js`, que
 
 Nunca coloque chaves no código nem no repositório. Rodando em `localhost` com `VERCEL_URL` preenchido, o chat usa a API de produção (consome crédito).
 
+## Pen drive / HD externo (sem internet)
+
+```bash
+npm run pendrive   # gera dist-pendrive/Nautilus (cerca de 17 MB)
+```
+
+Copie a pasta `Nautilus` para o pen drive. No Windows, dois cliques em `Iniciar Nautilus.bat` sobem um servidor local feito só com o PowerShell (sem instalar nada, com suporte a vídeo) e abrem o navegador em `http://localhost:5173`. Mac/Linux: `sh iniciar.sh` (python3). O kit fica em `pendrive-kit/`; as instruções para o dia estão em `LEIA-ME.txt`.
+
+Tudo funciona offline: o site, os vídeos e as fontes (`assets/fonts`, `css/fonts.css`). Sem internet o Náutilos usa o roteiro local; com internet ele chama a IA pelo Vercel (tempo limite de 15 s, depois volta ao roteiro).
+
 ## Antes do evento
 
-- O site usa fontes do Google Fonts (`index.html`): sem internet elas caem na fonte padrão. Para o pen drive, baixe as fontes para o projeto e use um servidor local (`file://` não funciona).
+- Teste o `.bat` no computador do evento (ou num parecido), com e sem wifi.
 - `docs/` é publicado junto com o site no GitHub Pages; remova de lá o que não deve ficar público.

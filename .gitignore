@@ -3,3 +3,4 @@ node_modules/
 media-src/
 .env
 .vercel
+dist-pendrive/

@@ -1,0 +1,24 @@
+REDE NAUTILUS - pacote para pen drive / HD externo
+===================================================
+
+COMO ABRIR (Windows)
+  1. Copie esta pasta inteira para o computador (ou rode direto do pen drive).
+  2. De dois cliques em "Iniciar Nautilus.bat".
+  3. O navegador abre sozinho em http://localhost:5173 . Deixe a janela preta aberta.
+     Se o Windows perguntar sobre o firewall, pode cancelar: so usa este proprio computador.
+
+COMO ABRIR (Mac/Linux)
+  No terminal: sh iniciar.sh   (precisa de python3)
+
+SEM INTERNET
+  O site, os videos e as fontes estao dentro desta pasta e funcionam sem internet.
+  O chat com o Nautilos usa o roteiro local (respostas prontas sobre os setores, os
+  habitantes e a cidade). Com internet, ele passa a usar a IA de verdade sozinho.
+
+DICAS PARA O DIA
+  - Teste no computador do evento antes (abre, toca o video da abertura, o chat responde).
+  - Chrome ou Edge atualizados. F11 deixa em tela cheia.
+  - Se aparecer tela em branco: feche a janela preta e abra o .bat de novo.
+  - Visitantes, missoes e registros ficam salvos neste navegador, neste computador.
+
+NAO ABRA o index.html com dois cliques: o navegador bloqueia os modulos do site.

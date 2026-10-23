@@ -3,6 +3,7 @@
 // Depois do deploy no Vercel, coloque a URL do projeto em VERCEL_URL para o site publicado no
 // GitHub Pages e o pen drive (localhost) também usarem a IA.
 const VERCEL_URL = 'https://atlantida-project.vercel.app';
+const TIMEOUT_MS = 15000; // wifi conectado sem internet não pode deixar o chat pendurado
 const ENDPOINT = typeof location === 'undefined' ? null
   : location.hostname.endsWith('.vercel.app') ? '/api/chat'
   : VERCEL_URL && `${VERCEL_URL}/api/chat`;
@@ -68,7 +69,7 @@ export async function registrar(d, ctx = {}) {
   const dup = ctx.registros?.some(r => norm(r.email) === norm(d.email.trim()));
   if (ENDPOINT && !dup) {
     try {
-      const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tipo: 'registro', ...d }) });
+      const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tipo: 'registro', ...d }), signal: AbortSignal.timeout(TIMEOUT_MS) });
       if (r.ok) return await r.json();
     } catch { /* sem resposta da API */ }
     return { ok: false, texto: 'Perdi o sinal com a Rede e não consegui processar seu registro. Tente novamente em instantes.' };
@@ -79,7 +80,7 @@ export async function registrar(d, ctx = {}) {
 export async function responder(texto, contexto, historico = []) {
   if (ENDPOINT) {
     try {
-      const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tipo: 'chat', mensagem: texto, historico }) });
+      const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tipo: 'chat', mensagem: texto, historico }), signal: AbortSignal.timeout(TIMEOUT_MS) });
       if (r.ok) { const { resposta } = await r.json(); if (resposta) return resposta; }
     } catch { /* cai no roteiro local */ }
   }
