@@ -77,12 +77,20 @@ export async function registrar(d, ctx = {}) {
   return processarRegistro(d, ctx);
 }
 
+let origem = 'local';
+export const origemDaResposta = () => origem; // 'ia' ou 'local' (para o HUD mostrar "modo local")
+
 export async function responder(texto, contexto, historico = []) {
-  if (ENDPOINT) {
+  if (!ENDPOINT) console.info('[Náutilos] sem endereço da IA; usando o roteiro local.');
+  else {
     try {
       const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tipo: 'chat', mensagem: texto, historico }), signal: AbortSignal.timeout(TIMEOUT_MS) });
-      if (r.ok) { const { resposta } = await r.json(); if (resposta) return resposta; }
-    } catch { /* cai no roteiro local */ }
+      if (r.ok) {
+        const { resposta } = await r.json();
+        if (resposta) { origem = 'ia'; return resposta; }
+      } else console.warn(`[Náutilos] a API respondeu ${r.status}; usando o roteiro local.`);
+    } catch (e) { console.warn('[Náutilos] sem conexão com a IA; usando o roteiro local.', e?.message ?? e); }
   }
+  origem = 'local';
   return respostaLocal(texto, contexto);
 }

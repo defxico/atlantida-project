@@ -1,5 +1,5 @@
 import { esc } from '../lib/html.js';
-import { responder, registrar, validarRegistro, BOAS_VINDAS } from '../lib/nautilos.js';
+import { responder, origemDaResposta, registrar, validarRegistro, BOAS_VINDAS } from '../lib/nautilos.js';
 import { loadVisitantes, saveVisitantes } from '../lib/visitantes.js';
 export const bare = true; // sem moldura de página: tela de IA em HUD
 
@@ -72,7 +72,8 @@ export async function render(container) {
   let vivo = true;
   const historico = []; // turnos enviados à IA para ela lembrar da conversa
 
-  const estado = s => { orb.dataset.state = s; status.textContent = STATUS[s]; };
+  let modoLocal = false; // a última resposta veio do roteiro local, não da IA
+  const estado = s => { orb.dataset.state = s; status.textContent = s === 'idle' && modoLocal ? 'modo local' : STATUS[s]; };
   const addMsg = (quem, texto = '') => {
     const p = document.createElement('p');
     p.className = `ia__msg ia__msg--${quem}`;
@@ -117,6 +118,7 @@ export async function render(container) {
     addMsg('eu', texto.trim());
     const resposta = await pensar(responder(texto, { setores, habitantes }, historico));
     if (!vivo) return;
+    modoLocal = origemDaResposta() === 'local';
     historico.push({ role: 'user', content: texto.trim() }, { role: 'assistant', content: resposta });
     await falar(resposta);
     ocupado = false;
