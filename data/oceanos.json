@@ -1,0 +1,141 @@
+{
+  "imagem": "assets/img/oceanos-mapa.svg",
+  "pontos": [
+    {
+      "id": "pacifico",
+      "nome": "Pacífico",
+      "x": 10.5,
+      "y": 47,
+      "regiao": "Registro 01 · Superfície",
+      "titulo": "Oceano Pacífico",
+      "texto": "O maior e mais profundo dos oceanos cobre quase um terço do planeta. Seu contorno é o Anel de Fogo, onde vulcões e terremotos desenham o fundo do mar. Os primeiros engenheiros de Atlântida estudaram suas fossas para aprender a viver sob pressão.",
+      "dados": [["Área", "cerca de 165 milhões de km²"], ["Profundidade média", "cerca de 4.000 m"], ["Ponto mais fundo", "Depressão Challenger, Fossa das Marianas, cerca de 10.900 m"], ["Fauna", "baleia-azul, peixe-caracol-das-Marianas"]],
+      "curiosidade": "É maior que todas as terras emersas do planeta somadas.",
+      "signo": {
+        "perfil": "Imenso e sereno por fora, vulcânico por dentro. Você guarda profundezas que pouca gente conhece, sonha grande e, quando decide agir, move continentes. Cuidado com as tempestades que você segura por tempo demais.",
+        "guia": "Baleia-azul",
+        "combina": "artico"
+      }
+    },
+    {
+      "id": "atlantico",
+      "nome": "Atlântico",
+      "x": 41,
+      "y": 40,
+      "regiao": "Registro 02 · Superfície",
+      "titulo": "Oceano Atlântico",
+      "texto": "O segundo maior oceano separa as Américas da Europa e da África. No meio dele corre a Dorsal Mesoatlântica, uma cordilheira submarina onde nasce fundo de mar novo. É o oceano das grandes travessias da superfície.",
+      "dados": [["Área", "cerca de 106 milhões de km²"], ["Profundidade média", "cerca de 3.600 m"], ["Ponto mais fundo", "Fossa de Porto Rico, cerca de 8.400 m"], ["Fauna", "tartaruga-de-couro, enguia-europeia"]],
+      "curiosidade": "Fica alguns centímetros mais largo a cada ano, porque as placas se afastam na dorsal.",
+      "signo": {
+        "perfil": "Viajante e inquieto, você nasceu para as travessias. Liga pessoas e mundos que nunca se encontrariam e cresce um pouco a cada ano, como a sua dorsal. Ficar parado no mesmo porto é o seu maior desafio.",
+        "guia": "Tartaruga-de-couro",
+        "combina": "indico"
+      }
+    },
+    {
+      "id": "indico",
+      "nome": "Índico",
+      "x": 70,
+      "y": 61,
+      "regiao": "Registro 03 · Superfície",
+      "titulo": "Oceano Índico",
+      "texto": "O mais quente dos oceanos banha a África, a Ásia e a Oceania. Os ventos de monção invertem suas correntes duas vezes por ano e trazem as chuvas para bilhões de pessoas na superfície.",
+      "dados": [["Área", "cerca de 70 milhões de km²"], ["Profundidade média", "cerca de 3.700 m"], ["Ponto mais fundo", "Fossa de Java (Sunda), cerca de 7.200 m"], ["Fauna", "celacanto, dugongo"]],
+      "curiosidade": "O celacanto, peixe que se julgava extinto havia milhões de anos, foi reencontrado vivo nas suas águas em 1938.",
+      "signo": {
+        "perfil": "Caloroso e intenso, você muda de direção com as estações e leva vida por onde passa. Acolhe todo mundo, improvisa como ninguém e surpreende quando todos achavam que já te conheciam.",
+        "guia": "Celacanto",
+        "combina": "atlantico"
+      }
+    },
+    {
+      "id": "artico",
+      "nome": "Ártico",
+      "x": 52,
+      "y": 8,
+      "regiao": "Registro 04 · Superfície",
+      "titulo": "Oceano Ártico",
+      "texto": "O menor e mais raso dos oceanos fica no topo do mundo, coberto em boa parte por gelo marinho. Esse gelo encolhe a cada verão, e as cúpulas de Atlântida acompanham a mudança pelas correntes frias que chegam até a cidade.",
+      "dados": [["Área", "cerca de 15 milhões de km²"], ["Profundidade média", "cerca de 1.000 m"], ["Ponto mais fundo", "Depressão Molloy, cerca de 5.500 m"], ["Fauna", "narval, tubarão-da-groenlândia"]],
+      "curiosidade": "O tubarão-da-groenlândia pode viver mais de 250 anos; é o vertebrado mais longevo que se conhece.",
+      "signo": {
+        "perfil": "Raro, discreto e resistente. Você fala pouco e acerta quando fala, prefere poucos amigos de verdade e tem a paciência de quem pensa em séculos. Por baixo do gelo, sente tudo com intensidade.",
+        "guia": "Narval",
+        "combina": "pacifico"
+      }
+    },
+    {
+      "id": "austral",
+      "nome": "Austral",
+      "x": 54,
+      "y": 83,
+      "regiao": "Registro 05 · Superfície",
+      "titulo": "Oceano Austral (Antártico)",
+      "texto": "Ele envolve a Antártida e foi o último oceano a ser reconhecido oficialmente. Ali corre a Corrente Circumpolar Antártica, a mais forte do planeta, que liga o Pacífico, o Atlântico e o Índico.",
+      "dados": [["Área", "cerca de 22 milhões de km²"], ["Profundidade média", "cerca de 3.300 m"], ["Ponto mais fundo", "Fossa das Sandwich do Sul, cerca de 7.400 m"], ["Fauna", "krill-antártico, pinguim-imperador"]],
+      "curiosidade": "O krill, um crustáceo de poucos centímetros, sustenta quase toda a cadeia alimentar da região.",
+      "signo": {
+        "perfil": "Forte, protetor e muitas vezes subestimado. Você é a corrente que une os outros e segura o grupo quando o mar fica bravo. Demoraram a te reconhecer, mas ninguém esquece quando você chega.",
+        "guia": "Pinguim-imperador",
+        "combina": "atlantico"
+      }
+    }
+  ],
+  "quiz": {
+    "qr": "assets/img/oceanos-qr.png",
+    "qrLegenda": "Faça no celular",
+    "perguntas": [
+      {
+        "texto": "Num dia livre em Atlântida, você…",
+        "opcoes": [
+          { "texto": "Pega o primeiro trem para um setor que ainda não conhece", "oceano": "atlantico" },
+          { "texto": "Fica em casa com um bom livro e silêncio", "oceano": "artico" },
+          { "texto": "Some por horas explorando as fossas mais fundas", "oceano": "pacifico" },
+          { "texto": "Ajuda a equipe de manutenção a reforçar as cúpulas", "oceano": "austral" },
+          { "texto": "Junta os amigos para uma festa na taverna", "oceano": "indico" }
+        ]
+      },
+      {
+        "texto": "Numa tripulação de missão, você é quem…",
+        "opcoes": [
+          { "texto": "Traz energia e muda o clima da equipe", "oceano": "indico" },
+          { "texto": "Assume o comando quando o mar fica bravo", "oceano": "austral" },
+          { "texto": "Faz a ponte entre pessoas que nunca se falariam", "oceano": "atlantico" },
+          { "texto": "Segura a calma de todo mundo… até explodir", "oceano": "pacifico" },
+          { "texto": "Observa, fala pouco e acerta quando fala", "oceano": "artico" }
+        ]
+      },
+      {
+        "texto": "Que criatura você seria?",
+        "opcoes": [
+          { "texto": "Narval: raro e misterioso", "oceano": "artico" },
+          { "texto": "Baleia-azul: enorme e tranquila", "oceano": "pacifico" },
+          { "texto": "Celacanto: cheio de surpresas", "oceano": "indico" },
+          { "texto": "Pinguim-imperador: resiste a qualquer inverno", "oceano": "austral" },
+          { "texto": "Tartaruga-de-couro: atravessa oceanos", "oceano": "atlantico" }
+        ]
+      },
+      {
+        "texto": "Um alarme de pressão toca na cúpula. Você…",
+        "opcoes": [
+          { "texto": "Protege quem está perto antes de tudo", "oceano": "austral" },
+          { "texto": "Segue o instinto e improvisa uma solução", "oceano": "indico" },
+          { "texto": "Mantém o sangue frio e consulta os manuais", "oceano": "artico" },
+          { "texto": "Corre para avisar todos os setores pela Rede", "oceano": "atlantico" },
+          { "texto": "Respira fundo: já viu coisa pior lá embaixo", "oceano": "pacifico" }
+        ]
+      },
+      {
+        "texto": "Qual luz combina com você?",
+        "opcoes": [
+          { "texto": "O brilho azul do abismo", "oceano": "pacifico" },
+          { "texto": "O reflexo branco do gelo antártico", "oceano": "austral" },
+          { "texto": "A aurora boreal sobre o mar congelado", "oceano": "artico" },
+          { "texto": "O farol que guia as travessias", "oceano": "atlantico" },
+          { "texto": "O pôr do sol quente das monções", "oceano": "indico" }
+        ]
+      }
+    ]
+  }
+}

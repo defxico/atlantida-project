@@ -4,8 +4,8 @@ import { readFileSync, existsSync } from 'node:fs';
 
 const hotspots = JSON.parse(readFileSync(new URL('../data/hotspots.json', import.meta.url), 'utf8'));
 
-test('as 4 áreas obrigatórias existem, na ordem do menu', () => {
-  assert.deepEqual(hotspots.map(h => h.id), ['mundo', 'habitantes', 'mural', 'portal']);
+test('as 4 áreas obrigatórias e Oceanos existem, na ordem do menu', () => {
+  assert.deepEqual(hotspots.map(h => h.id), ['mundo', 'oceanos', 'habitantes', 'mural', 'portal']);
 });
 
 test('cada hotspot tem campos completos e um módulo de área', () => {
