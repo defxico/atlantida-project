@@ -84,7 +84,7 @@
   ],
   "quiz": {
     "qr": "assets/img/oceanos-qr.png",
-    "qrLegenda": "Aponte a câmera",
+    "qrLegenda": "Faça no celular",
     "perguntas": [
       {
         "texto": "Num dia livre em Atlântida, você…",

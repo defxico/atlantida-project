@@ -35,7 +35,7 @@ export async function render(container) {
       <div class="quiz__main">
         <div class="quiz__corpo" aria-live="polite"></div>
         <figure class="quiz__qr">
-          <img src="${o.quiz.qr}" alt="QR code">
+          <img src="${o.quiz.qr}" alt="QR code: abre Os Cinco Oceanos no celular">
           <figcaption>${esc(o.quiz.qrLegenda)}</figcaption>
         </figure>
       </div>

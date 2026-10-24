@@ -16,7 +16,7 @@ Abrir `index.html` direto (`file://`) não funciona: módulos ES e `fetch` exige
 ## Áreas
 
 - **O Mundo:** só o holograma; cada setor é um botão HUD que abre uma caixa ao lado do domo (`data/mundo.json`).
-- **Os Cinco Oceanos:** guia dos oceanos do planeta no mesmo mapa holográfico de O Mundo (`js/lib/holomapa.js`) e quiz *Qual é o seu oceano?* (horóscopo dos oceanos, resultado em `js/lib/quiz.js`). Conteúdo, perguntas e QR code em `data/oceanos.json`; o QR fica em `assets/img/oceanos-qr.png` (sem o arquivo aparece um espaço reservado). Mapa: `assets/img/oceanos-mapa.svg`.
+- **Os Cinco Oceanos:** guia dos oceanos do planeta no mesmo mapa holográfico de O Mundo (`js/lib/holomapa.js`) e quiz *Qual é o seu oceano?* (horóscopo dos oceanos, resultado em `js/lib/quiz.js`). Conteúdo, perguntas e QR code em `data/oceanos.json`; o QR (`assets/img/oceanos-qr.png`) abre `https://defxico.github.io/atlantida-project/#oceanos`; se o endereço mudar, gere outro (sem o arquivo aparece um espaço reservado). Mapa: `assets/img/oceanos-mapa.svg`.
 - **Habitantes:** uma ficha por vez, com retrato (`data/habitantes.json`).
 - **Mural da Comunidade:** *Missões* (tripulações com vagas, reputação e formulário de nova missão, `data/missoes.json`) e *Recados* (avisos, personalidades do mês e mensagens de visitantes, `data/mural.json`).
 - **Fale com o Portal:** chat com o Náutilos IA (círculo pulsante) e registro de novo habitante.
