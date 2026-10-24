@@ -28,7 +28,7 @@ ${mundo.setores.map(s => `- ${s.nome} (${s.regiao}): ${s.texto}`).join('\n')}
 HABITANTES:
 ${habitantes.map(h => `- ${h.nome}, ${h.funcao.toLowerCase()} (${h.especialidade}). Mora no ${h.mora}, atua em ${h.atua}. Agora: ${h.situacao}`).join('\n')}
 
-O SITE: Início (taverna), O Mundo (mapa dos setores), Habitantes (fichas), Mural (Recados, Visitantes, Missões de tripulação) e Fale com o Portal (este chat e o registro de novos habitantes).`;
+O SITE: Início (taverna), O Mundo (mapa dos setores), Os Cinco Oceanos (guia dos oceanos do planeta e quiz da nacionalidade oceânica), Habitantes (fichas), Mural (Recados, Visitantes, Missões de tripulação) e Fale com o Portal (este chat e o registro de novos habitantes).`;
 
 const acessos = new Map(); // limite por IP; em memória, vale por instância (basta para o evento)
 function limitado(ip) {

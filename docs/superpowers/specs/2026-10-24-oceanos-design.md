@@ -1,7 +1,7 @@
 # Explorar os Oceanos — Design Spec
 
 - **Data:** 2026-10-24
-- **Status:** aprovado; código só começa quando o time pedir (aguardando o desafio)
+- **Status:** implementado (área "Os Cinco Oceanos"). Acréscimos pedidos na implementação: quiz "Qual é o seu oceano?" (horóscopo dos oceanos) com espaço para QR code; mapa em SVG gerado de dados reais (Natural Earth 110m) no lugar da imagem do Leonardo
 - **Base:** `docs/superpowers/specs/2026-10-19-rede-nautilus-design.md`
 
 ## 1. Conceito

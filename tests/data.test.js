@@ -46,3 +46,22 @@ test('transmissões: pelo menos 8 mensagens com origem, assunto, tipo e texto', 
     assert.ok(['info', 'alerta', 'comunidade'].includes(m.tipo));
   }
 });
+
+test('oceanos: 5 pontos completos, posições no quadro, signo e quiz coerentes', () => {
+  const o = load('oceanos.json');
+  const ids = o.pontos.map(p => p.id);
+  assert.equal(ids.length, 5);
+  assert.equal(new Set(ids).size, 5);
+  for (const p of o.pontos) {
+    for (const k of ['nome', 'regiao', 'titulo', 'texto', 'curiosidade']) assert.ok(p[k], `${p.id} sem ${k}`);
+    for (const k of ['x', 'y']) assert.ok(p[k] >= 0 && p[k] <= 100, `${p.id}: ${k} fora do quadro`);
+    assert.equal(p.dados.length, 4);
+    assert.ok(p.dados.every(([k, v]) => k && v));
+    assert.ok(p.signo.perfil && p.signo.guia && ids.includes(p.signo.combina), `${p.id}: signo incompleto`);
+  }
+  assert.ok(o.quiz.perguntas.length >= 3);
+  for (const q of o.quiz.perguntas) {
+    assert.ok(q.texto);
+    assert.deepEqual(q.opcoes.map(op => op.oceano).sort(), [...ids].sort(), `"${q.texto}" precisa de uma opção por oceano`);
+  }
+});

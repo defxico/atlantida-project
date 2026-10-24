@@ -249,13 +249,13 @@
 .panel--bare .panel__close { top: auto; bottom: -6px; right: 0; width: auto; height: auto; padding: .45rem .9rem; border-radius: 0; border: 1px solid var(--line); background: rgb(8 13 43 / .78); color: var(--cyan); font: 700 .78rem/1 var(--font-hud); letter-spacing: .16em; text-transform: uppercase; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
 .panel--bare .panel__close::before { content: 'Voltar '; }
 .hintbar { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(max-content, 1fr); align-items: center; width: 100%; }
-.mundo .hintbar { width: min(100%, calc((100dvh - var(--lens-top) - var(--lens-bottom) - 250px) * 16 / 9)); }
+.holo .hintbar { width: min(100%, calc((100dvh - var(--lens-top) - var(--lens-bottom) - 250px) * 16 / 9)); }
 .habs .hintbar { width: min(100%, 980px); }
 .hintbar .map__hint { margin: 0; grid-column: 2; }
 .hintbar__right { grid-column: 3; justify-self: end; display: flex; align-items: center; gap: var(--space-4); }
 .hintbar .panel__close { position: static; }
 .modo-recados .mis__acoes, .mis-form-open .mis__acoes { display: none; }
-.mundo { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3); }
+.holo { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3); }
 .map-stage { position: relative; width: min(100%, calc((100dvh - var(--lens-top) - var(--lens-bottom) - 250px) * 16 / 9)); }
 .map { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #000; border: 1px solid rgb(66 214 208 / .28); box-shadow: inset 0 0 60px rgb(66 214 208 / .12), 0 0 30px rgb(66 214 208 / .12); }
 .map__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; mix-blend-mode: screen; pointer-events: none; }
@@ -291,6 +291,27 @@
 .map__key--fechada { background: repeating-linear-gradient(90deg, #FF6B6B 0 6px, transparent 6px 9px); box-shadow: none; }
 .map__key--setor { width: 14px; height: 14px; border-radius: 4px; background: rgb(255 107 107 / .25); border: 1px solid #FF6B6B; box-shadow: none; }
 
+/* Os Cinco Oceanos: dados na caixa do mapa e quiz (horóscopo dos oceanos) */
+.oc__dados { display: grid; grid-template-columns: 1fr 1fr; gap: .35rem; margin: .6rem 0 0; }
+.oc__dados div { padding: .35rem .5rem; border: 1px solid var(--line); background: rgb(37 37 107 / .3); }
+.oc__dados dt { color: var(--cyan); font: 700 .6rem/1 var(--font-hud); letter-spacing: .18em; text-transform: uppercase; }
+.oc__dados dd { margin: .25rem 0 0; font-size: .78rem; font-weight: 600; line-height: 1.3; }
+.oc__curio { margin: .6rem 0 0; font-size: .82rem; line-height: 1.45; }
+.oc__curio b { margin-right: .35rem; color: var(--gold); font: 700 .62rem/1 var(--font-hud); letter-spacing: .18em; text-transform: uppercase; }
+.map-stage[hidden], .quiz[hidden] { display: none; }
+.quiz { width: min(100%, calc((100dvh - var(--lens-top) - var(--lens-bottom) - 250px) * 16 / 9)); }
+.quiz__main { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: clamp(16px, 3vw, 32px); padding: clamp(14px, 2.4vw, 26px); }
+.quiz__q { margin: .4rem 0 1rem; font: 700 clamp(1.2rem, 2.4vw, 1.8rem)/1.2 var(--font-title); }
+.quiz__q:focus { outline: none; }
+.quiz__opcoes { display: grid; gap: .5rem; }
+.quiz__op { padding: .65rem .9rem; border: 1px solid var(--line); background: rgb(8 13 43 / .7); color: var(--text); font: 600 .92rem/1.35 var(--font-body); text-align: left; cursor: pointer; transition: background .2s, border-color .2s; }
+.quiz__op:hover, .quiz__op:focus-visible { border-color: var(--cyan); background: rgb(66 214 208 / .18); box-shadow: var(--glow-cyan); }
+.quiz__acoes { display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-3); }
+.quiz__qr { display: flex; flex-direction: column; align-items: center; gap: .5rem; margin: 0; color: var(--text-dim); font: 700 .66rem/1 var(--font-hud); letter-spacing: .2em; text-transform: uppercase; }
+.quiz__qr img, .quiz__qr-vago { width: clamp(120px, 14vw, 180px); aspect-ratio: 1; }
+.quiz__qr img { padding: 6px; background: #fff; }
+.quiz__qr-vago { display: grid; place-items: center; border: 1px dashed var(--line); }
+
 @media (max-width: 767px) {
   .panel { padding: 52px 0 calc(var(--lens-bottom) + 58px); }
   .panel__frame { width: 100%; height: 100%; max-height: none; border-radius: 0; }
@@ -307,7 +328,7 @@
   .ficha__mural { margin-top: 8px; font-size: .66rem; }
   .ficha__txt { font-size: .76rem; line-height: 1.4; }
   .habs { justify-content: flex-start; gap: var(--space-2); }
-  .hintbar, .mundo .hintbar, .habs .hintbar { width: 100%; grid-template-columns: 1fr auto; gap: .5rem; }
+  .hintbar, .holo .hintbar, .habs .hintbar { width: 100%; grid-template-columns: 1fr auto; gap: .5rem; }
   .hintbar .map__hint { grid-column: 1; text-align: left; font-size: .62rem; letter-spacing: .14em; }
   .hintbar__right { grid-column: 2; }
   .habs__btn { font-size: .62rem; padding: .3rem .5rem; }
@@ -329,4 +350,8 @@
   .map__card { position: fixed; top: auto; bottom: calc(var(--lens-bottom) + 66px); left: 10px !important; right: 10px !important; translate: 0 0; width: auto; }
   .map__card .tx__text { font-size: .82rem; }
   .is-panel-open .hud__brand { display: none; }
+  .quiz { max-height: calc(100dvh - var(--lens-top) - var(--lens-bottom) - 190px); overflow-y: auto; }
+  .quiz__main { grid-template-columns: 1fr; }
+  .quiz__qr { display: none; }
+  .quiz__op { font-size: .82rem; padding: .5rem .7rem; }
 }
